@@ -50,7 +50,8 @@
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Q}{\mathbb{Q}}
-
+\renewcommand{\H}{\mathbb{H}} 
+\newcommand{\RP}{\mathbb{RP}}
 \newcommand{\ind}{\mathbbm{1}}
 \newcommand{\qed}{\quad \blacksquare}
 
@@ -61,9 +62,10 @@
 \newcommand{\mfX}{\mathfrak{X}}
 \newcommand{\norm}[1]{\left\vert \left\vert #1 \right\vert \right\vert}
 
-\newcommand{\SL}{\text{SL}\,}
-\newcommand{\SO}{\text{SO}\,}
-\newcommand{\GL}{\text{GL}\,}
+\newcommand{\SL}{\text{SL}}
+\newcommand{\SO}{\text{SO}}
+\newcommand{\GL}{\text{GL}}
+\newcommand{\SU}{\text{SU}}
 
 \newcommand{\tr}{\text{tr}\,}
 
@@ -72,16 +74,32 @@
 \newcommand{\g}{\mathfrak{g}}
 \renewcommand{\sf}{\mathfrak{s}}
 \newcommand{\h}{\mathfrak{h}}
-\newcommand{\slf}{\mathfrak{sl}}
-\newcommand{\glf}{\mathfrak{gl}}
-\newcommand{\sof}{\mathfrak{so}}
+\renewcommand{\sl}{\mathfrak{sl}}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\so}{\mathfrak{so}}
 
 \newcommand{\im}{\text{im}\,}
 
 \newcommand{\Ad}{\text{Ad}}
 \newcommand{\ad}{\text{ad}}
+\newcommand{\Aut}{\text{Aut}}
+\renewcommand{\mod}{\text{mod}\,}
+\newcommand{\Span}{\text{Span}\,}
+
+\newcommand{\Isom}{\text{Isom}}
+\newcommand{\PSL}{\text{PSL}}
+\newcommand{\conj}{\text{conj}}
+
+\newcommand{\Sc}{\text{Sc}}
+\renewcommand{\Vec}{\text{Vec}}
+
+\newcommand{\ihat}{\hat{\imath}}
+\newcommand{\jhat}{\hat{\jmath}}
+\newcommand{\khat}{\hat{k}}
 
 \usepackage{tcolorbox}
+
+\renewcommand{\bar}{\overline}
 \tcbuselibrary{breakable, skins}
 \tcbset{enhanced}
 \newenvironment*{tbox}[2][gray]{
@@ -107,11 +125,11 @@
     Historically arose from study of DEs.
 
     \textbf{Example 1:} Consider the system 
-    \begin{align}
+    \begin{align*}
         \frac{dx_1}{dt} &= 2x_1\\ 
         \frac{dx_2}{dt} &= \frac{1}{2}x_2\\
         x_1(0) &= x_2(0) = 1
-    \end{align}
+    \end{align*}
 
     \emph{Solution:}
     \[\frac{dx_1}{dt} = 2x_1 \implies \int \frac{dx_1}{x_1} = \int 2 \; dt \implies x_1(t) = C_1e^{2t}\]
@@ -1039,19 +1057,19 @@
 
     \[\SL(2, \R) = \{A \in \GL(2, \R) \big\vert \det A = 1\}\] 
     has $\gamma(t) \in \SL(2, \R), \; \gamma(0) = 1$. Differentiating, $\frac{d}{dt}\bigg\vert_{t=0} \tr \gamma'(0) = 0$ so 
-    \[\slf(2, \R) = \{B \in M_2(\R)\big\vert \tr(B) = 0\}\]
+    \[\sl(2, \R) = \{B \in M_2(\R)\big\vert \tr(B) = 0\}\]
 
     Thus for any matrix $B = \begin{pmatrix}
         a & b\\ 
         c & d
     \end{pmatrix}$, $\tr B = a + d = 0$, 
-    \[\slf(2, \R) = \left\{\begin{pmatrix}
+    \[\sl(2, \R) = \left\{\begin{pmatrix}
         a & b\\ 
         c & -a
     \end{pmatrix} \bigg\vert a, b, c \in \R\right\}\]  
 
     But this is not limited to $n=2$! In general, 
-    \[\dim \slf(n, \R) = \dim \SL(n, \R) = n^2 - 1\]
+    \[\dim \sl(n, \R) = \dim \SL(n, \R) = n^2 - 1\]
     (because only the last diagonal entry is fixed)
 
     \begin{tbox}{ \emph{Claim:} $\dim \GL(n, \R) = n^2$}
@@ -1108,7 +1126,7 @@
 
     \textbf{Examples of Lie groups:}
     \begin{itemize}
-        \item $G = \SO(3, \R)$ (the group of 3-dimensional rotations acting on $S^2$). What is the Lie algebra $\sof(3, \R)$? We have two conditions: $\det A = 1$ and $\brak{Av, Aw} = \brak{v, w}$ where $\brak{\cdot, \cdot}$ is the euclidean inner product ($A^TA = 1$)
+        \item $G = \SO(3, \R)$ (the group of 3-dimensional rotations acting on $S^2$). What is the Lie algebra $\so(3, \R)$? We have two conditions: $\det A = 1$ and $\brak{Av, Aw} = \brak{v, w}$ where $\brak{\cdot, \cdot}$ is the euclidean inner product ($A^TA = 1$)
         
         Linearizing equation 1, we have $\tr(B) = 0$. To linearize equation 2, notice 
         \begin{align*}
@@ -1122,7 +1140,7 @@
             -a & 0 & c\\ 
             -b & -c & 0
         \end{pmatrix}\]
-        so $\dim(\sof(3, \R)) = 3$
+        so $\dim(\so(3, \R)) = 3$
     \end{itemize}
 
     Finally, notice that we have not actually defined \emph{algebra.} Introduce the bracket: 
@@ -1175,7 +1193,7 @@
 
     So we can think of this as 
     \[\begin{array}{c}
-        G \to \text{Aut}(G)\\ 
+        G \to \Aut(G)\\ 
         g \mapsto ghg^{-1}
     \end{array}\]
 
@@ -1246,7 +1264,7 @@
 
         Why? The subgroup of vectors formed by $\begin{pmatrix} 0 & b\\ 0 & 1\end{pmatrix}$ is a normal subgroup. Obviously, normal subgroups should be preserved in the Lie algebra because they are preserved under conjugation. 
         
-        \item $G = \SL(2, \R)$. $g = \slf(2, \R)$. We choose the (trace-less) basis 
+        \item $G = \SL(2, \R)$. $g = \sl(2, \R)$. We choose the (trace-less) basis 
         \[X = \begin{pmatrix}
             0 & 0\\
             1 & 0
@@ -1520,7 +1538,7 @@
     and there is an induced lie-algebra short exact sequence 
     \[\h \overset{i}{\hookrightarrow} \g \overset{p}{\twoheadrightarrow} \g/\h\]
     Show this is short exact ($\ker p = \im i$). Consider 
-    \[\slf(2, \R) \hookrightarrow \glf(2, \R) \twoheadrightarrow \glf(2, \R)/\slf(2, \R)\]
+    \[\sl(2, \R) \hookrightarrow \gl(2, \R) \twoheadrightarrow \gl(2, \R)/\sl(2, \R)\]
 
 \section{Feb 16:}
     \textbf{Recall:} We have a group homomorphism $\phi: G \to Q$ with an induced lie-algebra homomorphism $d\phi_1: \g \to \mathfrak{q}$ which preserves lie-algebra structure: 
@@ -1538,10 +1556,10 @@
 
     \textbf{Example:}
     \[\SL(2, \R) \hookrightarrow \GL(2, \R) \twoheadrightarrow \GL(2, \R)/\SL(2, \R) \simeq \R^*\] 
-    \[\slf(2, \R) \hookrightarrow \glf(2, \R) \twoheadrightarrow \R\]
+    \[\sl(2, \R) \hookrightarrow \gl(2, \R) \twoheadrightarrow \R\]
     where $\R^k$ as a lie algebra is the $\R^k$ vector space with trivial brackets. 
 
-    In fact, there exists a lie-algebra homomorphism from $\R \overset{\sigma}{\longrightarrow} \glf(2, \R)$ so that $p\sigma = 1_{\R}$ (\emph{section} of $\glf(2, \R) \to \R$)
+    In fact, there exists a lie-algebra homomorphism from $\R \overset{\sigma}{\longrightarrow} \gl(2, \R)$ so that $p\sigma = 1_{\R}$ (\emph{section} of $\gl(2, \R) \to \R$)
 
     Let's inspect on the lie-group level:
     \[\SL(2, \R) \hookrightarrow \GL(2, \R) \overset{p}{\twoheadrightarrow} \R^*\] 
@@ -1689,7 +1707,7 @@
 
     We say a sequence is \emph{split exact} iff $p$ admits a section, $\sigma: \mathfrak{k} \to \g$ so that $p\sigma = 1_{\mathfrak{k}}$  
 
-    \textbf{Example:} $\slf(2, \R) \overset{i}{\hookrightarrow} \glf(2, \R) \overset{\tr}{\twoheadrightarrow} \R$ is a split exact sequence with section $t \mapsto \begin{pmatrix}
+    \textbf{Example:} $\sl(2, \R) \overset{i}{\hookrightarrow} \gl(2, \R) \overset{\tr}{\twoheadrightarrow} \R$ is a split exact sequence with section $t \mapsto \begin{pmatrix}
         t & 0\\ 
         0 & 0
     \end{pmatrix}$ 
@@ -1734,7 +1752,7 @@
 \section{Feb 21:}
     \textbf{Motivation:} By the classification of Semisimple Lie Groups, not all lie groups admit ideals. This is frustrating. Semidirect products give us a natural way to solve this problem. 
 
-    \textbf{Definition:} a semi-direct product is equivalent to the data of $\phi: H \to \text{Aut}(N)$ where $H, N$ are Lie groups. We form $G_{\phi} = N \rtimes_{\phi} H$ (where $N$ is normal because the triangle points to it) with multiplication 
+    \textbf{Definition:} a semi-direct product is equivalent to the data of $\phi: H \to \Aut(N)$ where $H, N$ are Lie groups. We form $G_{\phi} = N \rtimes_{\phi} H$ (where $N$ is normal because the triangle points to it) with multiplication 
     \[(n, h)(a, b) = (n \phi_h(a), hb)\]
 
     From the homework, we showed this is equivalent to 
@@ -1742,11 +1760,11 @@
         N \arrow[hook]{r} & G \arrow[two heads]{r} & H \arrow[bend right=60]{l}{\sigma}
     \end{tikzcd}\]
 
-    \textbf{Example:} $H = \R, N = \R$ with $\phi: H \to \text{Aut}(\R)$ and $\phi = 1 \in \text{Aut}(\R)$. Then 
+    \textbf{Example:} $H = \R, N = \R$ with $\phi: H \to \Aut(\R)$ and $\phi = 1 \in \Aut(\R)$. Then 
     \[N \rtimes_{\phi} \R \simeq \R^2\] 
     (more generally, the identity map yields the direct product $N \times H$) 
 
-    Alternatively, we could say $\phi: \R \to \text{Aut}(\R)$ squeezes or expands (arbitrarily) by $t \mapsto \{x \to e^t x\}$. Now we can form the semi-direct product $N \rtimes_{\phi} H$. 
+    Alternatively, we could say $\phi: \R \to \Aut(\R)$ squeezes or expands (arbitrarily) by $t \mapsto \{x \to e^t x\}$. Now we can form the semi-direct product $N \rtimes_{\phi} H$. 
 
     \emph{Exercise:}
     \[G_{\phi} \simeq \left\{\begin{pmatrix}
@@ -1951,8 +1969,8 @@
    \[\SL(n, \R) \hookrightarrow \GL(n, \R) \twoheadrightarrow \R^{\times}\]
    is a split exact sequence. 
 
-   But, lie group homomorphisms are easily creatable from $N \trianglelefteq_{\phi} H$: to map $H \to \text{Aut}(N)$, we just need to use one-parameter subgroups!
-   \[\R \overset{\phi}{\to} \text{Aut}(\R^n) = \GL(n, \R)\]
+   But, lie group homomorphisms are easily creatable from $N \trianglelefteq_{\phi} H$: to map $H \to \Aut(N)$, we just need to use one-parameter subgroups!
+   \[\R \overset{\phi}{\to} \Aut(\R^n) = \GL(n, \R)\]
    \[t \mapsto \exp(tB) \quad B \in M_n(\R)\]
 
    Zooming out, our project in this course so far has been classifying some low-dimensional lie algebras (and thus lie groups!): 
@@ -1984,14 +2002,14 @@
         \[\vdots\]
     \end{tbox}
 
-    Consider the map $\phi: \R \to \text{Aut}(\R^2)$ by 
+    Consider the map $\phi: \R \to \Aut(\R^2)$ by 
     \[t \mapsto \begin{pmatrix}
         \cosh(t) & \sinh(t)\\ 
         \sinh(t) & \cosh(t)
     \end{pmatrix} = \exp(t \underbrace{\begin{pmatrix}
         0 & 1\\ 
         1 & 0
-    \end{pmatrix}}_{B \in \slf(2, \R)})\] 
+    \end{pmatrix}}_{B \in \sl(2, \R)})\] 
     with 
     \begin{align*}
         \cosh(t) &= \frac{e^t + e^{-t}}{2}\\ 
@@ -2001,7 +2019,7 @@
     \end{align*}
 
     Then we can write 
-    \[\slf(2, \R) = \R\begin{pmatrix}
+    \[\sl(2, \R) = \R\begin{pmatrix}
         0 & -1\\ 
         1 & 0
     \end{pmatrix} \oplus \R\underbrace{\begin{pmatrix}
@@ -2012,7 +2030,7 @@
         0 & 0
     \end{pmatrix}}_{\text{Heisenberg}}\]
     so 
-    \[\text{Isom}(\R^{1, 1}) \simeq G =\left(\begin{array}{cc|c}
+    \[\Isom(\R^{1, 1}) \simeq G =\left(\begin{array}{cc|c}
         \cosh(t) & \sinh(t) & a\\
         \sinh(t) & \cosh(t) & b\\ 
         \hline
@@ -2061,7 +2079,7 @@
     \begin{enumerate}
         \item Why the Jacobi Identity? Why is it true that $[X, [Y, Z]] + [Y, [Z, X]] + [Z, [X, Y]] = 0$ for all $x, y, z \in \g$? 
         
-        For any groups there is a natural representation $\Phi: G \to \text{Aut}(G)$ by $g \mapsto \phi_g: G \biject G$ where $\phi_g(h) = ghg^{-1}$. This gives us a short exact sequence $Z(G) \hookrightarrow G \twoheadrightarrow \text{Im}(\Phi)$. 
+        For any groups there is a natural representation $\Phi: G \to \Aut(G)$ by $g \mapsto \phi_g: G \biject G$ where $\phi_g(h) = ghg^{-1}$. This gives us a short exact sequence $Z(G) \hookrightarrow G \twoheadrightarrow \text{Im}(\Phi)$. 
 
         This means that for any $g \in G$, we have an automorphism $\phi_g: G \biject G$ by $\phi(g)(h) = ghg^{-1}$. On the level of algebras, we form the commutative diagram 
         \[\begin{tikzcd}
@@ -2071,7 +2089,7 @@
 
         So for a smooth path $H(g)$ in $G$, we get another smooth path $gH(g)g^{-1} \in G$. 
 
-        Note that we get a representation of $\text{Ad}: G \to \text{Aut}(\g) \subseteq \GL(\g)$ by $g \mapsto d\phi_g$ (the derivative of conjugation by a fixed element $g \in G$.)
+        Note that we get a representation of $\text{Ad}: G \to \Aut(\g) \subseteq \GL(\g)$ by $g \mapsto d\phi_g$ (the derivative of conjugation by a fixed element $g \in G$.)
 
         Further, $d\phi_g: \g \to \g$ is a lie-algebra isomorphism. By definition it preserves 
         \[d\phi_g[X, Y] = [d\phi_g(X), d\phi_g(Y)]\]
@@ -2080,11 +2098,11 @@
 
         We have another commutative diagram
         \[\begin{tikzcd}
-            G \arrow[hook, two heads]{r}{\text{Ad}} & \text{Aut}(G)\\
-            \g \arrow{u}{\exp} \arrow[hook, two heads]{r}{d(\text{Ad})_1} & \glf(\g) \arrow{u}{\exp}
+            G \arrow[hook, two heads]{r}{\text{Ad}} & \Aut(G)\\
+            \g \arrow{u}{\exp} \arrow[hook, two heads]{r}{d(\text{Ad})_1} & \gl(\g) \arrow{u}{\exp}
         \end{tikzcd}\]
         so 
-        \[d(\text{Ad}_1(z) \in \glf(\g))\] 
+        \[d(\text{Ad}_1(z) \in \gl(\g))\] 
         and 
         \[d(\text{Ad})_1(z)(x) \in \g = \dots = [Z, X]\]
         (proof by linearization of conjugates) so 
@@ -2121,7 +2139,7 @@
     \end{enumerate}
 
 \section{Feb 28:}
-    \textbf{Recall:} The adjoint representation $\text{Ad}: G \to \text{Aut}(\g)$ is given by $g \mapsto \{x \mapsto dI_g(X)\}$ where $I_g: G \biject G$ by $h \to ghg^{-1}$. 
+    \textbf{Recall:} The adjoint representation $\text{Ad}: G \to \Aut(\g)$ is given by $g \mapsto \{x \mapsto dI_g(X)\}$ where $I_g: G \biject G$ by $h \to ghg^{-1}$. 
 
     Then letting $X \sim e^{tX}$ 
     \[\text{Ad}_g(X) = \frac{d}{dt}\bigg\vert_{t=0} ge^{tX}g^{-1} = gXg^{-1}, \quad g \in G\]
@@ -2167,11 +2185,11 @@
     We also notice that the bracket equations are precisely the derivatives of the adjoint representation! And again this makes sense because the derivative of the adjoint is the lie bracket! 
     \[\frac{d}{dt}\bigg\vert_{t=0}\text{Ad}_{g(t)} = \text{ad}(g'(0)) = \text{ad}(X)\] 
     since 
-    \[\text{Ad}_{g(t)} \in \text{Aut}(\g), \quad \text{ad}(X) \in \glf(\g)\]  
+    \[\text{Ad}_{g(t)} \in \Aut(\g), \quad \text{ad}(X) \in \gl(\g)\]  
     which creates the commutative diagram 
     \[\begin{tikzcd}
-        G \arrow{r}{\text{Ad}} & \text{Aut}(\g)\\ 
-        \g \arrow{u}{\exp} \arrow{r}{\text{ad}} & \glf(\g) \arrow{u}{\exp}
+        G \arrow{r}{\text{Ad}} & \Aut(\g)\\ 
+        \g \arrow{u}{\exp} \arrow{r}{\text{ad}} & \gl(\g) \arrow{u}{\exp}
     \end{tikzcd}\]
 
     Now consider the same group $\SL(2, \R)$ but let $h(t) = \begin{pmatrix}
@@ -2266,7 +2284,7 @@
 
     This makes sense because (in a basis) the Killing form preserves $B(X, Y) = \tr(AB) = \tr(BA) = B(Y, X)$
 
-    \textbf{Example:} Let $\g = \slf(2, \R) = \R X \oplus \R Y \oplus \R Z$ with $[X, Y] = 2Y$, $[X, Z] = -2Z$, $[Y, Z] = X$. 
+    \textbf{Example:} Let $\g = \sl(2, \R) = \R X \oplus \R Y \oplus \R Z$ with $[X, Y] = 2Y$, $[X, Z] = -2Z$, $[Y, Z] = X$. 
 
     Then $\text{ad}_X \circ \text{ad}_X: \g \to \g$ so we need to calculate the basis representation with respect ot $\beta = \{X, Y, Z\}$: 
     \begin{align*}
@@ -2364,7 +2382,7 @@
 
     \textbf{Conclusion:} for two isomorphic lie algebras, the killing forms are isometric.
 
-    \textbf{Example:} $\h$ and $\slf(2,\R)$ are \emph{not} isomorphic! The Killing form of $\h$ vanishes identically but the Killing form of $\slf(2, \R)$ is non-zero
+    \textbf{Example:} $\h$ and $\sl(2,\R)$ are \emph{not} isomorphic! The Killing form of $\h$ vanishes identically but the Killing form of $\sl(2, \R)$ is non-zero
 
 \section{March 4:}
     \textbf{Recall:} The \emph{Killing form} $B(X, Y) = \tr(\text{ad}_X \circ \text{ad}_Y)$ is a symmetric bilinear form on $\g$ which is Ad-invariant for all $g \in G$, $X, Y \in \g$: 
@@ -2382,13 +2400,13 @@
     
     Equivalently, $B: V\to V^*$ given by $v\mapsto \{w \mapsto B(v, \cdot)\}$ is an isomorphism. Equivalently, the signature has no zeroes. 
 
-    \textbf{Note:} because the Killing form of $\slf(2, \R)$ is non-degenerate (by explicit calculation), we have $\SL(2, \R) \to \SO(2, 1)$ because the Killing form on $\slf(2, \R)$ has signature $(+, +, -)$. Further, for $g \in \SL(2, \R)$, that map is precisely the adjoint representation:
+    \textbf{Note:} because the Killing form of $\sl(2, \R)$ is non-degenerate (by explicit calculation), we have $\SL(2, \R) \to \SO(2, 1)$ because the Killing form on $\sl(2, \R)$ has signature $(+, +, -)$. Further, for $g \in \SL(2, \R)$, that map is precisely the adjoint representation:
     \[\Ad_g: \g \biject \g, \quad K(\Ad_g X, \Ad_g Y) = K(X, Y)\] 
 
     Put differently, we know 
-    \[\SL(2, \R) \overset{\Ad}{\longrightarrow} \text{Aut}(\g)\]
+    \[\SL(2, \R) \overset{\Ad}{\longrightarrow} \Aut(\g)\]
     but more strongly. 
-    \[\SL(2, \R) \overset{\Ad}{\longrightarrow} \text{Aut}(\g \; | \; \text{ which preserves K}) \subset \text{Aut}(\g)\] 
+    \[\SL(2, \R) \overset{\Ad}{\longrightarrow} \Aut(\g \; | \; \text{ which preserves K}) \subset \Aut(\g)\] 
 
     The automorphisms of $\g$ which preserve $K$ are precisely those which preserve $x^2 + y^2 - z^2$ which is the isometry group of $\SO(2, 1)$.
 
@@ -2450,7 +2468,7 @@
     so $\Z(\h)$ is non-trivial but $Z(\mathfrak{e}(1, 1))$ is not. 
 
     How do you distinguish $\mathfrak{e}(1, 1)$ and $\mathfrak{i}$ where $\mathfrak{i}$ is the lie-algebra of 
-    \[\text{Isom}^+(\R^2) = \left\{\begin{pmatrix}
+    \[\Isom^+(\R^2) = \left\{\begin{pmatrix}
         \cos \theta & -\sin \theta & x\\ 
         \sin \theta & \cos \theta & y\\
         0 & 0 & 1
@@ -2473,7 +2491,7 @@
     
     \textbf{Definition:} a lie algebra is \emph{semi-simple} if it has no non-zero solvable ideals.
 
-    \emph{Example:} $\g = \slf(2, \R), \mathfrak{so}(3, \R)$.
+    \emph{Example:} $\g = \sl(2, \R), \mathfrak{so}(3, \R)$.
     
     \textbf{Motivation:} to each semi-simple lie group, you can associate a geometry. For example, $\SO(3, \R)$ admits a transitive action on $S^2$ whose point-stabilizer is $\SO(2, \R) \subseteq \SO(3, \R)$ stabilizes the north pole (rotation of a ball around the axis.) 
 
@@ -2492,7 +2510,7 @@
     \[[X, Y] = 0, [Z, X] = Y, [Z, Y] = X \implies \g^1 = \brak{X, Y}. \g^2 = 0\] 
     Therefore, $\mathfrak{e}(1, 1)$ is solvable.
 
-    However, $\slf(2, \R)$ is \emph{not} solvable. (\emph{Proof:} exercise) 
+    However, $\sl(2, \R)$ is \emph{not} solvable. (\emph{Proof:} exercise) 
 
     \begin{tbox}{\textbf{Theorem (Levi decomposition):} Every finite dimensional lie algebra fits into a short exact sequence 
         \[\h \hookrightarrow \g \twoheadrightarrow \g/\h\]
@@ -2840,7 +2858,7 @@
         \R \arrow[hook]{r}{z} & G \arrow[two heads]{r} & G/\R
     \end{tikzcd}\] 
 
-    \begin{tbox}{\textbf{Theorem (of Lie):} Let $\g$ be a solvable lie algebra and let $\pi: \g \to \glf(v)$ (as a lie algebra $\glf(v)$ is given by $[A, B] = AB - BA$ though $V$ does not have a lie algebra structure). Further, assume for $x \in \g$, the eigenvalues of $\pi(x)$ are real (alternatively, extend everything to $\C$ so we can solve characteristic polynomials). Then, there exists a $v \neq 0$ so that $v$ is an eigenvector of $\pi(\g)$}
+    \begin{tbox}{\textbf{Theorem (of Lie):} Let $\g$ be a solvable lie algebra and let $\pi: \g \to \gl(v)$ (as a lie algebra $\gl(v)$ is given by $[A, B] = AB - BA$ though $V$ does not have a lie algebra structure). Further, assume for $x \in \g$, the eigenvalues of $\pi(x)$ are real (alternatively, extend everything to $\C$ so we can solve characteristic polynomials). Then, there exists a $v \neq 0$ so that $v$ is an eigenvector of $\pi(\g)$}
         \textbf{Consequence:} You can find a complete, invariant flag of $\pi(\g)$, i.e. there exists a basis of $v$ so that $\pi(\g)$ is upper triangular. Further, if $\g$ is nilpotent, then the main diagonal will be all $1$'s. 
     \end{tbox}
 
@@ -2922,7 +2940,7 @@
     \[1 \triangleleft \R^2 \triangleleft G\]
     so $\R^2/1 \simeq \R^2$ is abelian and $G/\R^2 \simeq \R$ is abelian.
 
-    \textbf{Example:} $G = \text{Isom}^+(\R^2) \simeq \begin{pmatrix}
+    \textbf{Example:} $G = \Isom^+(\R^2) \simeq \begin{pmatrix}
         \cos \theta & -\sin \theta & x\\ 
         \sin \theta & \cos \theta & y\\
         0 & 0 & 1
@@ -3003,8 +3021,1171 @@
     \end{tbox}
 
     \textbf{Example:} $\GL(2, \R) \supseteq \SL(2, \R)$ is not solvable. Why is $\SL(2, \R)$ not solvable? 
-    \[\slf(2, \R) = \brak{X, Y, Z} \text{ with } [Z, X] = 2X,\; [Z, Y] = -2Y, \; [X, Y] = Z\]
+    \[\sl(2, \R) = \brak{X, Y, Z} \text{ with } [Z, X] = 2X,\; [Z, Y] = -2Y, \; [X, Y] = Z\]
     so $[\g, \g] = \g$ and the derived series does not terminate. 
 
+\section{March 15:} 
+    \textbf{Definition:} A representation of a group $G$ into a vector space $V$ is a homomorphism 
+    \[\Phi: \begin{array}{c}
+        G \to \Aut(V)\\ 
+        g \mapsto \{\Phi(g): V \biject  V\}
+    \end{array}\]
+    where $\Phi(g)(v)$ is another vector in $V$. 
+
+    Differentiating, we have 
+    \[\phi: \begin{array}{c}
+        \g \to \gl(V)\\ 
+        \quad X \mapsto \frac{d}{dt}\bigg\vert_{t=0} \Phi(e^{tX})
+    \end{array}\]
+    and $\frac{d}{dt}\bigg\vert_{t=0} \Phi(e^{tX})$ is an endomorphism $V \to V$ so $\phi$ is a lie-algebra homomorphism $\phi([X, Y]) = [\phi(X), \phi(Y)]$ 
+
+    \textbf{Lie's Theorem:} Let $\g$ be a solvable lie algebra and let $\pi: \g \to \gl(V)$ be a representation of $\g$ such that the eigenvalues of $\pi(x)$ are real for each $X \in \g$. Then there exists a $v \neq 0 \in V$ so that $v$ is an eigenvector of $\pi(X)$ for all $X \in \g$.
+
+    \begin{tbox}{\textbf{Corollary of Lie's Theorem:} If you have the same context as the theorem, then there exists a sequence of subspaces 
+        \[0 = V \subset V_m \subset V_{m-1} \subset \dots \subset V_0 = V\]
+        such that each $V_i$ is stable under $\pi(X) \in \gl(V)$ and each is codimension 1 in the next. }
+
+        \emph{Proof (by induction):} If $\dim V = 1$, then $\pi: \g \to \gl(V)$ is completely determined by $x \mapsto \pi(x)$. Then there exists a vector $v \neq 0$ so $\pi(x)v = \lambda(x) v$ for some $\lambda(x)$ (by hypothesis). 
+        
+        If it holds for $\dim V = n$, we claim it holds for $\dim V = n + 1$: let $\pi: \g \to \gl(V)$ where $\dim V = n+1$. Assume there exists a $v \neq 0$ so that $\pi(x)v = \lambda(x) v$. Let $w = \R v$. Then 
+        \[\begin{tikzcd}
+            \R v \arrow[hook]{r}{i} \arrow{d}{\pi(x)\big\vert_w} & V \arrow{d}{\pi(x)} \arrow[two heads]{r}{p} & V/\R v \arrow{d}{\overline{\pi(x)}}\\ 
+            \R v \arrow[hook]{r}{i} & V \arrow[two heads]{r}{p} & V/\R v 
+        \end{tikzcd}\]
+        so 
+        \[(\pi(x))_{\beta} \sim \left(\begin{array}{c|c}
+            * & \text{stuff}\\ 
+            \hline 
+            0 & \overline{\pi(x)}
+        \end{array}\right)\]
+
+        Originally, we had $\pi: \g \to \gl(V)$. The commutative diagram gives us $\bar \pi: \g \to \gl(V/\R v)$. Because $\g$ is solvable, $\bar \pi(\g) \subseteq \gl(V/\R v)$ is solvable. Then $\dim V/\R v = n$ so by the inductive hypothesis, there exists a complete flag 
+        \[0 = U_m \subset U_{m-1} \subset \dots \subset U_0 = V/\R v\]
+        On this flag of quotients, we know that $\bar \pi(x)$ stabilizes each subspace. To get a complete flag on $V$, just look at 
+        \[\pi^{-1}(U_m) \subset \pi^{-1}(U_{m-1}) \subset \dots \subset \pi^{-1}(V/\R v)\] 
+        left appending a $0$ and looking at the preimage of the flag, 
+        \[0 \subset \R v \subset \pi^{-1}(U_{m-1}) \subset \dots \subset V\]
+        which is a complete flag stabilized by $\pi(x)$ for each $X \in \g$. 
+    \end{tbox}
+
+    Equivalently, there exists a basis for $V$ for which 
+    \[(\pi(X))_{\beta} = \begin{pmatrix}
+        * & \dots & *\\ 
+        & \ddots\\
+        & & *
+    \end{pmatrix}\]
+    (upper triangular)
+
+    \begin{tbox}{\textbf{Ado's Theorem:} Let $\g$ be a lie algebra. Then there exists a sufficiently large vector space $V$ for which $\g \hookrightarrow \gl(V)$.}
+        \emph{Proof:} Far out of the scope of the course 
+    \end{tbox}
+
+\section{March 18:}
+    \textbf{Note on the Midterm:} nilpotent $\implies K =0$ but the converse is not true!
+
+    \begin{tbox}{\textbf{Fact:} If $G$ is connected, $\exp(\g)$ generates $G$ as a group, 
+        \[g = \exp(x_1)\exp(x_2)\dots \exp(x_n)\]
+        for some $x_i \in \g$.}
+
+        \emph{Proof sketch:} $\exp: \g \to G$ is a local diffeomorphism at $0 \in \g$ so $\exp(\g)$ must be an open subset of $G$. In addition, $\exp(\g)$ is a closed subset of $G$ (proof is harder). Since it is an open and closed set, $\brak{\exp(\g)} = G$.
+    \end{tbox}
+
+    \begin{tbox}{\textbf{Lie's Theorem:} Let $\g$ be a solvable lie algebra and let $\pi: \g \to \gl(V)$ be a representation of $\g$ such that the eigenvalues of $\pi(x)$ are real for each $X \in \g$. Then there exists a $v \neq 0 \in V$ so that $v$ is an eigenvector of $\pi(X)$ for all $X \in \g$.}
+
+        \emph{Proof:} We will proceed by induction on $\dim \g$. For $\dim \g = 1$, it is straightforward that $\pi(X) \in \gl(V)$: Note that $\pi(\g)$ is determined by $\pi(X)$ for a single non-zero $x \in \g$ since $\pi(X)$ has real eigenvalues. Therefore, $\pi(Y)= t\pi(X)$ for any $Y \in \g$ for some $t \in \R$. By the real condition on the eigenvalues, we know the characteristic polynomial will split over $\R$ so we can find a non-zero eigenvector.
+
+        Now assume the proof for all $\g$ with $\dim \g \leq n$. Because $g$ is solvable, $[\g, \g] \neq \g$. We can choose a codimension $1$ subspace $\h$ so that $[\g, \g] \subseteq \h$. 
+        
+        We would like to show that $\h$ is an ideal. And in fact, 
+        \[[\g, \h] \subseteq [\g, \g] \subseteq h\]
+
+        Then $\h$ is an ideal of $\dim 1$ in $\g$ so it is solvable. By the induction hypothesis, it admits an invariant vector $e \neq 0$ with $\pi(H)e = \lambda(H)e$ for all $H \in \h$.
+
+        Now choose an arbitrary complement $X \neq 0$ so that $\g = \R X \oplus \h$ as vector spaces (By definition, $X \notin \h$). The idea is to build a $\pi(X)$-invariant subspace: let $e_{-1} = 0, e_{0} = e, e_p = \pi(X)e_{p-1}$ and define 
+        \[E = \text{Span}\{e_{-1}, e_0, \dots, e_p, \dots\}\]
+        which is simply the orbit of $\pi(X)$ acting on $e$. 
+
+        Now let 
+        \[E_k = \text{Span}\{e_{-1}, \dots, e_{k-1}\}\]
+        for $k = -1, 0, 1, \dots$. By construction, $E$ is $\pi(X)$-invariant ($\pi(X)E \subseteq E$), thus $\pi(X)$ admits an eigenvector $v \in E, \pi(X)v = \lambda(X)b$. This is equivalent to saying there exists an invariant line in $E$ under $\pi(X)$.
+
+        We claim that $v$ is invariant under $\pi(H)$ for each $H \in h$. Thus, $\R v$ determines an invariant line for $\pi(X)$ (which is fixed) and $\pi(H)$ for each $H \in \h$. Together, this shows that $\R v$ is an invariant line for $\pi(\g)$ and we are done. 
+
+        This is the tricky part. 
+
+        \emph{Claim 1:} $\pi(H)e_p = \lambda(H)e_p \mod E_p - 1$ for $p = 0, 1, \dots$ 
+
+        \emph{Proof of Claim 1:} We proceed by induction. For $p = 0$, we have 
+        \begin{align*}
+            \pi(H)e_0 &= \lambda(H)e_0 \mod E_{-1}\\ 
+                &= \lambda(H)e_0 \mod \Span\{0\}\\ 
+            \pi(H)e &= \lambda(H)e_0 \quad \checkmark 
+        \end{align*}
+
+        For $p = 1$, 
+        \begin{align*}
+            \pi(H)e_1 &= \lambda(H)e_1 \mod E_0\\ 
+                &= \lambda(H)e_1 \mod \Span\{e\}\\ 
+                &= \lambda(H)e_1 + \R e
+        \end{align*}
+
+        So we could write 
+        \[(\pi(H))_{\beta} = \begin{pmatrix}
+            \lambda(H) & * & * & * \\ 
+            0 & \lambda(H) & * & *\\ 
+            0 & 0 & \ddots & *\\ 
+            0 & 0 & 0 & \lambda(H)
+        \end{pmatrix}\] 
+
+        Assume the claim holds for $p$ and we want to show it holds for $p +1$ (assuming these indices occur before the stabilization point when the claim becomes trivial) 
+
+        \begin{align*}
+            \pi(H)e_{p+1} &= \pi(H)\pi(X)e_p\\ 
+                &= \pi(H)\pi(X)e_p - \pi(X)\pi(H)e_p + \pi(X)\pi(H)e_p\\ 
+                &= \pi(\underbrace{[H, X]}_{\in \h})e_p + \pi(X)\pi(H)e_p\\ 
+                &=\left(\lambda([H, X])e_p + E_{p - 1}\right) + \pi(X)\left(\lambda(H)e_p + E_{p-1}\right)\\ 
+                &= \underbrace{\lambda([H, X]) e_p}_{\in E_{p-1}} + \pi(X)\lambda(H)e_p + \underbrace{\pi(X)E_{p}}_{\in E_{p}} + \underbrace{E_{p-1}}_{\in E_{p}}\\
+                &= \lambda(H)\pi(X)e_p + E_p\\ 
+                &= \lambda(H)e_{p+1} + E_p 
+        \end{align*}
+        so Claim 1 holds for all $p$. 
+
+        \emph{Claim 2:} $\lambda([H, X]) = 0$ for all $H \in \h$. 
+
+        \emph{Proof:} In the proof for claim 1, we showed that we can write 
+        \[(\pi(H))_{\beta} = \begin{pmatrix}
+            \lambda(H) & * & * & * \\ 
+            0 & \lambda(H) & * & *\\ 
+            0 & 0 & \ddots & *\\ 
+            0 & 0 & 0 & \lambda(H)
+        \end{pmatrix}\] 
+
+        Therefore, $\tr \pi(H) = \lambda(H) \dim E$ for all $H \in \h$. In particular, 
+        \[\tr \pi([H, X]) = \lambda([H, X])\dim E\]
+        but 
+        \[\tr \pi([H, X]) = \tr (\pi(H)\pi(X) - \pi(X)\pi(H)) = 0\]
+        so 
+        \[\lambda([H, X])\dim E = 0\]
+        since we have characteristic non-zero and $\dim E \neq 0$, we have 
+        \[\lambda([H, X]) = 0\]
+
+        \emph{Claim 3:} $\pi(H)e_p = \lambda(H)e_p$ for all $H \in \h$ and $p \geq 0$. (This is a much stronger claim than Claim 1!)
+
+        \emph{Proof:} For $p = 0$, this is true by construction: $e_p = e_0 = e$ is an eigenvector for all of $\pi(H)$. 
+
+        Assume the claim holds for $p$ and we want to show it holds for $p + 1$. 
+        \begin{align*}
+            \pi(H)e_{p+1} &= \pi(H)\pi(X)e_p\\ 
+            &= \pi(H)\pi(X)e_p - \pi(X)\pi(H)e_p + \pi(X)\pi(H)e_p\\
+            &= \pi([H, X])e_p + \pi(X)\pi(H)e_p\\
+            &= \lambda([H, X])e_p  + \pi(X)\lambda(H)e_p\\ 
+            &= 0 + \lambda(H) \pi(X) e_p\\
+            &= \lambda(H)e_{p+1}
+        \end{align*}
+        Thus, $\pi(H)$ acts by scalar multiplication ($\lambda(H)$) on $E$. 
+        
+        All together, 
+        \[\pi(H)v = \lambda(H)v\]
+        so $\pi(H)$ preserves the invariant line $\R v$. We also showed that $\pi(H)$ preserves $\h$ so $\pi(H)$ preserves $\g$.  
+    \end{tbox}
+
+\section{March 20:}
+    \textbf{Consequences of Lie's Theorem:} The upper triangular lie algebras are the only ones.  
+        
+    We showed that $\begin{pmatrix}
+        * & * & *\\ 
+        0 & * & *\\ 
+        0 & 0 & *
+    \end{pmatrix}$ are all solvable and moreover, so are its sub-algebras. 
+
+    Lie's Theorem says that if we start with something solvable, then it is embeddable in the upper triangular lie-algebras (with sufficiently many eigenvalues) 
+    
+    \textbf{Proposition:} Let $\pi: \g \to \gl(V)$ be a representation of a nilpotent lie algebra. Then each operator $\pi(X)$ is nilpotent. 
+
+    \begin{tbox}{\textbf{Engel's Theorem:} Let $\pi: \g \to \gl(V)$ be a representation such that each $\pi(X)$ is nilpotent (vanishes under powers) for each $X \in \g$. Then $\pi(\g)$ is a nilpotent lie-algebra (lower central series converges).}
+        \emph{Proof:} Omitted.
+    \end{tbox}
+
+\section{March 22:} 
+    For the next section of the course, we will be switching to geometry. 
+    \begin{itemize}
+        \item $S^3$ double covering of $\SO(3, \R)$
+        \item $\SO(+, \R)$ cover of $\SO(3, \R) \times \SO(3, \R)$
+        \item Hyperbolic geometry: length, area, curvature 
+        \item Fuchsian Groups 
+    \end{itemize}
+
+    In general we will have a pair $(G, X)$ where $G$ is the group of isometries of a model space $X$. 
+
+    \textbf{Examples:}
+    \begin{itemize}
+        \item $(\SO(3, \R), S^2)$ - Spherical Geometry 
+        \item $(\Isom(\E^2), \E^2)$ - Euclidean Geometry 
+        \item $(\PSL(2, \R), \H^2)$ - Hyperbolic Geometry 
+    \end{itemize}
+
+    \textbf{Definition:} $\PSL(2, \R) \simeq \SL(2, \R)/Z(\SL(2, \R)) = \SL(2, \R)/\Z_2$ 
+
+    \textbf{Definition:} The \emph{unit quaternion group }
+    \[Q_8 = \brak{1, i, j, k \;\big\vert\; i^2 = j^2 = k^2 = -1, ij = k, jk = i, ki = j}\]
+    is a group of order 8. 
+
+    $Z(Q_8) = \Z_2 = \{\pm 1\} \triangleleft Q_8$ so we have the short exact sequence 
+    \[\Z_2 \hookrightarrow Q_8 \twoheadrightarrow \Z_2 \oplus \Z_2\] 
+    (clearly the quotient is order 4 so up to isomorphism we have $\Z_4$ or $\Z_2 \oplus \Z_2$ and it should not be cyclic). 
+
+    The \emph{general quaternion group} is given by 
+    \[\H = \{a + b\ihat + c\jhat + d\khat \; | \; a, b, c, d \in \R\}\]
+
+    As a vector space, $\H \simeq \R^4$ with basis $\{1, \ihat, \jhat, \khat\}$. However, as a group, the multiplication rule is 
+    \begin{align*}
+        (a + b\ihat + c\jhat + d\khat)(x + y\ihat + z\jhat + w\khat) &= ax + ayi + azj + awk\\ 
+        &\quad + bx\ihat + by\ihat^2 + bz\ihat\jhat + bw\ihat\khat\\
+        &\quad + cx\jhat + cy\jhat\ihat + cz\jhat^2 + cw\ihat\khat\\
+        &\quad + dx\khat + dy\khat\ihat + dz\khat\jhat + dw\khat^2\\
+        &= \dots
+    \end{align*}
+    With the relations $\ihat^2 = \jhat^2 = \khat^2 = -1, \ihat\jhat = \khat, \jhat\khat = \ihat, \khat\ihat = \jhat$ so the vector multiplication is \emph{not} commutative. 
+
+    Given a quaternion $q = x + y\ihat + z\jhat + w\khat$, we say $\text{scal}(q) = x$ and $\text{vec}(q) = y\ihat + z\jhat + w\khat$ so 
+    \[q = \text{scal}(q) \cdot 1 + \text{vec}(q)\] 
+    
+    A quaternion is called \emph{pure} iff $\text{scal}(q) = 0$. 
+
+    Note that we have some copies of $\C$ in $\H$! 
+    \begin{align*}
+        \C &\to \H\\ 
+        x + iy &\mapsto x + y\ihat + 0\jhat + 0\khat
+    \end{align*}
+    (and same for $\jhat$ and $\khat$). Further, this is not just a vector space embedding but a full ring embedding (it respects multiplication).
+
+    \textbf{Definition:} We denote $\bar q$ as the \emph{conjugate} of $q$ defined by  
+    \[\bar q = \text{scal}(q) - \text{vec}(q)\]
+
+    \begin{tbox}{\textbf{Lemma:} For two pure quaternions $p, q$ (i.e. scalar parts zero), we have 
+        \[pq = -p \cdot q + p \times q\]
+        where $p \cdot q$ is the typical dot product on $\R^3$ and $p \times q$ is the cross product.}
+        \emph{Remark:} this requires an implicit identification of the pure quatermions with $\R^3$. 
+
+        \emph{Proof:} Just calculate. (Becomes a little more intuitive with later properties of 3-d space)
+    \end{tbox}
+
+    \begin{tbox}{\textbf{Lemma:} Let $X = x + p$ and $Y = y + q$ be two quaternions where $x, y$ and $p, q$ denote the scalar and pure parts respectively. Then 
+        \[XY = (x + p)(y + q) = xy + xq + yp + pq = (xy - p \cdot q) + (xq + yp + p \times q)\]}
+        \emph{Proof:} Direct from above lemma
+    \end{tbox}
+
+    \textbf{Definition:} Let $\norm{p} = \sqrt{x^2 + y^2 + z^2 + w^2}$. We say a quaternion is \emph{unit} iff $\norm{p} = 1$. 
+
+    Thus, 
+    \[p \bar p = \norm{p}^2\]
+    since 
+    \begin{align*}
+        p \bar p &= (x + v)(x - v) \\ 
+            &= x^2 -( v\dot (-v)) - xv + xv - v\times v \\ 
+            &= x^2 + v \cdot v\\ 
+            &= \norm{p}^2\\ 
+            &= p \cdot p \quad (\text{ in } \R^4)
+    \end{align*}
+
+    This gives us a nice formula for $p^{-1}$: 
+    \[p \left(\frac{\bar p}{\norm{p}^2}\right) = 1 \implies p^{-1} = \frac{\bar p}{\norm{p}^2}, \; p \neq 0\]
+
+    Consequently, $\H^{\times}$ is a group under multiplication! More interestingly, it is non-commutative which should give you ``an irresistible urge to look at it as a lie algebra''.
+
+    Observe that $Q_8$'s elements had order 4. 
+
+    \begin{tbox}{\textbf{CLaim:} Let $u$ be a unit pure quaternion, i.e. $u = xi + yj + zk$ with $x^2 + y^2 + z^2 = 1$, then $u^4 = 1$.}
+        \emph{Proof:} 
+        \begin{align*}
+            u^2 &= -u \cdot u + u \times u\\ 
+                &= -u \cdot u
+                &= -1\\
+            u^4 &= (u^2)^2 = 1
+        \end{align*}
+    \end{tbox}
+
+    \begin{tbox}{\textbf{Claim:} $\bar{pq} = \bar{q} \, \bar{p}$}
+        \emph{Proof:} Full proof is annoying but simple. 
+    \end{tbox}
+
+    This does raise an interesting property though: consider $\H \biject \H$ by $q \mapsto \bar q$. This is an \emph{anti-isomorphism} since 
+    \[\text{conj}(pq) = \text{conj}(q)\; \text{conj}(p)\]
+
+    As a consequence, $\norm{\cdot}: H^{\times} \to \R^+$ given by $p \mapsto \norm{p}$ is multiplicative: 
+    \[\norm{pq} = (pq)(\bar{pq}) = pq\, \bar q\, \bar p = p \norm{q}^2\, \bar p = \norm{p}^2 \, \norm{q}^2\]
+
+    Because the norm is a homomorphism, we can look at its kernel: 
+    \[S^3 = \{p \in \H^{\times} \; | \; \norm{p} = 1\} = \{\sqrt{x^2 + y^2 +z^2 + w^2}  =1\}\]
+
+\section{April 3:} 
+    \textbf{Recall:} Quaternions are the group of the form 
+    \[\H = \{x + y\ihat + z\jhat + w\khat \; | \; i^2 = j^2 = k^2 = -1, \; ij = k, jk =i, ki = i\}\]
+
+    We are predominantly interested in $\H^{\times}$, the group of quaternions under multiplication. 
+
+    Last time, we showed that if $q$ is non zero, then $q^{-1} = \frac{\bar q}{\norm{q}^2}$. (where $\norm{\cdot}$ is the typical norm on $\R^4$)
+ 
+    \textbf{Lemma:} For any $p, q \in \H$, $\bar{pq} = \bar q\, \bar p$ 
+
+    Recall if $q = x + (yi + zj + wk)$ then $\bar q = x - (yi + zj + wk)$. We say $\text{Sc}(q) = x$ and $\text{Vec}(q) = yi + zj + wk$.
+
+    We also showed that the norm is multiplicative so $\H^{\times} \twoheadrightarrow \R^+$ given by $q \mapsto \norm{q}$ is a homomorphism. 
+
+    Further, we have a normal subgroup inside of $\H^{\times}$: 
+    \begin{align*}
+        \ker \norm \cdot &= \{q \in \H^{\times} \, | \, \norm{q} = 1\}\\ 
+            &= \{x + y\ihat + z\jhat + w\khat \, | \, \sqrt{x^2 + y^2 + z^2 + w^2} = 1\}\\ 
+            &= S^3
+    \end{align*}
+
+    Note that this is \emph{not} the regular sphere $S^2$. One way think of $S^3$ as growing and shrinking balls at a given cross-section. However, since it is a compact manifold without boundary, it cannot be embedded in $\R^4$.
+
+    The theoretically best way to visualize it, however, is with the Stereographic projection. 
+    
+    For $S^2$ we can consider $f: S^2/N \biject \R^2$ (where $N$ is the north pole). Indeed, this preserves angles (circles generalized to infinite lines). 
+
+    And indeed, we can do the same thing for $S^3/N \biject \R^3$.
+
+    There exists a group action of $S^3$ on $\R^3$ which comes from quaternions. For any $q \in S^3$ look at the group-theoretic conjugation (this is different from quaternion conjugation!) 
+    \[q \in S^3 \mapsto I_q: \begin{array}{c}
+        \H \biject \H\\ 
+        p \mapsto qpq^{-1}
+    \end{array}\]
+
+    This preserves quaternion conjugation in the sense that 
+    \[\begin{tikzcd}
+        \H \arrow[two heads, hook]{r}{I_q} \arrow[two heads, hook]{d}{\text{conj}} & \H \arrow[two heads, hook]{d}{\text{conj}}\\ 
+        \H \arrow[two heads, hook]{r}{I_q} & \H
+    \end{tikzcd}\]
+    commutes. 
+
+    \begin{tbox}{\textbf{Claim:} The following diagram commutes: 
+        \[\begin{tikzcd}[ampersand replacement=\&]
+            p \arrow[mapsto]{r} \arrow[mapsto]{d} \& qpq^{-1} \arrow[mapsto]{d}\\
+            \conj(p) \arrow{dr} \& \conj(qpq^{-1}) \arrow[equal, double=gray!75!black]{d}\\
+             \& q\conj(p)q^{-1}
+        \end{tikzcd}\]}
+
+        \emph{Proof:} 
+        \begin{align*}
+            \bar{qpq^{-1}} &= \bar{q^{-1}}\, \bar p \, \bar q\\ 
+                &= \bar(\bar q)\, \bar p\, \bar q\\ 
+                &= q\, \bar p\, q^{-1}
+        \end{align*}
+
+        \textbf{Note:} This is true for any $q \in \H^{\times} \simeq \R^+ \times S^3$ since $q = \norm{q} \cdot \frac{q}{\norm q}$ because $\norm{q} \in \R^+$
+    \end{tbox}
+
+    \textbf{Observation:} We have a group structure on $S^0, S^1, S^3$ but \emph{not} on $S^2$. (Hairy Ball Theorem, tangent bundle is nontrivial) 
+
+    Since $I_q$ preserves hamiltonian conjugation, it commutes with all quantities expressible in it, e.g. $\text{Sc}(p) = \frac{1}{2}(p + \bar p)$,  $\text{Vec}(p) = \frac{1}{2}(p - \bar p)$, $\text{Norm}(p) = \sqrt{p \, \bar p}$ since 
+    \[\text{Sc}(I_q(p)) = I_q(\text{Sc}(p))\]
+
+    So we can write $\H = \R \oplus \R^3$ where $\R$ is the scalar part and $\R^3$ is the vector part so our representation $S^3 \to \Aut(\R^4)$ can be reduced to $S^3 \to \Aut(\R^3)$ 
+
+    \emph{Proof:} By $\text{Vec}(p) = \frac{1}{2}(p - \bar p)$, we have that $S^3$ respects the vector parts of each $p \in \H$, so we have an action of $S^3$ on $\R^3$, specifically the pure quaternions. 
+
+    By $\text{Norm}(p) = \sqrt{p \, \bar p}$, the norm is preserved so the representation can be written $S^3 \to O(3)$ and even more strongly, by connectivity we have $S^3 \to SO(3)$.
+
+    \begin{tbox}{\textbf{Theorem:} Let $q \in S^3$ and express $q = \cos \frac{\theta}{2} + \sin \frac{\theta}{2} u$ for $\theta \in [0, 2\pi]$ with $u$ a unit vector. Then $I_q$ acting on $\R^3$ is about the line generated by $u$ through an angle of $\theta$ (Clockwise).}
+        \emph{Proof:} Omitted 
+
+        \textbf{Consequence:} $S^3 \twoheadrightarrow \SO(3, \R)$ has a kernel of $\Z_2$ (\emph{Spin double cover of $SO(3, \R)$} so the fundamental group of $SO(3, \R)$ is $\Z_2$)
+
+        Topologically, this tells us $\SO(3, \R) \simeq S^3/\Z_2 \simeq \RP^3$ acting by the antipodal map so we can think of $\SO(3, \R)$ as the group of lines through the origin in 4-d space. 
+    \end{tbox}
+
+\section{April 5:}
+    \textbf{Recall:} group conjugation ($q \in \H^{\times} \mapsto \{I_q: \H \biject \H\}$) respects Hamiltonian conjugation: 
+    \[\conj(I_q(p)) = I_q(\conj(p))\] 
+    
+    Therefore, if we have a quantity that can be expressed in terms of $p$ and $\bar p$, then $I_q$ shall preserve/respect it. 
+
+    In particular, 
+    \begin{align*}
+        \text{Sc}(p) &= \frac{p + \bar p}{2}\\ 
+        \text{Vec}(p) &= \frac{p - \bar p}{2}\\ 
+        \text{Norm}(p) &= \sqrt{p\, \bar p}
+    \end{align*}
+
+    This means that if we have a pure quaternion $p \in \H$ (i.e. $\Sc(p) = 0$), then $I_q(p)$ is a pure quaternion. 
+
+    If we think of $\H = \R \oplus \Span_{\R}\{i, j, k\} = \R \oplus P$ where $P$ is the space of pure quaternions, then $I_q$ preserves the 3-dimensional, real subspace $P$
+
+    Further, since $I_q$ preserves the norm, we know $I_q$ is an isometry on $P$ (giving $P$ the typical inner product inherited from $\R^4 \simeq \H$, i.e. we consider $\{1, i, j, k\}$ an orthonormal oriented basis). This yields a map 
+    \[\begin{array}{c}
+        S^3 \to \SO(3, \R)\\ 
+        q \mapsto I_q: P \biject P
+    \end{array}\] 
+
+    Our question: What is $I_q$? 
+
+    \begin{tbox}{\textbf{Lemma:} Let $q \in S^3$ be pure, $\Sc(q) = 0$, so $q \in P \cap S^3 \simeq S^2$ }
+        \emph{Proof:} Omitted
+    \end{tbox}
+
+    We want to understand what $I_q$ does. Of course, we know 
+    \[I_q(p) = qpq^{-1}\] 
+    when $q$ is unit pure.
+
+    Trivially, $I_q(q) = qqq^{-1} = q$ so the line $\R q$ is invariant under $I_q$. 
+
+    Clearly, the map has to be in $\SO(3, \R)$. Recall that if there is a non-trivial $g \in \SO(3, \R)$ there exists a fixed axis -- indeed, we just found it! Therefore, it suffices to examine $I_q$ on a complementary subspace. The natural choice is the orthogonal complement $C$ of $\R q$ (the plane for which $q$ is normal). 
+    
+    Take $v \in C = \R q^{\perp}$. By definition, $I_q(v) = qvq^{-1}$. We can just let $v$ be unit so 
+    \begin{align*}
+        I_q(v) &= qvq^{-1}\\
+        &= (qv)q^{-1}\\ 
+        &= (-q\cdot v + q \times v)q^{-1}\\ 
+        & = (q \times v)q^{-1}\\ 
+        & = -(q \times v)q\\ 
+        & = -((q \times v) \cdot q + (q \times v) \times q)\\ 
+        &= -(0 + (q \times v) \times q)\\ 
+        &= -v
+    \end{align*}
+    (since $q, v$ orthogonal and $q^{-1} = \bar q = -q$ since $q \in S^3 \cap P$)
+
+    That means that on the line, $I_q$ does nothing. On the orthogonal complement, it send vectors to their negatives. 
+
+    Therefore, $I_q$ is a line symmetry with axis of symmetry $\R q$ and the plane of reflection $C$. Relative to the basis $\beta = \{q, v, q \times v\}$, 
+    \[(I_q)_{\beta} = \begin{pmatrix}
+        1 & 0 & 0\\ 
+        0 & -1 & 0\\ 
+        0 & 0 & -1
+    \end{pmatrix}\]
+
+    \begin{tbox}{\textbf{Cartan-Dieudonné Theorem:} Any isometry of $\R^n$ is expressible as a product of at most $(n+1)$-reflections in hyperplanes}
+        \emph{Proof:} Omitted
+    \end{tbox}
+
+    \begin{tbox}{\textbf{Lemma:} Let $q \in S^3$ and choose $v$ that is pure and unit and orthogonal to $\Vec(q)$. Then there exists pure unit quaternions $w_+$ and $w_-$ so that 
+        \[q = vw_+ = w_- v\]}
+        \emph{Proof:} Let $q \in S^3$, $q = x + \Vec(q)$, $\norm{q}^2 = 1$ so $x^2 + \norm{\Vec(q)}^2 = 1$.
+        
+        Choose $\theta \in [0, \pi]$ so that $\cos \theta = x$ and $\sin \theta = \norm{\Vec(q)}$. We can then write 
+        \[q = \cos \theta + \sin \theta u\]
+        where $u$ is unit pure. 
+
+        Take $v \perp u$. Certainly if we just want orthogonality to $u$, the natural choice is linear combinations of $v$ and $u \times v$. In a sense, this is created an oriented orthonormal basis $\beta = \{u, v, u \times v\}$. The trick is to take linear combinations such that they are still unital. 
+
+        Define $w_+ = -\cos \theta v + (u \times v) \sin \theta$. Clearly it is pure and $\norm{w_+} = 1$ since it is the sum of orthogonal pieces. The hard part to very is orthogonality to $\Vec (q)$: 
+        \begin{align*}
+            vw_+ &= v(-\cos \theta v + (u \times v)\sin \theta) \\ 
+            &= -\cos \theta vv + \sin \theta v(u \times v)\\ 
+            &= -\cos \theta (-v \cdot v) + \sin \theta(-v \cdot (u \times v)) + v \times (u \times v)\\
+            &= \cos \theta + \sin \theta u\\
+            &= q
+        \end{align*}
+        Note: we get the cross product relations from the cycle 
+        \[\begin{tikzcd}
+            & u \arrow[bend left]{dr}\\ 
+            u \times v \arrow[bend left]{ur} & & v \arrow[bend left]{ll}
+        \end{tikzcd}\]
+
+        We take $w_- = - \cos \theta v - (u \times v)\sin \theta$ and we can verify it similarly. 
+    \end{tbox}
+
+    \textbf{Consequence:} Every $q \in S^3$ decomposes as product of two unit pure quaternions 
+
+    \begin{tbox}{\textbf{Theorem:} Let $q$ be a unit quaternion such that $q = \cos \frac{\theta}{2} + \sin \frac{\theta}{2} u$ with $u$ pure unit. Then the map $I_q$ is a rotation about $\R u$ by angle of $\theta$ (clockwise)} 
+        \emph{Proof:} We will express $q = vw$ where $v$ and $w$ are pure unit, so 
+        \[I_q = I_v \circ I_w\] 
+        and then analyze the composition of line symmetries. 
+
+        (\emph{Exercise:} In the plane, $I_v \circ I_w$ is a rotation by $2\theta$ where $\theta$ is the angle from $w$ to $v$) 
+    \end{tbox}
+
+\section{April 8:}
+    We can draw the composition of 2-line symmetries $:_y \circ L_x$ in $\R^3$: 
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{Images/Cube symmetries.png}
+    \end{center}
+
+    We can express these in matrices in terms of the axes basis: 
+    \[L_x = \begin{pmatrix}
+        1\\ 
+        & -1\\ 
+        & & -1 
+    \end{pmatrix}, \quad L_y = \begin{pmatrix}
+        -1\\ 
+        & 1\\ 
+        & & -1
+    \end{pmatrix}\]
+
+    Clearly, $L_y \circ L_x$ is a composition of two rotations in $\SO(3, \R)$ so the result should also be a rotation. 
+
+    From the diagram, we can see that $L_y \circ L_x$ should fix the $z$-axis and rotate orthogonal complement, i.e. $L_y L_x v = -v$. 
+
+    Therefore, we could write $L_y \circ L_x = L_z$ in our basis. 
+
+    What happens in the general case? 
+
+    Let $A, B$ be lines in $\R^3$ through the origin. What is $L_B \circ L_A$ (where $L_A$ and $L_B$ denote the line symmetries of $A, B$ respectively). 
+
+    One trivial case is if $L_A = L_B$ so $L_B \circ L_A = L_A^2 = 1_{\R^3}$.
+
+    Now suppose $A \neq B$. Clearly, there is a non-zero angle between the two. 
+
+    We can rotate the frame such that $L_A, L_B \subseteq $ the $xz$-plane. Since these are elements in $\SO(3, \R)$, we claim that a vector parallel to $A \times B$ is fixed by $L_B \circ L_A$: 
+    \[(L_B \circ L_A)(A \times B) = L_B(L_A(A \times B)) = L_B(-A \times B) = A \times B\]
+    So $A \times B$ is fixed by $L_B \circ L_A$.
+
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{Images/Fixed axis.png}
+    \end{center}
+
+    Because $A \times B$ is fixed by $L_B \circ L_A$, it suffices to determine what $L_B \circ L_A$ does on $\R(A \times B)^{\perp}$. 
+
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{Images/Triangle rotations.png}
+    \end{center}
+
+
+    And in fact this matches what we know from geometry: The composition of two line symmetries in the plane is a rotation by twice the angle from $A$ to $B$. 
+
+    Therefore, $L_B \circ L_A$ fixes $A \times B$ and acts by a rotation of $2\theta$ from $A$ to $B$ where $\theta = \angle L_A, L_B$
+
+    \begin{tbox}{\textbf{Euler-Rodrigues Theorem:} Let $q = \cos \frac{\theta}{2} + u \sin \frac{\theta}{2}$ be a unit quaternion in $S^3$. Then $I_q: P \biject P$ is a rotation about axis $u \in P$ by an angle of $\theta$}
+        \emph{Proof:} Let $q = v^{-1}w$ where $v$ and $w$ are pure unit. We showed earlier that $q = vw_+ = w_- v$ so this is reasonable 
+
+        Because $v, w \in P \cap S^3$, $q = (-v)w$. We therefore have 
+        \[I_q = I_{-v} \circ I_w\]
+        where $I_{-v}, I_w$ are line symmetries generated by $-v$ and $w$ respectively.
+
+        From above, $I_q$ is thus a rotation about the plane perpendicular to $(-v) \times w$ by an angle of $2\phi$ (from $w$ to $-v$) so 
+        \begin{align*}
+            q &= (-v)w\\ 
+            &= -(-v) \cdot w + (-v) \times w\\ 
+            &= v \cdot w - v \times w\\ 
+            &= \cos \phi + (-v \times w)\\ 
+        \end{align*}
+        (since $A \cdot B = \norm A\; \norm B\; \cos \psi$) 
+
+        Here, the angle from $w$ to $v$ is $\phi$ and we know that 
+
+    \end{tbox}
+
+    \textbf{Consequence:} there exists a surjective lie group homomorphism $S^3 \twoheadrightarrow \SO(3, \R)$. 
+
+    \emph{Proof:} Any non-trivial rotation in $\SO(3, \R)$ admits a fixed axis, and about $g$ , acts by rotating about a fixed axis by angle $\theta$. Surjectivity follows from Euler-Rodrigues. 
+
+    However, this map is \emph{not} injective: Let $I_q$ act be the identity on $P$. Then $qvq^{-1} = v$
+    for all $v \in P$. This suggests that $q \in Z(\H^{\times}) = \R^{\times}$ ($q$ commutes with all pure quaternions so it also commutes with all of $\H^{\times}$), so if $q$ is central (scalar) and unital, we know $q = \pm 1$. 
+
+    Therefore, $\phi: S^3 \twoheadrightarrow \SO(3, \R)$ is surjective with kernel $\Z_2$. We call it the \emph{spin double cover} of $\SO(3, \R)$. 
+
+    By the first isomorphism theorem, $S^3/\Z_2 \simeq \SO(3, \R)$. In a sense, $S^3/\Z_2$ is the topology on the space of all lines through $O$ in $\R^4$ denoted by $\RP^3$.
+    
+    Therefore,
+    \[\RP^3 \simeq S^3/\Z_2 \simeq \SO(3, \R)\]
+
+    In fact, we have another isomorphism. Notice that $\C^n$ is equipped with a bilinear form 
+    \[\brak{\begin{pmatrix}
+        z_1\\z_2\\ \vdots\\ z_n
+    \end{pmatrix}, \begin{pmatrix}
+        w_1\\w_2\\ \vdots\\ w_n
+    \end{pmatrix}} = z_1 \bar{w_1} + z_2 \bar{w_2} + \dots + z_n \bar{w_n}\]
+    with
+    \begin{align*}
+        \brak{cv, w} &= c\brak{v, w}\\ 
+        \brak{v, cw} = \bar c\brak{v, w}
+    \end{align*}
+
+    In our case, $n = 2$. $\H$ is an $\R$-vector spaces (and in fact, it is an $\R$-algebra). Further, $\R$ sits in $\H$ centrally. 
+
+    Additionally, $\H$ is a $\C$-vector space but \emph{not} a $\C$-algebra (intuition: $\C$ is not in $\R$) 
+
+    This just means that we need to take some care. Let's construct $\H$ as a $\C$-vector space. What should $\C$-multiplication look like? A natural choice is to use the copies of $\C$ in $\H$ to get the desired representation of quaternion multiplication. 
+
+    Let's choose $\beta = \{1, j\}$ as our $\C$-basis for $\H$ (as a complex vector space). That way, 
+    \[a + b\ihat + c\jhat + d\khat = (a + bi)\cdot 1 + (c + di)\jhat\]
+
+    Now we have to construct a representation for left-multiplication.
+
+    First, a simpler example: $\C$ is an $\R$ vector space. $\beta = \{1, i\}$ is an $\R$-basis for $\C$. 
+    \[L_{a + bi}: \quad \begin{aligned}
+        \C &\to \C\\ 
+        z &\mapsto (a + bi)c
+    \end{aligned}\] 
+    so $\C \simeq \R^2$. 
+
+    \begin{align*}
+        L_{a+bi}(1) &= a + bi\\ 
+        L_{a+bi}(i) &= -b + ai
+    \end{align*}
+    so 
+    \[({L_{a+bi}}_{\beta}) = \begin{pmatrix}
+        a & b\\ 
+        -b & a
+    \end{pmatrix}\]
+
+    Returning to the quaternions, we have $\H$ as a $\C$-space with basis $\beta =\{1, j\}$. We want 
+    \begin{align*}
+        L_{a + b\ihat + c\jhat + d\khat}(1) &= a + b\ihat + c\jhat + d\khat\\ 
+        L_{a +bi + cj + dk}(j) &= aj + bk -c - di\\ 
+            &= (-c - di) + (aj + bk)\\ 
+            &= (-c - di)\cdot 1 + (a + bi)\jhat\\
+    \end{align*}
+    (note there is some notational subtlety: in the last line $1, j$ are the $C$-basis elements but $i, j, k$ above are the $\H$-basis) 
+    so 
+    \[(L_q)_{\beta} = \begin{pmatrix}
+        a + bi & c + di\\ 
+        -c - di & a + bi
+    \end{pmatrix}\]
+    which seems to make sense! 
+
+    \emph{However}! This implies that $L_q(zp) = zL_q(p)$ for all $z \in \C$. Is this actually true? Consider:
+    \[q(zp) \neq z(qp)\]
+    so in fact, our derivation required assumptions of commutativity that we don't actually have! 
+    
+    There are two choices of $\C$ vector space on $\H$. We looked at the left action, but we really want $\H$ as a \emph{right} vector space!
+ 
+\section{April 12:}
+    Last time, we were considering $\H$ as a $\C$-vector space with 
+    \[z = \begin{aligned}
+        a + bi &\hookrightarrow \H\\ 
+        a + bi &\mapsto a + b\ihat
+    \end{aligned}\]
+    so left multiplication extends naturally to yield a left $\C$-vector space of $\H$. 
+
+    For each $q \in \H$ we get the map 
+    \[L_q: {}^{\C} \H \biject {}^{\C}\H\]
+    while the map is additive, it does \emph{not} preserve the vector space structure:
+    \begin{align*}
+        L_q(cp) &= cL_q(p) \quad \forall c\in \C, q, p\in \H\\ 
+        q(cp) &= c(qp) 
+    \end{align*}
+
+    One solution is to consider $R_q$, the right action, instead. 
+    \begin{align*}
+        L_{qp}(h) &= (qp)h = q(ph) = (L_q \circ L_p)(h)\\ 
+        L_{qp} &= L_q \circ L_p
+    \end{align*} 
+    \begin{align*}
+        R_{qp}(h) &= (hq)p = R_p(h_q) = (R_p \circ R_q)(h)\\
+        R_{qp} &= R_p \circ R_q
+    \end{align*}
+    So instead $\H^{\times} \to \Aut(\H)$ by $q \mapsto R_{q^[-1]}$
+
+    However, this is still a little awkward. Therefore, let's consider $\H$ as a \emph{right} $\C$-vector space, $\H^{\C}$ instead of ${}^{\C}\H$.
+
+    So $a + b\ihat + c\jhat + d\khat$ relative to the $\C$-basis $\beta = \{1, \jhat\}$ is 
+    \[1 \cdot (a + bi) + \jhat(c - di)\] 
+    (since $\jhat \ihat = -\khat$) and 
+    \[L_q(pc) = q(pc) = (qp)c = L_q(p)c\]
+
+    This way, for each $q \in \H$, $L_q$ is an honest $\C$-endomorphism of $\H^{\C}$ (a right $\C$-space)
+
+    We want to see how $(L_q)_{\beta}$ looks in this context. Choosing a basis $\beta = \{1, \jhat\}$, 
+    \[\begin{aligned}
+        \H^{\times} \hookrightarrow \GL(\H^{\C}) \simeq \GL(2, \C)\\
+        q &\mapsto L_q
+    \end{aligned}\]
+    so we can say 
+    \[q = z + \jhat w \implies (q)_{\beta} = \begin{pmatrix}
+        z \\ w
+    \end{pmatrix}, \quad z, w \in \C\] 
+    and 
+    \begin{align*}
+        L_q(1) &= z + \jhat w\\
+        L_q(\jhat) &= q\jhat\\ 
+            &= (z + \jhat w)\jhat\\ 
+            &= z\jhat + \bar w + \jhat \jhat\\ 
+            &= z \jhat - \bar w\\ 
+            &= -\bar w + \jhat \bar z
+    \end{align*}
+    since 
+    \[\jhat w = \jhat(a + b\ihat) = \jhat a + b\jhat \ihat = a\jhat - b \hat k = (a - b\hat i)\jhat\]
+    which implies 
+    \begin{align*}
+        (L_q(1))_{\beta} &= \begin{pmatrix}
+            z\\w
+        \end{pmatrix}\\ 
+        (L_q(\jhat))_{\beta} &= \begin{pmatrix}
+            -w\\\bar z
+        \end{pmatrix}
+    \end{align*}
+    so we have 
+    \[(L_q)_{\beta} = \begin{pmatrix}
+        z & -\bar w\\ 
+        w & \bar z
+    \end{pmatrix}\]
+
+    Further, $\det L_q = z\bar z + w\bar w$ which gives us a representation of $\H^{\times} \hookrightarrow \GL(2, \C)$. The restriction onto elements of $\H^{\times}$ with $\norm{\cdot} = 1$ gives us the stronger representation 
+    \[S^3 \hookrightarrow \SU(2, \C)\] 
+    where $\SU(2, \C)$ is the group of $2 \times 2$ unitary matrices (matrices which preserve $\brak{z, w} = z_1 \bar w_1 + z_2 \bar w_2$ or equivalently, matrices with $A^{\dagger}A = (\bar A)^TA = I_2$) with determinant 1.
+
+    Once you have 
+    \[\SU(2, \C) = \left\{\begin{pmatrix}
+        z & -\bar w\\ 
+        w & \bar z
+    \end{pmatrix} \bigg\vert z\bar z + w\bar w = 1\right\}\]
+    then $S^3 \biject \SU(2, \C)$ and 
+    \[\begin{tikzcd}
+        S^3 \arrow[hook, two heads]{r}{\simeq} \arrow[two heads]{d}{\Z_2} & \SU(2, \C) \arrow[two heads]{dl}{\Z_2}\\
+        \SO(3, \R) &
+    \end{tikzcd}\]
+
+    Now we turn to yet another similar representation, $S^3 \times S^3 \twoheadrightarrow \SO(4, \R)$ with a $\Z_2$-kernel. ($\text{Spin}(4, \R) \simeq S^3 \times S^3$) 
+
+    Similar to the case of $\H$ as a $\C$-vector space, we can consider $\H$ as an $\R$-vector space (which means we do not have to worry about left/right structure). 
+
+    With basis $\beta = \{1, \ihat, \jhat, \khat\}$, we can write
+    \begin{align*}
+        L_q &\sim \begin{pmatrix}
+            x & -y & -z & -w\\ 
+            y & x & -w & z\\
+            z & w & x & -y\\
+            w & -z & y & x
+        \end{pmatrix}\\ 
+        R_q &\sim \begin{pmatrix}
+            x & -y & -z & -w\\ 
+            y & x & w & -z\\
+            z & -w & x & y\\
+            w & z & -y & x
+        \end{pmatrix}
+    \end{align*}
+
+    Notice! For each $q \in \H$ we get orthogonal columns so 
+    \begin{align*}
+        L_{\bar q} &\sim \begin{pmatrix}
+            x & y & z & w\\ 
+            -y & x & w & -z\\
+            -z & -w & x & y\\
+            -w & z & -y & x
+        \end{pmatrix}
+    \end{align*}
+    so $L_{\bar q} = (L_q)^T$ and $L_{q\,\bar q} = q\,\bar qI_4$ since $q\, \bar q = \norm{q}^2 \in \R$. 
+
+    Therefore, if $\norm{q} = 1$, we have $L{\bar q\, q} = L_{\bar q} L_q = L_q^T L_q = I_4$. So all $q \in \H^{\times}$ with $\norm{q} = 1$ have $L_q \in \SO(4, \R)$. 
+
+    An analogous statement holds for $R_q$., 
+
+    Note that for each $(p, q) \in S^3 \times S^3$, we get an element of $\SO(4, \R)$ so 
+    \[(q, p) \mapsto \begin{aligned}
+        \H \biject \H\\ 
+        h \mapsto qhp = L_q \circ R_p
+    \end{aligned}\]
+
+    We want this to be a representation (homomorphism) so it suffices to take 
+    \[(q, p) \mapsto L_q R_{p^{-1}} = R_{p^{-1}} L_q\] 
+
+\section{April 15:}
+    Last time, we noted that $q \mapsto (L_q)_{\beta}$ $(\beta = \{1, \ihat, \jhat, \khat\}$) gives us a faithful representation of $\H^{\times}$ in $\text{Sim}(4, \R)$. When $\norm{q} = 1$, we get $(L_q)_{\beta} \in \SO(4, \R)$. 
+
+    We also saw the same thing for $R_{p^{-1}}$ relative to $\beta$: We have a homomorphism 
+    \[\begin{aligned}
+        S^3 \times S^3 &\to \SO(4, \R)\\ 
+        (q, p) &\mapsto (L_q \circ R_{p^{-1}})_{\beta}
+    \end{aligned}\]
+
+    \begin{tbox}{\textbf{Claim:} This homomorphism is onto $\SO(4, \R)$}
+        \emph{Proof:} We know that if $g \in \SO(4, \R)$ for which $g(1) = 1$ (letting $\R^4 \simeq \H$).
+
+        We claim we can find $(p, q) \in S^3 \times S^3$ for which $L_p \circ R_{q^{-1}} = g$ such that $g: \H \biject \H$ and $g(1) = 1$. 
+
+        In particular, this would induce a map on $(\R 1)^{\perp} = P$ (the pure Hamiltonians) so we have 
+        \[g\big\vert_p: P \biject P\]
+        such that 
+        \[(q, p)\in S^3 \times S^3, \quad (L_q \circ R_{p^{-1}})\big\vert_P = g\big\vert_P\]
+
+        But in fact, we already did this! Just look at the conjugation map $(L_q \circ R_{q^{-1}})(h) = qhq^{-1}$. We already showed this is acting as an element of $\SO(3, \R)$ and Euler-Rodrigues claims this is sujective. 
+
+        Thus, if $g(1) = 1$, we can find $(p, q) \in S^3 \times S^3$ for which $L_q \circ R_{p^{-1}} = g$ and we are done. 
+
+        However, it is also possible for $g(1) = p$. In this case, we can consider the composition:
+        \[\psi = \phi_{(p^{-1}, 1)} \circ g\]
+        where $\psi: S^3 \times S^3 \to \SO(4, \R)$. 
+
+        \textbf{Note:} $\psi(1) = \phi_{(p^{-1}, 1)}(p) = p^{-1}p1^{-1} = 1$ so $\psi(1) = 1 \in \SO(4, \R)$.  
+        
+        By the first case, we can thus find $(p', q')$ so that $\phi_{(p', q')} = \psi = \phi_{(p^{-1}, 1)} \circ g$. 
+
+        Thus $\phi: S^3 \times S^3 \to \SO(4, \R)$ is surjective. 
+
+        We don't quite have injectivity but we do know that $\phi: S^3 \times S^3 \twoheadrightarrow \SO(4, \R)$ has a kernel of $\Z_2$ (precisely, $\ker \phi = \{(1, 1), (-1, -1)\}$. \emph{Proof:} HW). 
+
+        This also tells us $S^3 \times S^3/\Z_2 \simeq \SO(4, \R)$, which means $S^3 \times S^3$ is a double cover of $\SO(4, \R)$. So we say $S^3 \times S^3 \simeq \text{Spin}(4, \R)$. 
+    \end{tbox}
+
+    \textbf{Definition:} A \emph{Fibre Bundle} is a (surjective) smooth map 
+    \[E \overset{p}{\twoheadrightarrow} B\]
+    from a total space $E$ to a base $B$ such that for a small set $U \subseteq B$, $p^{-1}(U) \simeq U \times F$. 
+
+    A \emph{fibre} is the inverse-image/pull-back of a point under a map 
+
+    Heuristically, this is a parameterization of $E$ over a variable $B$. 
+
+    \textbf{Example:}
+    \[\begin{aligned}
+        \R^2 &\twoheadrightarrow \R\\ 
+        (x, y) &\mapsto x
+    \end{aligned}\]
+    is an $\R$-bundle. 
+
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{Images/April 16 - R2 bundle.png}
+    \end{center}
+
+    Clearly this projects the entire plane onto the real line. Given a point, if we consider its fibre, we get the vertical line corresponding to $x = p$. If we take a neighborhood $U$ around the point, then the neighborhood around the fibre will indeed look like $U \times \R$. 
+
+    \textbf{Example:} Now consider a cylinder ($E$) projected onto its base ($B = S^1$).
+    
+    Since $p^{-1}(U) \simeq U \times I$, $I = [0, 1]$ so we say $E$ is an $I$-bundle over $S^1$
+
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{Images/April 16 - Cylinder bundle.png}
+    \end{center}
+
+    \textbf{Example:} With $E$ a Mobius band, we can also consider $E$ as a $I$-bundle over $S^1$.
+
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{Images/April 16 - Mobius bundle.png}
+    \end{center}
+
+    However, these two bundles are different! The Mobius band is orientable but the cylinder is not. 
+
+    \textbf{Example:} We can do the same thing with a torus! 
+
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{Images/April 16 - Torus bundle.png}
+    \end{center}
+
+    Notice that we are taking circles to points on $S^1$ so the 2-torus, $T^2$, is a $S^1$-fibre bundle over base $S^1$.
+
+    And further, it remains so up local deformations: 
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{Images/April 16 - Pinched torus bundle.png}
+    \end{center}
+    is still an $S^1$-bundle over $S^1$.
+
+    But 
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{Images/April 16 - Deformed torus bundle.png}
+    \end{center}
+    is \emph{not}, because one of the fibres is a point -- not a circle. 
+
+    \textbf{Example:} We can also consider cut-and-paste constructions. 
+
+    If we take the original torus and cut along the red circle and down the center, we can construct this square: 
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{Images/April 16 - Torus square.png}
+    \end{center}
+    (Note: gluing red 2-arrow to red 2-arrow and white 1-arrow to white 1-arrow reconstructs the torus)
+
+    Notice that arrow orientation matters! If we instead consider this bundle: 
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{Images/April 16 - Klein square.png}
+    \end{center}
+    we get a Klein bottle $S^1$-bundle over $S^1$, not a torus! 
+
+    \subsection*{The Hopf-Fibration}
+    \textbf{Hopf-Fibration (Fibre bundle):} an $S^1$-bundle over $S^2$ base on total space $S^3$. 
+
+    Put differently, we have $p: S^3 \twoheadrightarrow S^2$ such that $p^{-1}\{h\} \simeq S^1$
+
+    \textbf{Motivation:} Recall the Stereographic projection that lets us write 
+    \begin{align*}
+        S^1/N &\simeq \R\\ 
+        S^2/N &\simeq \R^2\\
+        S^3/N &\simeq \R^3
+    \end{align*}
+
+    Question: Is there a way to decompose $\R^3$ into disjoint circles and 1-line? 
+
+    Here is one way: 
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{Images/April 16 - Disjoint circles.png}  
+    \end{center}
+    
+    Harder Question: Can we decompose $\R^3$ into disjoint circles and one line so that all circles and lines are linked? (linked in the sense of interlocked rings)
+
+    We can visualize this slightly more easily via the Stereographic projection $f: S^2/N \biject \R^2$
+
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{Images/April 16 - Stereographic.png}
+    \end{center}
+
+\section{April 17:}
+    Recall a fibre bundle is a sequence of homomorphisms 
+    \[F \hookrightarrow E \overset{p}{\twoheadrightarrow} B\] 
+    where $E$ is a total space, $B$ is a base space, and $F$ is a fibre ($p^{-1}\{b\} = F$)
+
+    The typical example is a torus projecting onto $S^1$ such that the cross sections are themselves circles (locally look like $S^1$). 
+
+    Further, this is a \emph{local} condition in the sense that a neighborhood $U(b)$ with $b \in B$ has pre-image $p^{-1}(U) = U \times F$ 
+
+    The \emph{Hopf-fibration} is a circle ($S^1$) bundle over $S^2$. Precisely, it is a \emph{principal G-bundle}, a fibre bundle equipped with a right $G$-action on the total space so that the fibres are ``equal'' to $G$. 
+
+    \emph{Example:} A subset of $\R^2$ projecting down into an interval $I \subset \R$ is one simple exacmple.
+
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{Images/April 17 - R2 Hopf}
+    \end{center}
+
+    Certainly this is a fibre bundle. And in fact, we could write this out explicitly:
+    \[E = \{(x, y) \; | \; 0 \leq x \leq 1, y \in \R\} \overset{p}{\twoheadrightarrow} I = [0, 1]\]
+    so each of the fibres looks like $\R$. 
+
+    We can define a right $\R$-action on $E$, $(x, y)t = (x, y + x)$ (an upwards translation along the fibre). 
+
+    This allows us to say that the fibres are in fact isomorphic to $\R = G$. 
+
+    \textbf{Example:} $T^2 = \{(\theta, \phi) \; | \; \theta, \phi \in \R/\Z\}$
+
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{Images/April 17 - T2} 
+    \end{center}
+
+    So we have $p: T^2 \twoheadrightarrow S^1$ by $p(\theta, \phi) = \theta \in S^1$. 
+
+    In fact, this is a \emph{principal $S^1$-bundle}. 
+    \[(\theta, \phi)t = (\theta, \phi + t), \quad t \in \R/\Z\]
+
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{Images/April 17 - T2 principal S1}
+    \end{center}
+
+    So this is an $S^1$-action on $T^2 \twoheadrightarrow S^1$ which preserves fibres. In fact, the fibres are isomorphic to $S^1$! 
+
+    \textbf{Non-commutative example:} Let $M = S^2$. Consider 
+    \[E = \{(p, \{v_1, v_2\}) \; | \; p \in S^2, \; v_1, v_2 \in T_p S^2 \text{ such that } T_p S^2 = \text{Span}\{v_1, v_2\}\}\] 
+    with action $q(p, \{v_1, v_2\}) = p$. 
+
+    We can visualize this by choosing $N \in S^2$. Then the tangent space $T_NS^2$ is just the plane tangent to $S^2$ at $N$ and we can choose any (linearly independent) vectors $v_1, v_2$ in this plane. So $(N, \{v_1, v_2\}) \in E$. 
+
+
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{Images/April 17 - Noncommutative manifold}
+    \end{center}
+
+    How do we choose another point in $E$? Just choose two more vectors in $T_{N}S^2$, say by rotation so we have $(N, \{w_1, w_2\}) \in E$ since 
+    \[q(N, \{v_1, v_2\}) = q(N, \{w_1, w_2\}) = N\]
+    
+    For example: 
+    \[\{v_1, v_2\} \begin{pmatrix}
+        2 & 0\\ 
+        0 & 1
+    \end{pmatrix} \mapsto \{2v_1, v_2\}\] 
+
+    Thus, we can say $E$ is a $\GL(2, \R)$ bundle over $S^2$. Our group action is $q^{-1}\{N\} \simeq \GL(2, \R)$ because we just need a choice of 2-vectors in $T_N S^2 \simeq \R^2$ that are linearly independent. 
+
+    \textbf{Conclusion:} a \emph{principal $G$-bundle} is a fibre bundle $E$ with fibre $G$ such that the fibre is isomorphic to $G$ as a group 
+
+    \textbf{Definition:} The \emph{Hopf-fibration} is a principal $S^1$ bundle over $S^2$ with total space $S^3$. 
+
+    Recall: By Euler-Rodrigues, we have
+    \[\begin{aligned}
+        S^3 \twoheadrightarrow \SO(3, \R)\\ 
+        q &\mapsto \begin{array}{c}
+            I_q: P \biject P\\ 
+            I_q(h) = qhq^{-1}
+        \end{array}
+    \end{aligned}\] 
+    (where $P$ is the pure quaternion) 
+
+    In particular, each $I_q$ preserves $S^2 = \{a \ihat + b\jhat + c\khat \; | \; a^2 + b^2 + c^2 = 1\}$, the pure quaternions with unit norm. 
+
+    Claim: this yields a transitive $S^3$ action on $S^2$ via 
+    \[\begin{aligned}
+        S^3 &\to \Aut(S^2)\\ 
+        q &\mapsto I_q: S^2 \biject S^2
+    \end{aligned}\]
+    which acts transitively because $\SO(3, \R)$ acts transitively on $S^2$ 
+
+    Consequently, we have $H: S^3 \twoheadrightarrow S^2$ via $q \mapsto I_q(\khat)$: Because the action is transitive $\text{Orbit}(\khat) = S^2$. This map is precisely the Hopf fibration!
+
+    Consider:  
+    \[H(q) = H(a, b, c, d) = 2(ac + bd)\ihat - 2(ab + cd)\jhat + (a^2 - b^2 - c^2 + d^2)\khat\]
+
+    By the orbit stabilizer theorem, $S^3/\text{Stab}(\khat) \simeq \text{Orbit}(\khat) \simeq S^2$. Therefore, we just need to find the stabilizer of $\khat$ since $S^3/\text{Stab}(\khat) \simeq S^2$. 
+
+    We know $\text{Stab}(\khat) = \{q \in S^3 \; | \; I_q(\khat) = \khat\} = \{q \in S^3 \; | \; q\khat q^{-1} = \khat\}$. 
+
+    Certainly, we know $q\khat q^{-1} = \khat$ for the plane generated by $\{1, \khat\} \simeq \C$ ($\khat$ will commute with the scalars and with itself). Then, it suffices to show that $\khat$ does \emph{not} commute with elements of the plane $\{\ihat, \jhat\}$ (Exercise). 
+
+    Therefore, $\text{Stab}(\khat)= \{\cos\theta + \sin\theta \khat \; | \; \theta \in \R\} \simeq S^1$. 
+
+    So 
+    \[S^3/S^1 \simeq S^2\]
+
+\section{April 22:}
+    \textbf{Recall:} The \emph{Hobf-Fibration} is a surjective map $H: S^3 \twoheadrightarrow S^2$ defined by $q \mapsto q\khat q^{-1}$. 
+
+    Last time, we found a fibre over $\khat = \{q \in S^3 \; | \; H(q) = q\khat q^{-1} = \khat\} = \text{Stab}(\khat)$ when $S^3$ acts on itself via conjugation. 
+    
+    The argument: the plane generated by $\text{Span}_{\R}\{1, \khat\} \in \H^{\times}$ is preserved by conjugation. 
+
+    Geometrically, when we take this plane minus $0$ and normalize, we have the circle $S^1$. 
+
+    Therefore, a nice parameterization is given 
+    \[\text{Stab}(\khat) = \{\cos \theta + \khat \sin \theta \; | \; \theta \in [0, 2\pi]\}\]
+
+    A \emph{Principal $G$-bundle} is a fibre bundle $E \twoheadrightarrow B$ with fibre $F$ where $F \simeq G$ as a group. Equivalently, we have a right $G$-action on $E$ that preserves fibres where the fibres are isomorphic to $G$.
+
+    \begin{tbox}{\textbf{Claim:} The Hopf fibration $H: S^3 \to S^2$ is a principal $S^1$-bundle over $S^2$}
+        \emph{Proof:} Let $q \in S^3$ so that $H(q) = v \in S^2$. (Geometrically, $q$ projects down to $v$ on the sphere)
+
+        How do we get the $S^1$-action? We can consider rotations. Note with $s \in S^1$,
+        \[H(qs) = qs\khat (qs)^{-1} = qs\khat s^{-1}q^{-1} = q\khat q^{-1} = H(q)\] 
+        which confirms we have a right $S^1$ action that preserves the fibres of $S^3 \twoheadrightarrow S^2$
+    \end{tbox}
+
+    Note: that there exists a non-zero vector field $X$ on $S^3$ is not surprising. (How could we get an arbitrary vector field on $S^3$? Just choose a non-zero $v \in T_1 S^{3}$ so we have an $S^3$ action by left multplication.) Indeed, you can do this for any Lie group - the tangent bundle is parallelizable! 
+
+    What happens with left multiplication in the Hopf-fibration? 
+    \[H(qp) = qp\khat (qp^{-1}) = qp\khat p^{-1}q^{-1} = qH(p)q^{-1} = I_q(H(p))\]
+    is just rotation of $H(p)$ about the vector part of $q$. 
+
+    This tells us how to find the fibre over a specific point in $S^2$ -- it is just a geometric problem:
+
+    We want to find $H^{-1}\{v\}$ with $v \in S^2$. But if we find \emph{any} $v \in S^3$ with $H(q) = v$, then we have the full fibre since $H^{-1}\{v\} = qS$ where $S = \text{Stab}(\khat)$. 
+
+    Thus, we are searching for a single $q \in S^3$ where $H(q) = v$. 
+
+    \begin{center}
+        \includegraphics[width=0.8\textwidth,angle=-90,origin=c0]{Images/April 22 - vk ball.png}
+    \end{center}
+
+    And we just need to find a rotation so it suffices to find $p \in S^3$ so that 
+    \[H(p \khat) = v \implies I_p(H(\khat)) = v \implies I_p(\khat) = v\]
+    and then we can just take $p\khat = q$. 
+
+    So to find $p$ we just need to find the rotation axis and the value of $\theta$ in the picture. 
+
+    Generally, $p = \cos \phi + u\sin \phi$ where $\phi = \theta/2$. 
+
+    $u$ is clearly just $\frac{v \times \khat}{\norm{v \times \khat}}$. The only places this fails is $\khat$ and $-\khat$ but we will figure that out later. 
+
+    We know $\theta \in [0, \pi]$ so $\phi \in [0, \pi/2]$. 
+
+    If we say $v = (a, b, c)$ then we can solve for $\cos \phi, \sin \phi, u$: 
+    
+    First $u$:
+    \[u = \frac{ v \times \khat }{\norm{v \times \khat}} = \frac{1}{\norm{v \times \khat}} \begin{vmatrix}
+        \ihat & \jhat & \khat\\ 
+        a & b & c\\ 
+        0 & 0 & 1
+    \end{vmatrix} = \frac{1}{\norm{v \times \khat}} (\ihat - a\jhat) = \frac{1}{\sqrt{a^2 + b^2}}(b\ihat - a\jhat)\]
+
+    Now $\cos \phi$: 
+    \[v \cdot \khat = \norm v \; \norm \khat \; \cos \theta \implies c = \cos \theta \implies \cos \phi = \cos \frac{\theta}{2} = \sqrt{\frac{1 + \cos \theta}{2}} = \sqrt{\frac{1 + c}{2}}\]
+
+    Finally $\sin \phi$: 
+    \[\sin \phi = \sqrt{\frac{1 - \cos \theta}{2}} = \sqrt{\frac{1 - c}{2}}\]
+
+    Therefore, 
+    \begin{align*}
+        p &= \sqrt{\frac{1 + c}{2}} + \sqrt{\frac{1-c}{2}}\left(\frac{1}{\sqrt{a^2 + b^2}}(b\ihat - a\jhat)\right)\\ 
+        &= \frac{1}{\sqrt{2(1 + c)}}\left((1 + c)+ \sqrt{1^2 - c^2}\left(\frac{1}{\sqrt{a^2 + b^2}}(b\ihat - a\jhat)\right) \right)\\ 
+        &= \frac{1}{\sqrt{2(1 + c)}}(1 + c + b\ihat - a\jhat)
+    \end{align*}
+
+    (Errata: $p = \frac{1}{\sqrt{2(1 + c)}}(1 + c - b\ihat + a\jhat)$ because of orientation of $\{v, \khat, v \times \khat\}$)
+
+\section{April 24:}
+    Last class, we drew this diagram: 
+    \begin{center}
+        \includegraphics[width=0.8\textwidth,angle=-90,origin=c0]{Images/April 24 - rotation ball.png}
+    \end{center}
+
+    Seen face on, the rotation from $\khat$ to $v$ is clockwise. Seen from the back, it is counterclockwise. 
+
+    Since the Euler-Rorigues theorem is stated \emph{clockwise}, $p = \cos \phi + \sin \phi u$ with $\theta = - \theta/2$.
+
+    Last time, we had visuals of some Hopf-fibres. For two generic points in $S^2$, their fibres in $S^3$ will be linked. 
+    (explicitly $p, q \in S^2$ will lead to linked circles $H^{-1}\{p\}, H^{-1}\{q\}$ via the maps $H^{-1}: S^2 \to S^3$ and the stereographic projection $S^3 \to \R^3$)
+
+    For all points other than the north pole, 
+    \[H^{-1}(\khat) = \cos \theta + \khat \sin \theta\]
+    (we have the bad point at $\theta = \pi/2$ and are okay otherwise)
+
+    Since we defined the north pole to be $\khat$, stereographic projection will be a bijection $F: S^3/\khat \biject \R^3$ 
+
+    Where 
+    \[F(x, y, z, w) = \left(\frac{x}{1 - w}, \frac{y}{1- w}, \frac{z}{1 - w}\right)\] 
+
+    Which means the fibre at $\khat$ is a line along the $x$-axis and the fibre of $-\khat$ will be a circle in the $yz$-plane. (\emph{{Proof:}} HW. Consider $q\khat q^{-1} = \khat$)
+
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{Images/k fibres.png}
+    \end{center}
+
+    Clearly, these are linked. How do we formalize this notion? 
+
+    \textbf{Motivation:} Consider the curve 
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{Images/April 24 - Winding curve}
+    \end{center}
+
+    How many times does the curve $\gamma$ wrap around $0$? 
+
+    Explicitly, we want to find the number of oriented wraps around $p$ ($\in \Z$) given a point $p$ and a closed curve $\gamma$ (not through $p$)
+
+    We can consider $\pi_1(s)$, the group of curves at $p \in S$ up to continuous deformation.
+
+    We can imagine picking an orientation on $\R^2/0$ and deforming the curve to wrap around a generator $n$-times where $n$ is our \emph{winding number}. 
+
+    We can also think about this problem geometrically in terms of one-forms. 
+
+    In a sense, we have a function $\R^2/0 \to \R$ which measures the angle relative to $0 \in \R^2$ at a point $p$. If we imagine the vector $\vec{OP}$ as the hypotenuse of a triangle with legs $x, y$, then the angle is $\theta = \arctan(y/x)$. Though unfortunately, this is really only defined locally. But, we can still take a local derivative: 
+    \[d\theta = \frac{-y}{x^2 + y^2}\; dx + \frac{x}{x^2 + y^2} \; dy\] 
+    which means that we can integrate along curves!
+    \[\gamma \mapsto \int_{\gamma} d\theta\]
+    but since the curves are closed ($\gamma(0) = \gamma(1)$), 
+    \[\int_{\gamma} d\theta = `\theta(\gamma(1)) - \theta(\gamma(0))'\]
+
+    \textbf{Example:} 
+    \begin{align*}
+        \gamma(t) &= ( \cos t, \sin t), \quad t \in [0, 2\pi]\\ 
+        \int_\gamma d\theta &= \frac{1}{2\pi}\int_0^{2\pi} \frac{-\sin t}{\sin^2 t + \cos^2 t} \; d(\cos t) + \frac{\cos t}{\sin^2 t + \cos^2 t} \; d(\sin t)\\
+        &= \frac{1}{2\pi}\int_0^{2\pi} \sin t(\sin t) + \cos t \cos t \; dt\\ 
+        &= \frac{1}{2\pi}\int_0^{2\pi} 1 \; dt = 1
+    \end{align*}
+
+    So 
+    \[\omega = \frac{1}{2\pi}\begin{pmatrix}
+        -y & dx\\ 
+        x & dy
+    \end{pmatrix} \frac{1}{x^2 + y^2}\]
+    where $[\omega]$ generates $H'(\R^2/p)$
+
+    \textbf{Question:} Why is there no honest function $f: \R^2/O \to \R$ so that $df = \omega$? 
+
+    Because then $\int_{\gamma} d\theta = \theta(\gamma(1)) - \theta(\gamma(0)) = 0$ exactly. But our calculation just showed that $\int_{\gamma}d\theta \neq 0$ 
+
+    We want to understand why linked and unlinked curves are fundamentally different in order to understand why $H^{-1}(p)$ and $H^{-1}(q)$ (for distinct $p, q$) are linked. 
+
+    First reduction: consider $p, q \in S^2$ and their fibres. We claim it suffices to show instead that $p = \khat, q = -\khat$. 
+
+    Intuitively, the linkage of fibres in invariant under isotopy (under deformation, what is linked should stay linked and vice versa.) Therefore, if we move $p$ to $\khat$ and $q$ to $-\khat$, the linkage should remain.
+
+    If we imagine two curves around two parallel lines: 
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{Images/April 24 - Parallel lines.png}
+    \end{center}
+
+    Then, clearly, there is no way to defom $a$ to $b$. In fact, $a, b$ generate a free group in $\pi_1(\R^3/\text{two parallel lines})$ 
+
+    \textbf{Application:} How do you hang a picture with two nails such that pulling either nail causes the picture to drop? 
+
+    This problem resolves to finding a non-trivial relation on the generating circles $a, b$ of two linked circles.
+
+    If we imagine the curve formed by the word $aba^{-1}b^{-1}$ from the generating point, we have 
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{Images/April 24 - Word 1.png}
+    \end{center}
+
+    But now we can shift the entire thing to the other side of the left circle giving us this image:
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{Images/April 24 - Word 2.png}
+    \end{center}
+
+    Now we can free the yellow curve by taking the loop on the right and again twisting it to the left side, then taking the last part down. 
+    
+    This shows that $1 = aba^{-1}b^{-1}$ so 
+    \[\pi_1(\R^3/\text{linked circles}) \simeq \Z^2\]
 
 \end{document}
+
