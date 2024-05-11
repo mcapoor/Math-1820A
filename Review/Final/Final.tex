@@ -1,0 +1,666 @@
+\documentclass[12pt]{article} 
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage{graphicx} 
+\usepackage{parskip}
+\usepackage{booktabs}
+\usepackage{array} 
+\usepackage{paralist} 
+\usepackage{verbatim}
+\usepackage{subfig}
+\usepackage{fancyhdr}
+\usepackage{sectsty}
+\usepackage{tikz-cd}
+\usepackage{multicol}
+
+\usepackage[shortlabels]{enumitem}
+
+\geometry{
+    left=0.25in, 
+    right=0.25in,
+    top=0.25in,
+    bottom=0.25in
+}
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt} 
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} 
+\usepackage[titles,subfigure]{tocloft}
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} %
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{empheq}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+\newcommand{\ans}[1]{\boxed{\text{#1}}}
+\newcommand{\vecs}[1]{\langle #1\rangle}
+\renewcommand{\hat}[1]{\widehat{#1}}
+\newcommand{\F}[1]{\mathcal{F}(#1)}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\renewcommand{\H}{\mathbb{H}}
+\newcommand{\RP}{\mathbb{RP}}
+
+\newcommand{\ind}{\mathbbm{1}}
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\brak}[1]{\left\langle #1 \right\rangle}
+\newcommand{\bra}[1]{\left\langle #1 \right\vert}
+\newcommand{\ket}[1]{\left\vert #1 \right\rangle}
+\newcommand{\abs}[1]{\left\vert #1 \right\vert}
+\newcommand{\mfX}{\mathfrak{X}}
+\newcommand{\ep}{\varepsilon}
+
+\newcommand{\norm}[1]{\left\vert \left\vert #1 \right\vert \right\vert}
+
+\newcommand{\SL}{\text{SL}}
+\newcommand{\SO}{\text{SO}}
+\newcommand{\GL}{\text{GL}}
+\newcommand{\SU}{\text{SU}}
+
+\newcommand{\tr}{\text{tr}\,}
+
+\newcommand{\biject}{\hookrightarrow \hspace{-8pt} \rightarrow}
+
+\newcommand{\g}{\mathfrak{g}}
+\renewcommand{\sf}{\mathfrak{s}}
+\newcommand{\h}{\mathfrak{h}}
+\renewcommand{\sl}{\mathfrak{sl}}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\so}{\mathfrak{so}}
+
+\newcommand{\im}{\text{im}\,}
+
+\newcommand{\Ad}{\text{Ad}}
+\newcommand{\ad}{\text{ad}}
+\newcommand{\Aut}{\text{Aut}}
+\renewcommand{\mod}{\text{mod}\,}
+\newcommand{\Span}{\text{Span}\,}
+
+\newcommand{\Isom}{\text{Isom}}
+\newcommand{\PSL}{\text{PSL}}
+\newcommand{\conj}{\text{conj}}
+
+\newcommand{\Sc}{\text{Sc}}
+\renewcommand{\Vec}{\text{Vec}}
+
+\renewcommand{\bar}[1]{\overline{#1}}
+\newcommand{\ihat}{\hat{\imath}}
+\newcommand{\jhat}{\hat{\jmath}}
+\newcommand{\khat}{\hat{k}}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins}
+\tcbset{enhanced}
+\newenvironment*{tbox}[2][gray]{
+    \begin{tcolorbox}[
+        parbox=false,
+        colback=#1!5!white,
+        colframe=#1!75!black,
+        breakable,
+        title={#2}
+    ]}
+    {\end{tcolorbox}}
+
+
+\title{Math 1820A: Lie Algebras - Final Exam Review}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace*{-0.75in}
+
+\section{Lecture Notes}
+
+\textbf{Killing form:} $B(X, Y) = \tr(\ad_X \circ \ad_Y)$ is a symmetric bilinear form on $\g$ which is Ad-invariant, i.e. 
+\[B(\Ad_g X, \Ad_g Y) = B(gXg^{-1}, gYg^{-1}) = B(X, Y)\]
+
+\textbf{Cartan's Criterion for Semisimplicity:} a lie algebra is semi-simple (has no non-zero solvable ideals) iff its Killing form is non-degenerate (i.e. $B(X, Y) = 0$ for all $Y \in \g$ or the signature has no zeros) 
+
+\subsection*{Solvability} 
+A lie algebra is \textbf{solvable} iff the derived series terminates: 
+\[\g^0 = \g, \quad \g^{n+1} = [\g^n, \g^n]\]
+\begin{itemize}
+    \item $\mathfrak{e}(1, 1)$ is solvable 
+    \item $\mathfrak{sl}(2, \R)$ is \emph{not} solvable
+\end{itemize}
+
+A group is solvable iff there exists a composition series 
+\[1 = G_n \triangleleft G_{n-1} \triangleleft \cdots \triangleleft G_1 \triangleleft G_0 = G\]
+where $G_i/G_{i+1}$ is abelian.
+
+\emph{Lemmas:}
+\begin{itemize}
+    \item Every abelian group is solvable 
+    \item If $H \subseteq G$ and $G$ is solvable, then $H$ is solvable
+    \item If $G$ is solvable and $\phi: G \twoheadrightarrow H$ then $H$ is solvable 
+    \item If $N \hookrightarrow G \twoheadrightarrow H$, $G$ is solvable iff $N$ and $H$ are solvable
+\end{itemize}
+
+\textbf{Levi Decomposition:} Every finite-dimensional lie algebra fits into a \emph{split} exact sequence 
+\[\h \hookrightarrow \g \twoheadrightarrow \g/\h\]
+where $\h$ is the unique maximal solvable ideal and $\g/\h$ is semi-simple. 
+
+\textbf{Maximal Solvable Ideal:} $\text{Rad}(\g)$, the \emph{maximal solvable ideal} is defined as expected by inclusion using the fact that $\mathfrak{a}, \mathfrak{b}$ solvable implies $\mathfrak{a} + \mathfrak{b}$ is solvable.
+
+\subsection*{Nilpotency}
+A group is \textbf{nilpotent} iff the \emph{lower central series} terminates:
+\[G_0 = G, \quad G_{n+1} = [G, G_n]\]
+equivalently, 
+\[1 = G_n \triangleleft G_{n-1} \triangleleft \cdots \triangleleft G_1 \triangleleft G_0 = G\]
+where $G_i \triangleleft G$ and the quotients $G_k/G_{k+1}$ are central:
+\[G_k/G_{k+1} \subseteq Z(G/G_{k+1})\]
+(this is a much stronger statement than that quotients are abelian!)
+
+Further, up to diffeomorphism, each of the quotients is of the form $\R^k$
+
+\emph{Lemmas:}
+\begin{itemize}
+    \item Nilpotent implies solvable 
+    \item Each $G_n \triangleleft G$ and $G_{i+1} \triangleleft G_i$
+    \item $G$ nilpotent $\implies$ the Killing form of $G$ is identically zero  
+\end{itemize}
+
+\textbf{Commutator:} $[x, y] = xyx^{-1}y^{-1} \in G$ is the \emph{commutator} of $x, y$.
+
+The \emph{commutator subgroup} $[G, G]$ is the subgroup generated by all commutators 
+\[[G, G] = \{[x, y]: x, y \in G\}\]
+
+\textbf{Abelianization} $G^{\text{ab}} = G/[G, G]$, the \emph{abelianization of $G$} is the largest abelian quotient of $G$.
+
+\textbf{Jordan-Holder Theorem:} For finite groups, a composition series with ``nice'' quotients always exists 
+\begin{itemize}
+    \item \emph{Ascending sequence:} $1 = G_0 \triangleleft G_1 \triangleleft \cdots \triangleleft G_{n-1} \triangleleft G_n = G$
+    \item \emph{Descending sequence:} $1 \triangleleft \cdots \triangleleft G_{2} \triangleleft G_1 \triangleleft G$
+\end{itemize}
+
+Notice, we can write the series of extensions of a nilpotent group as either an ascending or descending series of normal subgroups. 
+
+The lower central series gives the descending sequence 
+\[1 = G_n \triangleleft G_{n-1} \triangleleft \cdots \triangleleft G_1 \triangleleft G_0 = G\]
+with central quotients. 
+
+However, we can also write $G$ as a series of central \emph{extensions} using the upper central series 
+\[1 = G_0 \triangleleft G_1 \triangleleft \cdots \triangleleft G_{n-1} \triangleleft G_n = G\]
+such that as the generalized centers converge to $G$, the quotient subgroups converge to $0$
+
+Intuitively, the lower central series yields the largest central quotient while the upper central series yields the largest central \emph{subgroup}. (Of course, is simply $G_1 = Z(G)$)
+
+We say a nilpotent group is \emph{$k$-steps} if we need $k$ extensions of $G$ for the series to terminate. 
+
+\textbf{Theorem:} Let $G$ be a connected lie group. Then $G$ is a nilpotent group iff $\g$ is a nilpotent lie algebra. Further, $\g$ is solvable iff $G$ is solvable. 
+
+Recall that if $\mathfrak{n} \hookrightarrow \mathfrak{g} \twoheadrightarrow \mathfrak{h}$, $\g$ is solvable iff $\mathfrak{n}$ and $\mathfrak{h}$ are solvable.
+ 
+However, this is \emph{not} true for nilpotency: consider $\R \hookrightarrow \mathfrak{aff}(1, \R) \twoheadrightarrow \R$ 
+
+\textbf{Claim:} The upper triangular matrices $U_n$ are solvable
+
+\subsection*{Representations}
+\textbf{Representation:} a \emph{representation} of a group into a vector space $V$ is a homomorphism 
+\[\Phi: \begin{array}{l}
+    G \to \Aut(V)\\
+    g \mapsto \{\Phi(g): V \biject V\}
+\end{array}\]
+where $\Phi(g)(v)$ is another vector in $V$. 
+
+Differentiating, we have 
+\[\phi: \begin{array}{l}
+    \g \to \gl(V)\\ 
+    X \mapsto \frac{d}{dt}\big\vert_{t=0} \Phi(e^{tX})
+\end{array}\]
+which is a lie-algebra homomorphism ($\phi([X, Y]) = [\phi(X), \phi(Y)]$)
+
+\textbf{Ado's Theorem:} Let $\g$ be a lie algebra. Then there exists a sufficiently large vector space $V$ such that $\g \hookrightarrow \gl(V)$
+
+\textbf{Fact:} If $G$ is connected, $\exp(\g)$ generates $G$ as a group, i.e. $\forall g \in G$, 
+\[g = \exp(x_1)\exp(x_2)\cdots \exp(x_n)\]
+for some $x_i \in \g$ 
+
+\textbf{Lie's Theorem:} Let $\g$ be a solvable lie algebra and let $\pi: \g \to \gl(V)$ be a representation of $\g$ with real eigenvalues for all $\pi(X)$, $X \in \g$. Then there exists a $v \neq 0 \in V$ such that $v$ is an eigenvector of $\pi(X)$ for all $X \in \g$ 
+
+\textbf{Corollary:} In the same context as the theorem, there exists a sequence of subspaces 
+\[0 = V \subset V_m \subset V_{m-1} \subset \cdots \subset V_0 = V\]
+such that $V_i$ is stable under $\pi(X) \in \gl(V)$ and each $V_i$ is codimension $1$ in the next. 
+
+Equivalently, there exists a basis for $V$ for which $(\pi(X))_{\beta}$ is upper triangular for all $X \in \g$. 
+
+\textbf{Conclusion:} If we have a solvable lie algebra, then it is embeddable in the upper triangular lie-algebras (with sufficiently many eigenvalues). \emph{The upper triangular lie algebras are the only ones}. 
+
+\textbf{Proposition:} Let $\pi: \g \to \gl(V)$ be a representation of a nilpotent lie algebra $\g$. Then each operator $\pi(X)$ with $X \in \g$ is nilpotent.
+
+\textbf{Engel's Theorem:} Let $\pi: \g \to \gl(V)$ be a representation such that each $\pi(X)$ is nilpotent (vanishes under powers). Then $\pi(\g)$ is a nilpotent lie-algebra (lower central series converges).
+
+\subsection*{The Quaternions} 
+\textbf{The Unit Quaternions:} 
+\[Q_8 = \{1, i, j, k \; | \; i^2 = j^2 = k^2 = -1, ij = k, jk = i, ki = j\}\]
+is a group of order $8$ with $Z(Q_8) = \{1, -1\}$ 
+
+\textbf{The General Quaternion Group (Hamiltonians):}
+\[\H = \{a + b\ihat + c\jhat + d\khat \; | \; a, b, c, d \in \R\}\]
+
+As a vector space, $\H \simeq \R^4$ with basis $\{1, \ihat, \jhat, \khat\}$. As a group, $\H$ is non-abelian with multiplication rule
+\begin{align*}
+    (a + &b\ihat + c\jhat + d\khat)(w + x\ihat + y\jhat + z\khat)\\ 
+    &= aw + ax \ihat + ay \jhat + az \khat
+        + bw \ihat + bx \ihat^2 + by \ihat\jhat + bz \ihat\khat
+        + cw \jhat + cx \jhat\ihat + cy \jhat^2 + cz \jhat\khat
+        + dw \khat + dx \khat\ihat + dy \khat\jhat + dz \khat^2\\
+    & = (aw - bx - cy - dz) 
+        + (ax + bw + cz - dy)\ihat
+        + (ay - bz + cw + dx)\jhat
+        + (az + by - cx + dw)\khat
+\end{align*}
+
+Given $q = a + b\ihat + c\jhat + d\khat$, we define  
+\begin{itemize}
+    \item $\text{Scal}(q) = a$ is the \emph{scalar part} of $q$
+    \item $\text{Vec}(q) = b\ihat + c\jhat + d\khat$ is the \emph{vector part} of $q$
+    \item $\bar q = a - b\ihat - c\jhat - d\khat = \text{Scal}(q) - \text{Vec}(q)$ is the \emph{conjugate} of $q$
+    \item $\norm{q} = \sqrt{a^2 + b^2 + c^2 + d^2}$ is the \emph{norm} of $q$
+    \item $p^{-1} = \frac{\bar p}{\norm{p}^2}$ is the \emph{inverse} of $p$
+\end{itemize}
+
+We say $q$ is a \emph{unit quaternion} if $\norm{q} = 1$ and \emph{pure} if $\text{Scal}(q) = 0$.
+
+\textbf{Properties:}
+\begin{itemize}
+    \item For two pure quaternions, 
+    \[pq = -p \cdot q + p \times q\]
+    
+    \item Similarly, for $X = x + \vec p$ and $Y = y + \vec q$,
+    \[XY = (x + \vec p)(y + \vec q) = xy + x\vec q + y\vec p + \vec p\, \vec q = (xy - \vec p \cdot \vec q) + (x\vec q + y\vec p + \vec p \times \vec q)\]
+
+    \item $p \bar p = \norm{p}^2 = p \cdot p$
+    
+    \item For $u$ pure and unital, $u^4 = 1$ 
+    
+    \item $\bar{pq} = \bar q\, \bar p$
+\end{itemize}
+
+Note that $\norm{\cdot}: \H^{\times} \to \R^{+}$ given by $p \mapsto \norm{p}$ is multiplicative:
+\[\norm{pq} = (pq)(\bar{pq}) = pq \, \bar q\, \bar p = p \norm{q}^2 \, \bar p = \norm{p}^2\, \norm{q}^2\]
+
+We can also look at its kernel:
+\[S^3 = \{p \in \H^{\times} \; | \; \norm{p} = 1\} = \{w + x\ihat + y\jhat + z \khat \; | \; \sqrt{w^2 +x^2 + y^2 + z^2} = 1\}\]
+
+\subsection*{Group Actions}
+There exists a group action of $S^3$ on $\R^3$. 
+
+Notice that group conjugation ($q \in \H^{\times} \mapsto \{I_q: H \biject \H\}$) respects Hamiltonian conjugation:
+\[\conj(I_q(p)) = I_q(\conj(p))\]
+
+This means that a quantity expressed in terms of $p$ and $\bar p$ will be preserved by $I_q$. 
+
+In particular, for a quaternion $p$, 
+\begin{align*}
+    \text{Scal}(p) &= \frac{p + \bar p}{2}\\
+    \text{Vec}(p) &= \frac{p - \bar p}{2}
+    \text{Norm}(p) &= \sqrt{p \bar p}
+\end{align*}
+so if $p$ is pure, $I_q(p)$ is pure. 
+
+If we think of $\H = \R \oplus \text{Span}_{\R}\{\ihat, \jhat, \khat\} = R \oplus P$, where $P$ is the space of pure quaternions, then $I_q$ preserves the 3-dimensional, real subspace $P$. (In fact, since $I_q$ preserves the norm, it is an isometry of $P$). 
+
+Therefore, we have a map 
+\[\begin{array}{c}
+    S^3 \to \SO(3, \R)\\ 
+    q \mapsto I_q: P \biject P
+\end{array}\]
+
+What is $I_q$? By definition $I_q(p) = q p^{-1} q$. Trivially, this is a map in $\SO(3, \R)$ and has fixed axis $I_q(q) = qqq^{-1} = q$. Therefore, it suffices to examine the action of $I_q$ on the orthgonal complement $C$ of $\R q$. Take $v \in \R q^{\perp}$. Using some of the pure quaternion multiplication properties, we find that $I_q(v) = qvq^{-1} = -v$.
+
+Therefore, $I_q$ is a line symmetry with axis of symmetry $\R q$. Relative to $\beta = \{q, v, q \times v\}$, 
+\[(I_q)_{\beta} = \begin{pmatrix}
+    1 & 0 & 0\\
+    0 & -1 & 0\\
+    0 & 0 & -1
+\end{pmatrix}\] 
+
+\textbf{Cartan-Dieudonné Theorem:} Any isometry of $\R^n$ is expressible as at most $(n+1)$-reflections in hyperplanes 
+
+\textbf{Proposition:} The composition of two line symmetries $L_B \circ L_A$ in the plane is a a rotation by twice the angle from $A$ to $B$ 
+
+\textbf{Euler-Rodrigues Theorem:} Let $q = \cos \frac{\theta}{2} + u \sin \frac{\theta}{2}$ be a unit quaternion in $S^3$. Then $I_q: P \biject P$ is a rotation about the axis $u \in P$ by an angle of $\theta$.
+
+\subsection*{Covering Maps}
+By the Euler-Rodrigues theorem, there exists $\phi: S^3 \twoheadrightarrow \SO(3, \R)$ with kernel $\Z_2$ called the \emph{spin double cover of $\SO(3, \R)$}. 
+
+In a sense, $S^3/\Z_2$ is the topology on the space of lines through the origin in $\R^4$:
+\[\RP^{3} \simeq S^3/\Z_2 \simeq \SO(3, \R)\]
+
+\textbf{$\SU(2, \C)$ isomorphism:}
+
+We have another isomorphism. Consider $\H$ a \emph{right} $\C$-vector space $\H^{\C}$ with $\C$-basis $\{1, \jhat\}$ so 
+\[(a + b\ihat + c\jhat + d\khat)_{\beta} = 1 \cdot (a + bi) + \jhat(c - di)\]
+and 
+\[L_q(pc) = q(pc) = (qp)c = L_q(p)c\]
+so that $\forall q = z + w\jhat \in \H$, $L_q$ is an honest $\C$-endomorphism of $\H^{\C}$ so $q \mapsto L_q$ yields 
+\[\H^{\times} \hookrightarrow \GL(\H^{\C}) \simeq \GL(2, \C)\] 
+so relative to $\beta = \{1, \jhat\}$, 
+\[(L_q)_{\beta} = \begin{pmatrix}
+    z & -\bar w\\
+    w & \bar z
+\end{pmatrix}\] 
+
+Restricting to $S^3$ we have $S^3 \hookrightarrow \SU(2, \C)$ where 
+\[\SU(2, \C) = \left\{\begin{pmatrix}
+    z & -\bar w\\
+    w & \bar z
+\end{pmatrix} \bigg\vert z\, \bar z + w\, \bar w = 1\right\}\]
+then $S^3 \biject \SU(2, \C)$ again with $\Z_2$ kernel. 
+
+\textbf{Spin 4 double cover:} 
+
+Similar to the case of $\H$ as a $\C$-vector space, we can consider $\H$ as an $\R$-vector space which means that we do not have to worry about left/right structure. 
+
+With basis $\beta = \{1, \ihat, \jhat, \khat\}$, we have
+\[L_q \sim \begin{pmatrix}
+    x & -y & -z & -w\\
+    y & x & -w & z\\
+    z & w & x & -y\\
+    w & -z & y & x
+\end{pmatrix}, \quad R_q \sim \begin{pmatrix}
+    x & -y & -z & -w\\
+    y & x & w & -z\\
+    z & -w & x & y\\
+    w & z & -y & x
+\end{pmatrix}\]
+
+Since we have orthogonal columns, if $\norm{q} = 1$, then $L_q \in \SO(4, \R)$ and $R_q \in \SO(4, \R)$ so we have a homomorphism
+\begin{align*}
+    S^3 \times S^3 &\to \SO(4, \R)\\ 
+    (q, p) &\mapsto (L_q \circ R_{p^{-1}})_{\beta}
+\end{align*}
+
+Using Euler-Rodrigues, we can show this map is surjective with another $\Z_2$ kernel so 
+\[S^3 \times S^3/Z_2 \simeq \SO(4, \R)\]
+(i.e. $S^3 \times S^3$ is a double cover of $\SO(4, \R)$)
+and 
+\[S^3 \times S^3 \simeq \text{Spin}(4, \R)\]
+
+\subsection*{Fibre Bundles}
+\textbf{Fibre Bundle:} A \emph{fibre bundle} is a surjective smooth math $p: E \to B$ such that for a small set $U \subseteq B$, 
+\[p^{-1}(U) = U \times F\]
+
+\textbf{Fibre:} the inverse-image (pullback) of a point under a map. (Heuristically, a parameterization of the total space over a variable base space)
+
+\textbf{Examples:}
+\begin{itemize}
+    \item $p(x, y) = x$ is an $\R$-bundle over $\R$ of total space $\R^2$ 
+    \item A cylinder projected onto its base is an $I$-bundle over $S^1$ for interval $I$
+    \item The Mobius band is a $I$-bundle over $S^1$ (but the Mobius band is orientable while the cylinder is not)
+    \item $T^2$ is a $S^1$-bundle over $S^1$
+    \item The Klein bottle is an $S^1$-bundle over $S^1$
+\end{itemize}
+
+\textbf{Principal G-bundle:} a fibre bundle $E$ with fibre $G$ such that the fibre is isomorphic to $G$ as a group. Equivalently, a fibre bundle equipped with a right $G$-action on the total space so the fibres are the orbits of the action.
+
+\textbf{Examples:}
+\begin{itemize}
+    \item With $(x, y)t = (x, y + x)$ (an upwards translation), $\R^2$ is an principal $\R$-bundle over $I$ 
+    \item With $S^1$-action $(\theta, \phi)t = (\theta, \phi + t), t\in \R/\Z$, $T^2$ is a principal $S^1$-bundle over $S^1$ 
+    \item Let $E = \{(p, \{v_1, v_2\}) \; | \; p\in S^2, v_1, v_2 \in T_pS^2\}$ such that $T_pS^2 = \text{Span}_{\R}\{v_1, v_2\}$ with action $(p, \{v_1, v_2\})t = p$. Then $E$ is a $\GL(2, \R)$ bundle over $S^2$ and our group action is $q^{-1}(N) \simeq \GL(2, \R)$ because we just need two linearly independent vectors in $T_N S^2 \simeq \R^2$ 
+\end{itemize}
+
+\textbf{The Hopf Fibration:} a principal $S^1$-bundle over $S^2$ with total space $S^3$ when $S^3$ acts on itself by conjugation
+
+Recall that $S^3 \to \Aut(S^2)$ given by $q \mapsto I_q: S^2 \biject S^2$ is a transitive $S^3$ action on $S^2$. Consequently, we have $H: S^3 \twoheadrightarrow S^2$ via $q \mapsto I_q(\khat)$ with $\text{Orbit}(\khat) = S^2$. 
+
+By the orbit stabilizer theorem, $S^3/\text{Stab}(\khat) \simeq \text{Orbit}(\khat) \simeq S^2$. We know 
+\[\text{Stab}(\khat) = \{q \in S^3 \; | \; I_q(\khat) = \khat\} = \{q \in S^3 \; | \; q\khat q^{-1} = \khat\}\] 
+
+Certainly we know $q\khat q^{-1} = \khat$ for $q \in \text{Span}_{\R}\{1, \khat\} \simeq \C$. Further, we can show it does not commute with $\text{Span}\{\ihat, \jhat\}$ so 
+\[\text{Stab}(\khat) = \{\cos \theta + \sin \theta \khat \; | \; \theta \in \R\} \simeq S^1\]
+is our fibre over $\khat$. 
+
+What about over the rest of $S^2$? 
+
+Notice: 
+\[H(qp) = qp\khat p^{-1}q^{-1} = qH(p)q^{-1} = I_q(H(p))\]
+so left multiplication is just rotation of $H(p)$ about the vector part of $q$. 
+
+This means that finding the fibre over a point $v \in S^2$ is a matter of finding a single $q \in S^3$ with $H(q) = v$ since $H^{-1}(v) = qS$ where $S = \text{Stab}(\khat)$. 
+
+Geometrically, this means we need to find $p \in S^3$ so 
+\[H(p\khat) = v \implies I_p(H(\khat)) = v \implies I_p(\khat) = v\]
+and then let $q = p\khat$ so $H^{-1}(v) = p\khat S = pS$ 
+
+To find $p$, we can use the fact that $p = \cos \phi + u\sin \phi$ where $\phi = \theta/2$ to reduce the problem to finding the fixed axis of rotation which transforms $\khat$ to $v$ and the angle $\theta$ from $\khat$ to $v$.
+
+For all $v = (a, b, c)\neq \{\khat, -\khat\}$, the obvious choice of axis is 
+\[u = \frac{v \times \khat}{\norm{v \times \khat}} = \frac{1}{\norm{v \times \khat}} \begin{vmatrix}
+    \ihat & \jhat & \khat\\
+    a & b & c\\
+    0 & 0 & 1
+\end{vmatrix} = \frac{1}{\sqrt{a^2 + b^2}}(b\ihat - a\jhat)\]
+
+Then 
+\begin{align*}
+    v \cdot \khat = \norm{v}\; \norm{\khat} \cos \theta \implies c = \cos \theta \implies \cos \phi &= \sqrt{\frac{1 + c}{2}}\\ 
+    \sin \phi &= \sqrt{\frac{1 - c}{2}}\\
+\end{align*}
+so 
+\[p = \frac{1}{\sqrt{2 + 2c}}(1 + c - b\ihat + a\jhat)\]
+and the full fibre over $S^2$ is 
+\[H^{-1}(v) = \frac{1}{\sqrt{2 + 2c}}(1 + c - b\ihat + a\jhat)(\cos \theta + \sin \theta \khat)\]
+
+\subsection*{Linked Curves}
+For two generic points in $S^2$, their fibres in $S^3$ will be linked. Explicitly, $p, q \in S^2$ will lead to linked circles $H^{-1}(p), H^{-1}(q)$ via $H^{-1}:S^2 \to S^3$ and stereographic projection $F: S^3/\khat \biject \R^3$ defined by 
+\[F(x, y, z, w) = \left(\frac{x}{1- w}, \frac{y}{1- w}, \frac{z}{1 - w}\right)\] 
+
+\emph{Example:} the fibre at $\khat$ is a line along the $x$-axis. The fibre of $-\khat$ is a circle in the $yz$-plane. A simple drawing shows that these two circles are linked. But how do we formalize this notion? 
+
+Consider a curve $\gamma(t)$ that loops many times around $p \in \C$ with $\gamma(0) = \gamma(1)$. We want to find the \textbf{winding number} of oriented wraps around $p$. 
+
+We can consider $\pi_1(s)$, the group of curves at $p \in S$ up to continuous deformation. One way is to imagine picking an orientation on $R^2/0$ and deforming the curve to wrap around a generator $n$-times where $n$ is the winding number. 
+
+We can also think about this geometrically in terms of one-forms. In a sense, we have a function $\R^2/0 \to \R$ which measures the angle relative to $0$ at a point $p$. If we imagine the vector $\vec{OP}$ as the hypotenuse of a triangle with legs $x$ and $y$, then (locally) the angle is $\theta = \arctan(y/x)$ so (locally)
+\[d\theta = -\frac{y}{x^2 + y^2}\; dx + \frac{x}{x^2 + y^2}\; dy\]
+which means that we can integrate along curves! 
+\[\gamma \mapsto \int_{\gamma}d\theta\]
+but since $\gamma(0) = \gamma(1)$, we (morally) have 
+\[\int_{\gamma} d\theta \approx \theta(\gamma(1)) - \theta(\gamma(0))\]
+
+In fact, there is no honest function $f: \R^2/0 \to \R$ so that $df = \omega$ where $[\omega]$ generates $H^1(\R^2/0)$. If there were, then $\int_{\gamma} d\theta = 0$ exactly but if we consider the simplest curve $\gamma(t) = (\cos t, \sin t)$, we see 
+\begin{align*}
+    \int_{\gamma} d\theta &= \frac{1}{2\pi} \int_0^{2\pi} \frac{-\sin t}{\sin^2 t+ \cos^2 t}\; d(\cos t) + \frac{\cos t}{\sin^2 t + \cos^2 t} \; d(\sin t)\\ 
+    &= \frac{1}{2\pi} \int_0^{2\pi} \sin t (\sin t) + \cos t (\cos t)\; dt\\ 
+    &= \frac{1}{2\pi} \int_0^{2\pi} 1\; dt = 1
+\end{align*}
+which would give
+\[\omega = \frac{1}{2\pi}\begin{pmatrix}
+    -y & dx\\ 
+    x & dy
+\end{pmatrix} \frac{1}{x^2 + y^2}\]
+but this is a contradiction. 
+
+Our original goal was to understand why linked and unlined curves are fundamentally different in order to understand why $H^{-1}(p), H^{-1}(q)$ are linked.
+
+First reduction: consider $p, q \in S^3$ and their fibres. It suffices to show the case $p = \khat, q = -\khat$. Intuitively, the linkage of fibres should be invariant under isotopy (i.e. under deformation, linked curves should remain linked and vice versa). Therefore, if we move $p$ to $\khat$ and $q$ to $-\khat$, the fibres should remain linked.
+
+We can imagine two curves $a$ and $b$, each wrapped around a two parallel poles. Clearly, there is no way to deform $a$ to $b$. In fact, $a, b$ generate a free group in $\pi_1(\R^3/\text{two parallel lines})$
+
+This problem then resolves to finding a non-trivial relation on the generating circles $a, b$ of two linked curves.
+
+\pagebreak 
+
+\section{Homework Results}
+For a short exact sequence $\mathfrak{n} \hookrightarrow \mathfrak{g} \twoheadrightarrow \mathfrak{h}$, $\mathfrak{g}$ is solvable iff $\mathfrak{n}$ and $\mathfrak{h}$ are solvable.
+
+A \textbf{derivation} of a lie algebra $\mathfrak{n}$ is any linear map $D: \mathfrak{n} \to \mathfrak{n}$ such that 
+\[D[X, Y] = [DX, Y] + [X, DY]\]
+for all $X, Y \in \mathfrak{n}$.
+
+\emph{Example:} $\ad_X(Y) = [X, Y]$ is a derivation of $\mathfrak{g}$ for any $X \in \mathfrak{g}$ 
+
+A \textbf{representation} of a lie algebra $\h$ into $\mathfrak{n}$ is a Lie-algebra homomorphism $\phi: \h \to \gl(\mathfrak{n})$ 
+
+To show that $\g \simeq \mathfrak{n} \rtimes_{\phi} \h$, it suffices to show there exists a split exact sequence $\mathfrak{n} \hookrightarrow \g \twoheadrightarrow \h$. 
+
+If $\mathfrak{n} \subset \g$ is an ideal and $\h \subset \g$ is a sub-algebra for which $\g = \mathfrak{n} \oplus \h$ as vector spaces, then $\g \simeq \mathfrak{n} \rtimes \h$
+
+$\g$ is solvable iff there exists a sequence of subalgebras 
+\[0 = \h_n \subset \h_{n-1} \subset \cdots \subset \h_1 \subset \h_0 = \g\]
+such that each $\h_{i+1}$ is an ideal of $\h_i$ and $\h_i/\h_{i+1}$ is abelian.
+
+The sum of solvable ideas is solvable. 
+
+For two ideals $\mathfrak{a}, \mathfrak{b} \subset \g$, 
+\[(\mathfrak{a} + \mathfrak{b})/\mathfrak{a} = \mathfrak{b}/(\mathfrak{a} \cap \mathfrak{b})\]
+
+$\exp: \so(3, \R) \to \SO(3, \R)$ is surjective. 
+
+Let $X \in \so(3, \R)$ such that $\norm{X} = \sqrt 2$. Then 
+\[\exp(tX) = I_3  +\sin(t)X + (1 - \cos t)X^2\]
+
+Every element of $\SO(n, \R)$ is the product of at most $(n+2)/2$ reflections. 
+
+\[\so(3, \R) \oplus \so(3, \R) \simeq \so(4, \R)\]
+
+The linking number of two smooth curves $\gamma: I \to \R^3$ with no self-intersections and where $\gamma(0) = \gamma(1)$ is given by 
+\[L(\gamma_1, \gamma_2) = \frac{1}{4\pi} \oint \oint_{S^1 \times S^1} \frac{1}{\abs{\gamma_1(s) - \gamma_2(t)}^3} \det \begin{pmatrix}
+    \frac{d\gamma_1}{ds}(s) & \frac{d\gamma_2}{dt}(t) & \gamma_1(s) - \gamma_2(t)
+\end{pmatrix}\; ds\, dt\] 
+
+\[S^3/S^1 \simeq S^1 \times \R^2\]
+ 
+\pagebreak  
+\begin{multicols}{2}
+
+\section{Important Formulae}
+\textbf{Group action:}
+\begin{enumerate}
+    \item $\alpha(1, x) = x$
+    \item $\alpha(g, \alpha(h, x)) = \alpha(gh, x)$
+\end{enumerate}
+
+\textbf{One parameter subgroup:} $\alpha: \R \to \GL(n, \R)$ 
+\begin{enumerate}
+    \item $\alpha(0) = I$
+    \item $\alpha(s + t) = \alpha(s)\alpha(t)$
+    \item $\alpha'(t) = \alpha(t) \alpha'(0)$
+\end{enumerate}
+
+\textbf{Matrix exponential:}
+\[e^{tA} = I_n + At + \frac{t^2}{2}A^2 + \frac{t^3}{3!}A^3 + \dots\]
+
+If $AB = BA$, 
+\[e^A e^B = e^B e^A = e^{A+B}\]
+
+With $A$ diagonalizable, 
+\[e^{tA} = e^{tPDP^{-1}} = Pe^{tD}P^{-1}\]
+
+For any $A \in M_n(\C)$, 
+\[\det(e^A) = e^{\tr A}\]
+
+For $A(t)$ a smooth family of matrices in $\GL(2, \R)$ and $A(0) = I$, 
+\[\frac{d}{dt}\bigg\vert_{t=0} \det A(t) = \tr A'(0)\]
+
+\textbf{Lie Algebra:} A vector space with a pairing $[\cdot, \cdot]: \g \times \g \to \g$ such that
+\begin{enumerate}
+    \item $[A, B] = -[B, A]$ (skew-symmetry)
+    \item $[A + cB, D] = [A, D] + c[B, D]$ (bilinearity)
+    \item $[A, [B, C]] + [B, [C, A]] + [C, [A, B]] = 0$ (Jacobi identity)
+\end{enumerate}
+and where 
+\[[A, B] = \frac{d}{dt}\bigg\vert_{t=0} \frac{d}{ds}\bigg\vert_{s = 0} e^{tA} e^{sB} e^{-tA} = AB - BA\]
+
+\textbf{Ideal:} $\h \subseteq \g$ such that $[\g, \h] \subseteq \h$
+
+\textbf{Short exact sequence:} 
+\[N \overset{i}{\hookrightarrow} G \overset{p}{\twoheadrightarrow} H\] 
+where $\ker p = \text{im } i$ 
+
+\textbf{Split exact sequence:}
+\[\begin{tikzcd}
+    N \arrow[hook, "i"]{r} & G \arrow[two heads, "p"]{r} & H \arrow[bend right=60, "\sigma"]{l}
+\end{tikzcd}\]
+with $\ker p = \text{im } i$ and $p\sigma = 1_H$.
+
+Equivalently, $G \simeq N \rtimes_{\phi} H$ where $\phi: H \to \Aut(N)$ by 
+\[(n, h)(a, b) = (n\phi_h(a), hb)\]
+(if $\phi = \text{id}$, then $G \simeq N \times H$)
+
+\textbf{Lie Algebra Homomorphism:}
+\[\psi([X, Y]) = [\psi(X), \psi(Y)]\]
+
+\textbf{Adjoint Representation:} $\Ad_g(X) = gXg^{-1}$ for $g \in G$. 
+\[\begin{tikzcd}
+    G \arrow["Ad"]{r} & \Aut(\g)\\ 
+    \g \arrow["\ad"]{r} \arrow["\exp"]{u} & \gl(\g) \arrow["\exp"]{u}
+\end{tikzcd}\]
+
+\textbf{adjoint Representation:} $\ad_x(Y) = [X, Y]$
+\[\frac{d}{dt}\bigg\vert_{t=0} \Ad_{g(t)} = \ad(g'(0)) = \ad(X)\]
+
+\textbf{Killing Form:} $B(X, Y) = \tr(\ad_X \circ \ad_Y)$ 
+
+One may assign a symmetric matrix $A$ such that $B(X, Y) =  x^TAy$. The signs of the eigenvalues of $A$ determine the signature of the Killing form.
+
+\emph{Polarization identity:} 
+\[B(x + y, x + y) = B(x, x) + 2B(x, y) + B(y, y)\]
+
+If $\g$ is nilpotent, the Killing form is $0$. 
+
+A lie algebra is semi-simple iff the Killing form is non-degenerate. 
+
+\textbf{Solvable:} $g^0 = g$, $g^{i+1} = [g^i, g^i]$
+\begin{enumerate}
+    \item $H \subseteq G \implies$ $H$ solvable if $G$ solvable 
+    \item $\phi: G \twoheadrightarrow H \implies$ $H$ solvable if $G$ solvable 
+    \item $N \hookrightarrow G \twoheadrightarrow H \implies$ $G$ solvable iff $N$ and $H$ are solvable  
+    \item $G$ connected implies $\g$ solvable if $G$ solvable 
+\end{enumerate}
+
+\textbf{Nilpotent:} $\g_0 = \g$, $\g_{i+1} = [\g, \g_i]$
+\begin{enumerate}
+    \item $G$ connected implies $\g$ nilpotent if $G$ nilpotent
+    \item $\g$ nilpotent implies $\g$ solvable
+\end{enumerate}
+
+If $G$ is connected, for all $g \in G$,
+\[g = \exp(x_1)\exp(x_2) \cdots \exp(x_n)\]
+for $x_1, \dots, x_n \in \g$
+
+\textbf{Pure quaternions:} 
+\[pq = -p \cdot q + p \times q\]
+
+If $u$ pure and unital, $u^4 = 1$ 
+
+\textbf{Euler-Rodrigues:} 
+\[q = \cos \frac{\theta}{2} + u \sin \frac{\theta}{2}\] 
+is a rotation about fixed axis $u$ by angle $\theta$
+
+\textbf{$\SO(4, \R)$ embedding:} Left multiplication action of $q = x + y\ihat + z\jhat + w\khat$ can be written 
+\[L_q \sim \begin{pmatrix}
+    x & -y & -z & -w\\
+    y & x & -w & z\\
+    z & w & x & -y\\
+    w & -z & y & x
+\end{pmatrix}\]
+
+\textbf{Fibre Bundle:} $p: E \twoheadrightarrow B$ such that $p^{-1}(U) = U \times F$
+
+\textbf{Principal G-bundle:} a fibre bundle with fibre $G$ such that the fibre is isomorphic to $G$ as a group
+
+\end{multicols}
+\end{document}
