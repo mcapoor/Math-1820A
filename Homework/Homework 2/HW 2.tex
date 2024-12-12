@@ -1,0 +1,406 @@
+\documentclass[12pt]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% PACAKAGES %%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%% GRAPHICS/FONTS
+\usepackage{amsmath,amsfonts,graphicx,tikz-cd,pgfplots}
+
+%%%%%%%%%%%%%% FORMATTING
+\usepackage{geometry,titlesec,hyperref,xhfill,setspace,float,fancyhdr}
+\usepackage{parskip}
+
+
+%%%%%%%%DEFINING COMMANDS
+\usepackage{xifthen}
+
+%%%%%%%%%TIKZ STUFF
+\usetikzlibrary{positioning,calc}
+\usetikzlibrary{decorations.markings}
+\usepgfplotslibrary{polar}
+\usepgflibrary{shapes.geometric}
+\usepgfplotslibrary{fillbetween}
+
+%%%%%%FOR THE GRAPHS
+\pgfplotsset{my style/.append style={axis x line=middle, axis y line=
+middle, xlabel={$x$}, ylabel={$y$}, axis equal }}
+
+%%%%%%MARGINS
+\geometry{
+    letterpaper,
+    left=0.5in,
+    right=0.5in,
+    top=0.75in,
+    bottom=0.75in
+}
+\setlength\parindent{0pt}
+
+%%%%%%MAKES THE HEADER AND FOOTER FANCY
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\pagestyle{fancy}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% COMMANDS %%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\underscore}{\underline{\hspace{2mm}}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Aut}{\text{Aut}}
+\newcommand{\GL}{\text{GL}}
+\newcommand{\SO}{\text{SO}}
+\newcommand{\PGL}{\text{PGL}}
+\newcommand{\End}{\text{End}}
+\newcommand{\lra}{\longrightarrow}
+
+\newcommand{\RP}{\mathbb{R}P}
+\newcommand{\K}{\emph{K}}
+
+\newcommand{\ihat}{\hat{\textbf{i}}}
+\newcommand{\jhat}{\hat{\textbf{j}}}
+\newcommand{\khat}{\hat{\textbf{k}}}
+
+%TEXT COMMAND
+\newcommand{\T}[1][]{\text{#1}}
+\newcommand{\TB}[1][]{\mathbb{#1}}
+
+\newcommand{\xlra}[1][]{%
+  \ifthenelse{\isempty{#1}}%
+    {\xrightarrow{\phantom{,,,,,,}}}% if #1 is empty
+    {\xrightarrow{\phantom{,,}#1\phantom{,,}}}% if #1 is not empty
+}
+
+\usepackage{amssymb}
+\newcommand{\ans}[1]{\boxed{\text{#1}}}
+\newcommand{\vecs}[1]{\langle #1\rangle}
+\renewcommand{\hat}[1]{\widehat{#1}}
+\newcommand{\F}[1]{\mathcal{F}(#1)}
+\renewcommand{\P}{\mathbb{P}}
+\renewcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\renewcommand{\Z}{\mathbb{Z}}
+\newcommand{\ind}{\mathbbm{1}}
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\brak}[1]{\left\langle #1 \right\rangle}
+\newcommand{\bra}[1]{\left\langle #1 \right\vert}
+\newcommand{\ket}[1]{\left\vert #1 \right\rangle}
+\newcommand{\abs}[1]{\left\vert #1 \right\vert}
+\newcommand{\mfX}{\mathfrak{X}}
+\newcommand{\norm}[1]{\left\vert \left\vert #1 \right\vert \right\vert}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins}
+\tcbset{enhanced}
+\newenvironment*{tbox}[2][gray]{
+    \begin{tcolorbox}[
+        parbox=false,
+        colback=#1!5!white,
+        colframe=#1!75!black,
+        breakable,
+        title={#2}
+    ]}
+    {\end{tcolorbox}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%BEGINNING OF ACTUAL DOCUMENT %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%TITLE______REMEMBER TO REGULARLY CHANGE THIS!!!!
+\title{Math 1820A Spring 2024 - Homework 2}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-0.5in}
+%%%%%%%%%%%%%%%%
+\begin{spacing}{1.5}
+\noindent \textbf{Instructions:}  This assignment is worth twenty points.  Please complete the following problems assigned below.  Submissions with insufficient explanation may lose points due to a lack of reasoning or clarity.  If you are handwriting your work, please ensure it is readable and well-formatted for the grader.
+
+Be sure when uploading your work to \textbf{assign problems to pages}.  Problems with pages not assigned to them \textbf{may not be graded}.  
+\end{spacing}
+
+\hrule
+
+%%%%%%%%%%%%%%%%%%
+\vspace{10mm}\noindent
+
+\noindent
+Here's a helpful trick if you haven't seen it before.  If you have a continuous function $F: \R^{m} \lra \R^{n}$, and a sequence of points $x_{n} \lra x$, then $f(x_{n}) \lra f(x)$.  This sort of thing is helpful for proving identities, e.g. Problem 4 and 6. 
+\vspace*{0.25in}
+
+1.  Let $\alpha: \R \lra \GL(n,\R)$ be a one parameter subgroup.  Prove that $\alpha'(t) = \alpha(t)\alpha'(0)$.  Use this to show that if $\alpha$ is a one-parameter subgroup such that $\alpha(0) = 1$ and $\alpha'(0) = A$, then $\alpha(t)$ must commute with $A$ for all $t$.  (Do not assume that every one parameter subgroup is of the form a matrix exponential)
+
+    \color{blue}
+        \begin{enumerate}
+            \item As $\alpha$ is a 1-parameter subgroup, it satisfies $\alpha(t+s) = \alpha(t)\alpha(s)$. Then,
+            \[\frac{d}{ds}\bigg\vert_{s=0}(\alpha(t+s)) = \frac{d}{ds}\bigg\vert_{s=0}\alpha(t)\alpha(s) = \alpha(t)\alpha'(0)\] 
+
+            \item Since $\alpha$ is a homomorphism and addition is commutative in $\R$, we have that 
+            \[\alpha(s + t) = \alpha(s)\alpha(t) = \alpha(t + s) = \alpha(t)\alpha(s)\]
+            Deriving, 
+            \[\alpha'(t) = \alpha'(0)\alpha(t) = \alpha(t)\alpha'(0) = A\alpha(t) = \alpha(t)A\]
+            So for all $t$, $\alpha(t)$ commutes with $A$ $\qed$
+        \end{enumerate}
+    \color{black}
+
+\pagebreak
+2.  If $A$ is any matrix in $M_{n}(\C)$, prove that there exists a sequence of diagonalizable matrices $A_{n}$ such that $A_{n}$ converges to $A$. 
+
+    \color{blue}
+        If $A$ is diagonalizable, we are done as there exists a diagonalizable matrix $A_n$ such that $\abs{A_n - A} = 0 < \varepsilon$ 
+        
+        If $A$ is not diagonalizable, then we know that its eigenvalues are not distinct. By Hall Theorem B.7, every matrix is similar to an upper triangular matrix, i.e. $A = PTP^{-1}$ for some upper triangular matrix $T$. As $T$ is upper triangular, its eigenvalues are on the diagonal (call them $\lambda_1, \dots, \lambda_n$). 
+        
+        We may then construct a sequence of diagonal matrices $D_n$ with eigenvalues $\lambda_i + \varepsilon_i$ with $(\varepsilon_i)_n \to 0$ chosen such that $\lambda_i + \varepsilon_i \neq \lambda_j + \varepsilon_j$ for $i \neq j$. Then, since diagonal matrices are dense in $M_n(\C)$, $D_n \to T$ and $P^{-1}D_nP \to A$ $\qed$
+    \color{black}
+
+\vspace*{1in}
+
+3.  Consider the matrix
+\[
+A = \left(
+\begin{array}{cc}
+0 & -1 \\
+1 & 0
+\end{array}
+\right)
+\]
+Show that there is no sequence of real diagonalizable matrices converging to $A$.  (Hint:  Look at the discriminant of the characteristic polynomial)\\
+
+    \color{blue}
+        The characteristic polynomial of $A$ is $\lambda^2 + 1$, so the discriminant of the characteristic polynomial is $-4$. As the discriminant is negative, $A$ has no real eigenvalues. Thus, $A$ is not diagonalizable over $\R$. Further, as diagonal matrices are not dense in $M_n(\R)$, there is no sequence of real diagonalizable matrices converging to $A$ $\qed$
+    \color{black}
+
+\pagebreak
+4. For any $A \in M_{n}(\C)$ satisfying $||A - I_{n}|| < 1$, define the \emph{matrix logarithm} to be
+\[\log(A) = \sum_{m=1}^{\infty} (-1)^{m+1}\frac{1}{m}\left(A-I_{n}\right)^{m}\]
+Prove that $e^{\log A} = A \text{ and if in addition } ||A|| < \log 2 \text{ then } \log e^{A} = A$.
+
+    \color{blue}
+        If $A$ is diagonalizable, then $A = PDP^{-1}$ and $A - I = P(D - I)P^{-1}$. Then, 
+        \[(A - I)^m = P \begin{pmatrix} 
+            (\lambda_1 - 1)^m\\ 
+            & \ddots\\
+            && (\lambda_n - 1)^m
+        \end{pmatrix}P^{-1}\]
+        
+        Then since $\norm{A - I_n} < 1$, $\abs{\lambda_i - 1} < 1$ (Hall Th 2.7) so we may apply the usual analytic log function, 
+        \[\log A= \sum_{m=1}^{\infty} \frac{(-1)^{m+1}}{m} (A - I_n)^m = P \begin{pmatrix}
+            \log \lambda_1\\ 
+            & \ddots\\
+            & & \log \lambda_n
+        \end{pmatrix}P^{-1}\]
+        So by Hall Lemma 2.5, 
+        \[e^{\log A} = P\begin{pmatrix}
+            e^{\log \lambda_1}\\
+            & \ddots\\
+            & & e^{\log \lambda_n} 
+        \end{pmatrix}P^{-1} = P\begin{pmatrix}
+            \lambda_1\\
+            & \ddots\\
+            & & \lambda_n
+        \end{pmatrix}P^{-1} = A \]
+
+        In the case where $A$ is not diagonalizable, we simply need to invoke Problem 2 above and construct a sequence of diagonalizable matrices $A_n$ converging to $A$. When $\norm{A_n - I} < 1$, we have that $e^{\log A_n} = A_n$ and as $A_n \to A$, $e^{\log A_n} \to e^{\log A}$. Thus, $e^{\log A} = A$.
+
+        For the second part, we have that $\norm{A} < \log 2$ so by the sub-multiplicativity of the operator norm,
+        \begin{align*}
+            \norm{e^A - I} &\leq \norm{e^A} - \norm{I}\\ 
+                &= \norm{e^A} - 1\\ 
+                &= \norm{I + A + \frac{1}{2}A^2 + \dots} - 1\\ 
+                &\leq 1 + \norm{A} + \frac{1}{2}\norm{A^2} + \dots - 1\\ 
+                &\leq \log 2 + \frac{1}{2}(\log 2)^2 + \dots \\ 
+                &= e^{\log 2} - 1 = 2 - 1 = 1
+        \end{align*}
+        so $\norm{e^A - I} < 1$. 
+
+        Now we may apply exactly the same argument as above. First suppose $e^A$ is diagonalizable, then 
+        \[e^A = Pe^DP^{-1}\]
+        so (now since $\norm{e^A - I_n}< 1$), 
+        \[\log e^A = \sum_{m=1}^{\infty} \frac{(-1)^{m+1}}{m} (e^A - I_n)^m = P\begin{pmatrix}
+            \log(e^{\lambda_1})\\
+            & \ddots\\
+            & & \log(e^{\lambda_n})
+        \end{pmatrix}P^{-1}\]
+        and since $\norm{e^{\lambda_i} - 1} < 1$, 
+        \[e^{\log A} = P\begin{pmatrix}
+            \lambda_1\\ 
+            & \ddots\\
+            & & \lambda_n
+        \end{pmatrix}P^{-1} = A \qed\]
+    \color{black}
+\pagebreak
+
+5. Hall 2.6.5:  Calculate $e^{A}$ where $A \in M_{n}(\R)$ is defined below.  (Hint:  be careful when calculating!)  
+\[A = \left(
+\begin{array}{cc}
+a & b \\
+0 & d
+\end{array}
+\right)\]
+
+    \color{blue}
+        Notice first that $A = \begin{pmatrix}
+            a & 0\\
+            0 & d
+        \end{pmatrix} + \begin{pmatrix}
+            0 & b\\
+            0 & 0
+        \end{pmatrix}$ but 
+        \[\begin{pmatrix}
+            0 & b\\
+            0 & 0
+        \end{pmatrix} \begin{pmatrix}
+            a & 0\\ 
+            0 & d
+        \end{pmatrix} \neq \begin{pmatrix}
+            a & 0\\
+            0 & d
+        \end{pmatrix} \begin{pmatrix}
+            0 & b\\
+            0 & 0
+        \end{pmatrix}\]
+        so we \emph{cannot} say that $e^{A} = e^{S+N} = e^{S}e^{N}$. 
+
+        Instead, we will proceed by explicit terms: 
+        \begin{align*}
+            A &= \begin{pmatrix}
+                a & b\\
+                0 & d
+            \end{pmatrix}\\ 
+            A^2 &= \begin{pmatrix}
+                a^2 & b(a + d)\\
+                0 & d^2
+            \end{pmatrix}\\
+            A^3 &= \begin{pmatrix}
+                a^3 & b(a^2 + ad + d^2)\\
+                0 & d^3
+            \end{pmatrix}\\
+            A^4 &= \begin{pmatrix}
+                a^4 & b(a^3 + a^2d + ad^2 + d^3)\\
+                0 & d^4
+            \end{pmatrix}
+        \end{align*}
+
+        We notice that the diagonals are simply $a^n$ and $d^n$, while the upper right entry is the telescoping sum $b\left(\frac{a^{n-1} - b^{n-1}}{a - b}\right)$. 
+
+        So,
+        \begin{align*}
+            e^A &= I + A + \frac{1}{2}A^2 + \frac{1}{3!}A^3 + \dots\\ 
+            &= \begin{pmatrix}
+                1 & 0\\ 
+                0 & 1
+            \end{pmatrix} + \begin{pmatrix}
+                a & b\\
+                0 & d        
+            \end{pmatrix} + \frac{1}{2}\begin{pmatrix}
+                a^2 & b(a + d)\\
+                0 & d^2
+            \end{pmatrix} + \frac{1}{3!}\begin{pmatrix}
+                a^3 & b(a^2 + ad + d^2)\\
+                0 & d^3
+            \end{pmatrix} + \dots\\
+            &= \begin{pmatrix}
+                1 + a + \frac{a^2}{2} + \frac{a^3}{3!} + \dots & b + \frac{ab}{2} + \frac{a^2b}{3!} + \dots\\
+                0 & 1 + d + \frac{d^2}{2} + \frac{d^3}{3!} + \dots
+            \end{pmatrix}\\
+            &= \begin{pmatrix}
+                \sum_{n=1}^{\infty} \frac{a^n}{n!} & b\left(\frac{a^n - d^n}{a - d}\right)\\
+                0 & \sum_{n=1}^{\infty} \frac{d^n}{n!}
+            \end{pmatrix}\\ 
+            &= \boxed{\begin{pmatrix}
+                e^a & b\left(\frac{e^a - e^d}{a - d}\right)\\
+                0 & e^d
+            \end{pmatrix}}
+        \end{align*}
+    \color{black}
+
+\pagebreak
+6. For any matrix $A \in M_{n}(\C)$ define $\sin(A)$ and $\cos(A)$ as you would guess.
+\[
+\sin(A) = \sum_{n=0}^{\infty} (-1)^{n}\frac{1}{(2n+1)!}A^{2n+1} \text{ and } \cos(A) = \sum_{n=0}^{\infty} (-1)^{n}\frac{1}{(2n)!}A^{2n}
+\]
+Show that $\sin^{2}(A) + \cos^{2}(A) = I_{n}$ (Hint:  Show it works for diagonal matrices first).  \\
+
+    \color{blue}
+        \begin{align*}
+            \sin^2(A) &= \left(\sum_{n=0}^n (-1)^n \frac{1}{(2n+1)!} A^{2n+1}\right)^2\\ 
+                &= \left(A - \frac{1}{3!}A^3 + \frac{1}{5!}A^5 - \dots\right)\left(A - \frac{1}{3!}A^3 + \frac{1}{5!}A^5 - \dots\right)\\ 
+                &= A^2 + (-\frac{1}{3!}A^4 - \frac{1}{3!}A^4) + (\frac{1}{3!\, 3!}A^6 + \frac{1}{5!}A^6 + \frac{1}{5!}A^6) + (-\frac{1}{3!\, 5!}A^8 -\frac{1}{3!\, 5!}A^8) + \dots\\
+                &= A^2 -\frac{2}{3!}A^4 + \frac{1}{3!\, 3!}A^6 + \frac{2}{5!}A^6 + \dots\\ 
+                &= A^2 - \frac{1}{3}A^4 + \frac{2}{45}A^6 + \dots\\ 
+                &= \sum_{n=1}^{\infty} \frac{(-1)^{n+1}\, 2^{2n-1}}{(2n)!}A^{2n}\\            
+            \cos^2(A) &= \left(\sum_{n=0}^{\infty} \frac{1}{(2n)!} A^{2n}\right)^2\\ 
+                &= \left(I - \frac{1}{2}A^2 + \frac{1}{4!}A^4 - \frac{1}{6!}A^6 + \dots\right)\left(I - \frac{1}{2}A^2 + \frac{1}{4!}A^4 - \frac{1}{6!}A^6 + \dots\right)\\ 
+                &= I + (-\frac{1}{2}A^2 - \frac{1}{2}A^2) + (\frac{1}{2!\,2!}A^4 + \frac{1}{4!}A^4 + \frac{1}{4!}A^4) + (-\frac{1}{6!}A^6 - \frac{1}{6!}A^6 - \frac{1}{2!\, 4!}A^6 + \frac{1}{2!\, 4!})  + \dots\\
+                &= I - A^2 + \frac{3}{4!}A^4 - \frac{2}{6!}A^6 -\frac{2}{2!\, 4!}A^6 + \dots\\ 
+                &= I - A^2 + \frac{1}{3}A^4 - \frac{2}{45}A^6 + \dots\\
+                &= I + \sum_{n=1}^{\infty} \frac{(-1)^n\, 2^{2n-1}}{(2n)!}A^{2n}\\
+            \sin^2(A) + \cos^2(A) &= \sum_{n=1}^{\infty} \frac{(-1)^{n+1}\, 2^{2n-1}}{(2n)!}A^{2n} + I + \sum_{n=1}^{\infty} \frac{(-1)^n\, 2^{2n-1}}{(2n)!}A^{2n}\\ 
+                &= I - \sum_{n=1}^{\infty} \frac{(-1)^{n}\, 2^{2n-1}}{(2n)!}A^{2n} + \sum_{n=1}^{\infty} \frac{(-1)^n\, 2^{2n-1}}{(2n)!}A^{2n}\\
+                &= I \qed
+        \end{align*}
+    \color{black}
+
+\pagebreak
+7. Hall 2.6.11:  Show that for all $A \in M_{n}(\C)$, $\lim_{m\to \infty} \left(I_{n} + \frac{A}{m}\right)^{m} = e^{A}$.  (Hint:  Use matrix logarithms.) 
+    
+    \color{blue}
+        Suppose $A$ is diagonalizable ($A = PDP^{-1}$). Then
+        \[\lim_{m\to\infty} (I_n + \frac{A}{m})^m = \lim_{m\to \infty} (I_n + \frac{PDP^{-1}}{m})^m = \lim_{m\to\infty} P(\frac{D}{m} + I_n)^m P^{-1}\]
+        so the entries of $(\frac{D}{m} + I_n)^m$ look like 
+        \[(1 + \frac{\lambda_i}{m})^m\]
+        where $\lambda_i$ are the eigenvalues of $A$, i.e. 
+        \[\lim_{m\to\infty} (I_n + \frac{A}{m})^m = P\begin{pmatrix}
+            \lim_{m\to\infty} (1 + \frac{\lambda_1}{m})^m\\
+            & \ddots\\
+            & & \lim_{m\to\infty} (1 + \frac{\lambda_n}{m})^m
+        \end{pmatrix}P^{-1}\] 
+        But $\lim_{m\to\infty}(1 + \frac{\lambda_n}{m})^m$ is the definition of $e^{\lambda_n}$, so
+        \[\lim_{m\to\infty} (I_n + \frac{A}{m})^m = P\begin{pmatrix}
+            e^{\lambda_1}\\
+            & \ddots\\
+            & & e^{\lambda_n}
+        \end{pmatrix}P^{-1} = e^A\]
+
+        In the case where $A$ is not diagonalizable, we just need to invoke Problem 2 above and construct a sequence of diagonalizable matrices $A_n$ converging to $A$. So $e^{\log A} = A$ $\qed$
+
+    \color{black}
+
+\pagebreak
+8.  Show that there is no matrix $A \in M_{2}(\R)$ for which $e^{A} = B$ where 
+\[B = \left(
+    \begin{array}{cc}
+    -1 & 1 \\
+    0 & -1
+    \end{array}
+\right)\]
+(Note this shows the matrix exponential is not surjective in the real case.)
+
+    \color{blue}
+        We seek a matrix $B$ for which $\log B = A$. Suppose that $\exists\, A \in M_2(\R)$ s.t. $e^A = B$. 
+        
+        First notice that the eigenvalues of $B$ are $\pm 1$ so $B$ is diagonalizable. Then $B = PDP^{-1} \implies e^A = PDP^{-1}$. So $A = \log B = P\log D P^{-1}$. However, 
+        \begin{align*}
+            \log D &= \log \begin{pmatrix}
+                1 & 0\\ 
+                0 & -1
+            \end{pmatrix} = \begin{pmatrix}
+                    \log (1) & 0\\ 
+                    0 & \log (-1)
+                \end{pmatrix} 
+        \end{align*}
+
+        But $\log -1$ is not defined in $\R$, so there is no matrix $A$ such that $e^A = B$ $\qed$
+    \color{black}
+
+
+\end{document}

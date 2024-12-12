@@ -1,0 +1,380 @@
+\documentclass[12pt]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% PACAKAGES %%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%% GRAPHICS/FONTS
+\usepackage{amsmath,amsfonts,amssymb,graphicx,tikz-cd,pgfplots}
+
+%%%%%%%%%%%%%% FORMATTING
+\usepackage{geometry,titlesec,hyperref,xhfill,setspace,float,fancyhdr}
+
+%%%%%%%%DEFINING COMMANDS
+\usepackage{xifthen}
+
+%%%%%%%%%TIKZ STUFF
+\usetikzlibrary{positioning,calc}
+\usetikzlibrary{decorations.markings}
+\usepgfplotslibrary{polar}
+\usepgflibrary{shapes.geometric}
+\usepgfplotslibrary{fillbetween}
+
+%%%%%%FOR THE GRAPHS
+\pgfplotsset{my style/.append style={axis x line=middle, axis y line=
+middle, xlabel={$x$}, ylabel={$y$}, axis equal }}
+
+%%%%%%MARGINS
+\geometry{
+a4paper,
+left=0.25in,
+right=0.25in,
+top=0.25in,
+bottom=0.75in
+}
+
+%%%%%%MAKES THE HEADER AND FOOTER FANCY
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\pagestyle{fancy}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% COMMANDS %%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\underscore}{\underline{\hspace{2mm}}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Aut}{\text{Aut}}
+\newcommand{\GL}{\text{GL}}
+\newcommand{\SL}{\text{SL}}
+\newcommand{\SO}{\text{SO}}
+\newcommand{\PGL}{\text{PGL}}
+\newcommand{\Stab}{\text{Stab}}
+\newcommand{\End}{\text{End}}
+\newcommand{\lra}{\longrightarrow}
+
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\sll}{\mathfrak{sl}}
+\newcommand{\pgl}{\mathfrak{pgl}}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\h}{\mathfrak{h}}
+\newcommand{\n}{\mathfrak{n}}
+\newcommand{\la}{\mathfrak{a}}
+\newcommand{\lb}{\mathfrak{b}}
+
+
+\newcommand{\RP}{\mathbb{R}P}
+\newcommand{\K}{\emph{K}}
+
+\newcommand{\ihat}{\hat{\textbf{i}}}
+\newcommand{\jhat}{\hat{\textbf{j}}}
+\newcommand{\khat}{\hat{\textbf{k}}}
+
+\newcommand{\brak}[1]{\left\langle #1 \right\rangle}
+\newcommand{\Ad}{\text{Ad}}
+\newcommand{\ad}{\text{ad}}
+\newcommand{\tr}{\text{tr}\,}
+
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\rad}{\text{rad }}
+\newcommand{\biject}{\hookrightarrow \hspace{-8pt} \rightarrow}
+
+
+%TEXT COMMAND
+\newcommand{\T}[1][]{\text{#1}}
+\newcommand{\TB}[1][]{\mathbb{#1}}
+
+\newcommand{\xlra}[1][]{%
+  \ifthenelse{\isempty{#1}}%
+    {\xrightarrow{\phantom{,,,,,,}}}% if #1 is empty
+    {\xrightarrow{\phantom{,,}#1\phantom{,,}}}% if #1 is not empty
+}
+
+\setlength{\parskip}{10pt}
+\setlength{\parindent}{0pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%BEGINNING OF ACTUAL DOCUMENT %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%TITLE______REMEMBER TO REGULARLY CHANGE THIS!!!!
+\title{Math 1820A Spring 2024 - Homework 6}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-0.5in}
+%%%%%%%%%%%%%%%%
+\begin{spacing}{1.5}
+\noindent \textbf{Instructions:}  This assignment is worth twenty points.  Please complete the following problems assigned below.  Submissions with insufficient explanation may lose points due to a lack of reasoning or clarity.  If you are handwriting your work, please ensure it is readable and well-formatted for the grader. 
+
+Be sure when uploading your work to \textbf{assign problems to pages}.  Problems with pages not assigned to them \textbf{may not be graded}.  
+\end{spacing}
+
+%%%%%%%%%%%%%%%%%%
+\vspace{10mm}\noindent
+\textbf{Textbook Problems: }\\
+
+\noindent
+\textbf{Additional Problems:}   For these problems if you see an $S$ in front of a group, you can assume it means determinant 1, e.g. all elements of $SO(3,\R)$ and $SO(2,1)$ have determinant 1.\\ 
+
+1.  Let $\n, \h,$ and $\g$ be Lie-algebras that fit into the short exact sequence $\n \lra \g \lra \h$.  Finish our proof in class that $\g$ is solvable if and only if both $\n$ and $\h$ are solvable by showing if both $\n$ and $\h$ are solvable, so is $\g$.  
+
+    \color{blue}
+        Suppose both $\n$ and $\h$ are solvable. Then we have that 
+        \[1 = \n_k \triangleleft \n_{k-1} \triangleleft \dots \triangleleft \n_1 \triangleleft \n\]
+        and 
+        \[1 = \h_m \triangleleft \h_{m-1} \triangleleft \dots \triangleleft \h_1 \triangleleft \h\]
+        where $\n_i/\n_{i+1}$ and $\h_j/\h_{j+1}$ are abelian. 
+
+        Since we have the short exact sequence, we can say 
+        \[\n/[\n, \n] \hookrightarrow \g/[\g, \g] \twoheadrightarrow \h/[\h, \h]\]
+        and since $\n/[\n, \n]$ and $\h/[\h, \h]$ are abelian, the commutator subgroups fit into the derived sequences above. 
+
+        Thus denote $\g_{n+1} = \g_n/[\g_n, \g_n]$. Then we have that
+        \[\begin{tikzcd}
+            \n \arrow[r, hook] \arrow[two heads]{d} & \g \arrow[r, two heads] \arrow[two heads]{d} & \h\arrow[two heads]{d}\\ 
+            \n_1 \arrow[r, hook] \arrow[dotted]{d} & \g_1 \arrow[r, two heads]{r} \arrow[dotted]{d} & \h_1 \arrow[dotted]{d}\\ 
+            \n_n \arrow[r, hook] & \g_n \arrow[r, two heads] & \h_n
+        \end{tikzcd}\]
+
+        However, since $\n$ and $\h$ are solvable, we have that $\n_n = 0 = \h_n$ for $n \geq \max\{k, m\}$. Then we have that 
+        \[0 \hookrightarrow \g_n \twoheadrightarrow 0\]
+        so $\g_n = 0$ and $\g$ is solvable. $\qed$
+    \color{black}
+
+
+\pagebreak
+
+2.  A \emph{derivation} of a Lie-algebra $\n$ is any linear map $D: \n \lra \n$ satisfying $D[X,Y] = [DX,Y] + [X,DY]$ for all $X,Y \in \n$.  For example, and $\ad_{X}(Y) := [X,Y]$ is a derivation for any $X \in \n$.  A \emph{representation} of a Lie-algebra $\h$ into $\n$ is a Lie-algebra homomorphism $\phi: \h \lra \gl(\n)$ where $\gl(\n)$ denotes the Lie-algebra of all derivations.  The Lie bracket on $\gl(\n)$ is the difference of function composition: $[A,B]:=A\circ B - B\circ A$.
+
+Let $H$ and $N$ be groups and $\Phi: H \lra \Aut(N)$ be a homomorphism.  Use this to construct a representation of a Lie-algebra of $\h$ into $\gl(\n)$.  
+
+    \color{blue}
+        Since $\Phi: H \to \Aut(N)$, $h \mapsto \{\psi(g): N \biject N\}$ is a lie group homomorphism, we can calculate the lie algebra homomorphism $\phi: \h \to \gl(\n)$ by 
+        \[\phi(X) = \frac{d}{dt}\bigg\vert_{t=0} \Phi(e^{tX})\]
+        and $\frac{d}{dt}\bigg\vert_{t=0} \Phi(e^{tX})$ is an endomorphism $\n \to \n$ so $\phi$ is a lie algebra homomorphism. $\qed$
+
+    \color{black}
+
+\pagebreak
+3.  Let $\h$ and $\n$ be Lie-algebras, and $\phi: \h \lra \gl(\n)$ be a Lie-algebra representation.  Consider the \emph{vector space homomorphisms} $i_{\n}: \n \lra \n \oplus \h$ and $i_{\h}: \h \lra \n\oplus \h$ defined by the embeddings 
+\[i_{\n}(X) = (X,0) \text{ and } i_{\h}(Y) = (0,Y) \]
+Prove there exists a unique \emph{Lie-algebra} on $\n\oplus \h$ for which both $i_{\n}$ and $i_{\h}$ are Lie-algebra homomorphisms and $[(0,Y),(X,0)] := \phi(Y)(X)$ for all $X \in \n$ and $Y \in \h$.  We denote this Lie-algebra by $\n \oplus_{\phi} \h$ and call it the semi-direct product of $\n$ and $\h$ over $\phi$.  With this Lie-algebra equipped on $\n\oplus \h$, prove that the sequence of Lie-algebras in Equation \ref{eq1} is split-exact.
+\begin{equation}\label{eq1}
+\n \xrightarrow{\phantom{=}i_{\n}\phantom{=}} \n\oplus_{\phi} \h \xrightarrow{\phantom{=}p\phantom{=}} \h
+\end{equation}
+where $p: \n\oplus_{\phi} \h \lra \h$ denotes projection $p(X,Y) = Y$
+
+    \color{blue}
+        To be lie algebra homomorphisms, the vector space homomorphisms must satisfy 
+        \[\psi([X, Y]) = [\psi(X), \psi(Y)]\]
+        for all $X$ and $Y$. 
+
+        This introduces the conditions, 
+        \[i_{\n}([X, Y]) = [i_{\n}(X), i_{\n}(Y)] \implies ([X, Y], 0) = [(X, 0), (Y, 0)]\]
+        and 
+        \[i_{\h}([X, Y]) = [i_{\h}(X), i_{\h}(Y)] \implies (0, [X, Y]) = [(0, X), (0, Y)]\]
+
+        \vspace*{10pt}
+        \hrule
+        \vspace*{10pt}
+
+        Clearly, $\text{im } i_{\n} = (X, 0) = \ker p$ and further, $p$ admits the section $\sigma = i_{\h}$: 
+        \[p(i_{\h}(Y)) = p(0, Y) = Y\]
+        so the sequence is split exact.
+    \color{black}
+
+
+\pagebreak
+4.  Let $\g$ be a Lie-algebra and assume one can find an \emph{ideal} $\n \leq \g$ and a \emph{sub-algebra} $\h \leq \g$ for which $\g = \n \oplus \h$ as \emph{vector spaces}.  Prove that $\g$ is isomorphic to a semi-direct product of $\n$ and $\h$.  Exhibit such an $\n$ and $\h$ in the case where $\g = \mathfrak{i}$ is the Lie-algebra of $\text{Isom}^{+}(\R^{2})$.  
+\[
+\mathfrak{i} = \left\{ \left( 
+\begin{array}{ccc}
+0 & -z & x \\
+z & 0 & y \\
+0 & 0 & 0
+\end{array}
+\right) \, \Bigg| \, x,y,z  \in \R \right\}
+\]
+
+    \color{blue}
+        We know that $\g = \n \oplus \h$ as vector spaces. To show that $\g \simeq \n \rtimes_{\phi} \h$, it suffices to show that there exists a split exact sequence 
+        \[\n \hookrightarrow \g \twoheadrightarrow \h\]
+
+        Since $\n$ is an ideal of $\g$, we have the inclusion map $i_{\n}: \n \hookrightarrow \g$. For the projection, it suffices to define $\h = \g/\n$ and $p: \g \to \h$ as the quotient map. Then, as normal, the sequence is split exact.
+
+        \vspace*{10pt}
+        \hrule
+        \vspace*{10pt}
+
+        In HW 3, we proved that $\text{Isom}^+(\R^2) \simeq \R^2 \rtimes_{\phi} \R$ for $\phi: \R \to \Aut(\R^2)$ by the map $\phi(t) = \begin{pmatrix}
+            \cos t & -\sin t\\
+            \sin t & \cos t
+        \end{pmatrix}$.
+
+        Therefore, as a vector space $\mathfrak{i} = \R^2 \oplus \R$ so we can take $\n = \R^2$ and $\h = \R$ and from Part 1, we have that $\mathfrak{i} \simeq \R^2 \rtimes \R$. $\qed$
+    \color{black}
+
+       
+
+\pagebreak
+
+5.  Use the Killing form to distinguish $\mathfrak{i}$ and $\mathfrak{e}(1,1)$ as Lie-algebras, where $\mathfrak{e}(1,1)$ is the Lie-algebra 
+\[
+\mathfrak{e}(1,1) = \left\{ \left( 
+\begin{array}{ccc}
+0 & z & x \\
+z & 0 & y \\
+0 & 0 & 0
+\end{array}
+\right) \, \Bigg| \, x,y,z  \in \R \right\}
+\] 
+
+    \color{blue}
+        In class, we calculated the Killing form of $\mathfrak{e}(1, 1)$ with lie algebra $[X, Y] = 0$, $[Z, X] = Y$, $[Z, Y] = X$ as 
+        \[\begin{pmatrix}
+            \brak{X, X} & \brak{X, Y} & \brak{X, Z} \\
+            & \brak{Y, Y} & \brak{Y, Z} \\
+            & & \brak{Z, Z}
+        \end{pmatrix} = \begin{pmatrix}
+            0 & 0 & 0 \\
+            & 0 & 0 \\
+            & & 2
+        \end{pmatrix}\]
+
+        By similar process, we can calculate the Killing form of $\mathfrak{i}$. 
+
+        Let
+        \[Z = \begin{pmatrix}
+            0 & -1 & 0\\ 
+            1 & 0 & 0\\
+            0 & 0 & 0
+        \end{pmatrix}, Y = \begin{pmatrix}
+            0 & 0 & 0\\ 
+            0 & 0 & 1\\
+            0 & 0 & 0
+        \end{pmatrix}, X = \begin{pmatrix}
+            0 & 0 & 1\\ 
+            0 & 0 & 0\\
+            0 & 0 & 0
+        \end{pmatrix}\] 
+        so that $[X, Y] = 0$, $[Z, X] = Y$, $[Z, Y] = -X$. 
+
+        Then, $\g^1 = [\g, \g] = \brak{X, Y}$, $\g^2 = [\g^1, \g^1] = \brak{-X, Y} = 0$ so $\g$ is solvable. 
+
+        Thus, 
+        \begin{align*}
+            B(X, X) &= \tr(\ad_X \circ \ad_X) = \tr([\underbrace{X}_{\in \g^1}, \underbrace{[X, \cdot]}_{\in \g^1}]) = \tr 0 = 0\\ 
+            B(X, Y) &= \tr([\underbrace{X}_{\in \g^1}, \underbrace{[Y, \cdot]}_{\in \g^1}]) = \tr 0 = 0\\ 
+            B(X, Z) &= \tr([X, [Z, \cdot]]) = \tr([X, \brak{-X, Y}]) = 0\\ 
+            B(Y, Y) &= \tr([Y, [Y, \cdot]]) = \tr([Y, \brak{X}]) = 0\\ 
+            B(Y, Z) &= \tr([Y, [Z, \cdot]]) = \tr([Y, \brak{Y, -X}]) = 0\\
+            B(Z, Z) &= \tr([Z, [Z, \cdot]]) = \tr([Z, \brak{-X, Y}]) = \tr(\brak{-X, -Y}) = -2
+        \end{align*}
+
+        Therefore, the signature of the Killing form of $\mathfrak{i}$ is $(0, 0, -)$ but the signature of the Killing form of $\mathfrak{e}(1, 1)$ is $(0, 0, +)$ so they are not isomorphic. $\qed$ 
+    \color{black}
+\pagebreak
+
+6.  Prove that $\g$ is solvable if and only if there exists a sequence of subalgebras 
+\begin{equation}\label{eq2}
+0 = \h_{n} < \h_{n-1} < \hdots < \h_{1} < \h_{0} = \g
+\end{equation}
+such that each $\h_{i+1}$ is an ideal of $\h_{i}$ and each $\h_{i}/\h_{i+1}$ is abelian.
+
+    \color{blue}
+        Suppose $\g$ is solvable. Then, denote 
+        \[\h_n := [\h^{n-1}, \h^{n-1}]\]
+        so $\h_0 = \g$ and $\h_n = 0$ for some $n$. 
+
+        Then, $\h_{i+1}$ is an ideal of $\h_i$ since 
+        \[[\h_{i+1}, \h_i] = [[\h_i, \h_i], \h_i] \subset [\h_i, \h_i] \subset \h_i\]
+        
+        Further, $\h_i/\h_{i+1}$ is in fact the abelianization of $\h_i$ since $\h_{i+1} = [\h_i, \h_i]$ so we have a sequence of subalgebras satisfying the conditions.
+
+        Conversely, suppose we have a sequence of subalgebras satisfying the conditions and let $\h_0 = \g$ and $\h_n = 0$ for some $n$. Then, since each $\h_{i+1}$ is an ideal of $\h_i$ we can take quotients. Now we can induct on $n$: since $[\h_n, \h_n] = 0$ we know that $h_n$ is solvable. 
+
+        Suppose $\h_i$ is solvable. Then $\h_i \subset \h_{i-1}$ and 
+        \[\h_i \hookrightarrow \h_{i-1} \twoheadrightarrow \h_{i-1}/\h_i\]
+        since $\h_{i-1}/\h_i$ is abelian, it is nilpotent. Since it is nilpotent, it is solvable. Then since $\h_i$ and $\h_{i-1}/\h_i$ are solvable, $\h_{i-1}$ is solvable. Therefore, $\h_0 = \g$ is solvable. $\qed$
+    \color{black}
+
+
+\pagebreak 
+
+7.  Prove that the sum of solvable ideals is solvable.  (Hint:  Use the 2nd isomorphism theorem for Lie-algebras which states that for two ideals $\la, \lb \leq \g$ one has that $(\la + \lb)/\la \simeq \lb / \la \cap \lb$).  Use this to prove that there exists a \emph{unique} maximal solvable ideal inside a finite dimensional Lie-algebra.  We call this maximal ideal the \emph{radical} of $\g$, and is frequently denoted $\text{rad } \g$.  Prove that $\g / \text{rad } \g$ is semi-simple.  
+
+    \color{blue}
+        Let $\la, \lb \subseteq \g$ be solvable ideals.
+
+        We can create the short exact sequence by the standard inclusion and quotient maps: 
+        \[\la \hookrightarrow \la + \lb \twoheadrightarrow (\la + \lb)/\la\]
+        
+        Then, $\la + \lb$ is solvable if and only if $\la$ and $(\la + \lb)/\la$ are solvable. We already have that $\la$ is solvable so it suffices to show that $(\la + \lb)/\la$ is solvable.
+        
+        By the 2nd isomorphism theorem, $(\la + \lb)/\la \simeq \lb/(\la \cap \lb)$ so we just need to show that $\lb/(\la \cap \lb)$ is solvable. Trivially, $\lb \cap \la$ is a subgroup of $\lb$ so it is solvable since $\lb$ is solvable.
+       
+        Therefore, $\la + \lb$ is solvable. $\qed$ 
+
+        Now consider the sum of all solvable ideals $M$ in $\g$. By the above, this is a solvable ideal. Further, this sum is maximal since for any solvable ideal $\la \subset \g$, $\la \subset M$. Finally, this maximal ideal is unique since if $M$ and $N$ are maximal solvable ideals, then $M + N$ is a solvable ideal containing both $M$ and $N$ so $M + N = M = N$.
+
+        \vspace*{10pt}
+        \hrule 
+        \vspace*{10pt}
+
+        Let $\rad \g$ be the unique maximal solvable ideal in $\g$. We seek to show that $\g/\rad \g$ is semi-simple.
+
+        By definition, a lie algebra is semi-simple if it has no non-zero solvable ideals. Assume $\g/\rad \g$ contains a non-zero solvable ideal $A$. Then consider the pre-image of $A$ under the quotient map $\pi: \g \to \g/\rad \g$. $pi^{-1}(A)$ is a solvable ideal of $\g$ since 
+        \[A = \pi^{-1}(A)/\rad \g\]
+        and we have that $A$ and $\rad \g$ are solvable. But then by uniqueness and maximality of $\rad \g$, $\pi^{-1}(A) \subseteq \rad \g$ so $\pi^{-1}(A) = \rad\g \implies A = \rad \g/\rad\g = 0$. This is a contradiction so $\g/\rad \g$ is semi-simple. $\qed$
+
+    \color{black}
+
+\pagebreak
+
+\textbf{Bonus: [4 pts]}  Let $B_{4}$ denote the 4$\times $4-upper triangular matrices with 1's along the main diagonal.  Express $G = B_{4}/Z(B_{4})$ as the semi-direct product familiar groups and obtain a faithful representation of $G \lra \Aut(\R^{n})$ for some sufficiently large $n$.  
+
+    \color{blue}
+        Let 
+        \[B_4 = \begin{pmatrix}
+            1 & a & b & c\\
+            0 & 1 & d & e\\
+            0 & 0 & 1 & f\\
+            0 & 0 & 0 & 1 
+        \end{pmatrix}\]
+
+        Then, the center of $B_4$ is the set of all matrices of the form
+        \[Z(B_4) = \begin{pmatrix}
+            1 & 0 & 0 & x\\
+            0 & 1 & 0 & 0\\
+            0 & 0 & 1 & 0\\
+            0 & 0 & 0 & 1
+        \end{pmatrix}\]
+        
+        Consider the map $\phi: B_4 \to \R^5$ given by 
+        \[\phi\begin{pmatrix}
+            1 & a & b & c\\
+            0 & 1 & d & e\\
+            0 & 0 & 1 & f\\
+            0 & 0 & 0 & 1
+        \end{pmatrix} = (a, b, d, e, f)\]
+
+        Clearly, $\phi$ is surjective and $\ker \phi = Z(B_4)$. Then, by the first isomorphism theorem, $B_4/Z(B_4) \simeq \R^5$.
+
+        Therefore, we can create the split exact sequence 
+        \[\R^3 \hookrightarrow \R^5 \twoheadrightarrow \R^2\]
+        where $p: \R^3 \to \R^5$ is given by $p(a, b) = (a, b, 0, 0, 0)$ and $i: \R^5 \to \R^2$ is given by $i(a, b, c, d, e) = (a, b)$. So $\ker p = 
+
+    
+
+
+    \color{black}
+
+\end{document}

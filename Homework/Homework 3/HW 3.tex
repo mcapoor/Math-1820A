@@ -1,0 +1,528 @@
+\documentclass[11pt]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% PACAKAGES %%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%% GRAPHICS/FONTS
+\usepackage{amsmath,amsfonts,amssymb,graphicx,tikz-cd,pgfplots}
+
+%%%%%%%%%%%%%% FORMATTING
+\usepackage{geometry,titlesec,hyperref,xhfill,float,fancyhdr}
+\pagestyle{fancy}
+\usepackage[onehalfspacing]{setspace}
+
+%%%%%%%%DEFINING COMMANDS
+\usepackage{xifthen}
+
+%%%%%%%%%TIKZ STUFF
+\usetikzlibrary{positioning,calc}
+\usetikzlibrary{decorations.markings}
+\usepgfplotslibrary{polar}
+\usepgflibrary{shapes.geometric}
+\usepgfplotslibrary{fillbetween}
+
+%%%%%%FOR THE GRAPHS
+\pgfplotsset{my style/.append style={axis x line=middle, axis y line=
+middle, xlabel={$x$}, ylabel={$y$}, axis equal }}
+\pgfplotsset{compat=1.18}
+
+%%%%%%MARGINS
+\renewcommand{\headrulewidth}{0pt} 
+\geometry{
+  letterpaper,
+  left=0.5in,
+  right=0.5in,
+  top=0.5in,
+  bottom=0.5in
+}
+\setlength{\parskip}{0pt}
+\setlength{\parindent}{0pt}
+
+%%%%%%MAKES THE HEADER AND FOOTER FANCY
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\pagestyle{fancy}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% COMMANDS %%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\underscore}{\underline{\hspace{2mm}}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Aut}{\text{Aut}}
+\newcommand{\GL}{\text{GL}}
+\newcommand{\SO}{\text{SO}}
+\newcommand{\PGL}{\text{PGL}}
+\newcommand{\Stab}{\text{Stab}}
+\newcommand{\End}{\text{End}}
+\newcommand{\lra}{\longrightarrow}
+
+\newcommand{\RP}{\mathbb{R}P}
+\newcommand{\K}{\emph{K}}
+
+\newcommand{\ihat}{\hat{\textbf{i}}}
+\newcommand{\jhat}{\hat{\textbf{j}}}
+\newcommand{\khat}{\hat{\textbf{k}}}
+
+\newcommand{\gf}{\mathfrak{g}}
+\newcommand{\tr}{\text{tr}\,}
+\newcommand{\qed}{\quad \blacksquare}
+
+%TEXT COMMAND
+\newcommand{\T}[1][]{\text{#1}}
+\newcommand{\TB}[1][]{\mathbb{#1}}
+
+\newcommand{\xlra}[1][]{%
+  \ifthenelse{\isempty{#1}}%
+    {\xrightarrow{\phantom{,,,,,,}}}% if #1 is empty
+    {\xrightarrow{\phantom{,,}#1\phantom{,,}}}% if #1 is not empty
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%BEGINNING OF ACTUAL DOCUMENT %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%TITLE______REMEMBER TO REGULARLY CHANGE THIS!!!!
+\title{Math 1820A Spring 2024 - Homework 3}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-0.5in}
+%%%%%%%%%%%%%%%%
+
+\noindent \textbf{Instructions:}  This assignment is worth twenty points.  Please complete the following problems assigned below.  Submissions with insufficient explanation may lose points due to a lack of reasoning or clarity.  If you are handwriting your work, please ensure it is readable and well-formatted for the grader.
+
+Be sure when uploading your work to \textbf{assign problems to pages}.  Problems with pages not assigned to them \textbf{may not be graded}.  
+
+
+%%%%%%%%%%%%%%%%%%
+\vspace{10mm}\noindent
+\textbf{Textbook Problems: }  
+\vspace{10mm}\noindent
+
+\noindent
+\textbf{Additional Problems:}   For these problems if you see an $S$ in front of a group, you can assume it means determinant 1, e.g. all elements of $SO(3,\R)$ and $SO(2,1)$ have determinant 1.
+\vspace{10mm}\noindent
+
+1.  Recall in class we defined the Lie-algebra of a group $G \subset \GL(n,\C)$ to be 
+\[\mathfrak{g} = \{B \in M_{n}(\C) \, | \, B = \gamma'(0) \text{ where }\gamma \text{ is a smooth path in }G\text{ satisfying }\gamma(0) = 1\}
+\]
+Prove there is a one-to-one correspondence between one-parameter subgroups of $G$ and $\mathfrak{g}$.  Note this says that every one-parameter subgroup is in fact exponential.  \\
+
+	\color{blue}
+		Let $A(t)$ be a one-parameter subgroup of $G$. By definition, it satisfies 
+		\begin{enumerate}
+			\item $A$ is continuous 
+			\item $A(0) = 1$
+			\item $A(t+s) = A(t)A(s)$
+		\end{enumerate}
+
+		By Hall Th. 2.13, there exists a unique $n \times n$ complex matrix $X$ such that 
+		\[A(t) = e^{tX}\]
+
+		Differentiating with respect to $t$ and evaluating at $t=0$, we have 
+		\[A'(0) = Xe^{(0)X} = X\]
+		i.e. $X \in M_n(\C)$ and $X = A'(0)$ where $A$ is a smooth path in $G$ satisfying $A(0) = 1$, so $X \in \gf$.  
+
+		By the uniqueness of $X$, we have a one-to-one correspondence between one-parameter subgroups of $G$ and $\gf$. $\qed$
+	\color{black}
+
+\pagebreak
+
+2.  Explain briefly why if we have a smooth path $\gamma : \R \to G$ so that $\gamma(0) = 1$, that we may approximate $\gamma$ by a one-parameter subgroup up to first-order.  Note this means that we may define 
+\[\mathfrak{g} = \{B \in M_{n}(\C) \, | \, \gamma(t) = e^{tB} \text{ is a smooth path in }G\}\]
+
+	\color{blue}
+		Since it is smooth and $\gamma(0) = 1$, we may approximate $\gamma$ by its first order Maclaurin polynomial 
+		\[\gamma(t) \approx \gamma(0) + t\gamma'(0) = 1 + t\gamma'(0)\] 
+
+		Notice, however, that up to first order, this is exactly $\exp(t\gamma'(0))$, a one parameter subgroup. Therefore, $e^{tB}$ where $B = \gamma'(0)$ is a good approximation for $\gamma$. 
+	\color{black}
+
+\pagebreak	
+
+3.  Let $G = \SO(2,1)$ be the group of determinant 1 matrices in $\GL(3,\R)$ such that $(Av,Aw) = (v,w)$ where $(v,w)$ is the Lorentzian product with signature $(+,+,-)$.  Calculate $\mathfrak{g}$, and find a basis for $\mathfrak{g}$.  Write out an interesting exponential to get a neat one-parameter family in $G$.\\
+	
+	\color{blue}
+		From Hall 2.5.6, a matrix $A$ is in $O(2,1)$ if and only if $A^{T}gA = g$ (or equivalently, $g^{-1}A^Tg= A^{-1}$) where 
+		\[g = \begin{pmatrix}
+			1 & 0 & 0\\
+			0 & 1 & 0\\
+			0 & 0 & -1
+		\end{pmatrix}\]
+
+		Then for $X$ a $3\times 3$ matrix, we have $X \in \gf$ if and only if $\exp(tX) \in \SO(2,1)$, i.e. 
+		\[g^{-1}e^{tX^T}g = A^{-1}\]
+		notice, however, that 
+		\[g^2 = I \implies g = g^{-1}\]
+		so we have 
+		\[g^{-1}e^{tX^T}g = ge^{tX^T}g = e^{tgX^Tg} = e^{-tX}\]
+		This condition holds for all $t$ if $gX^Tg = -X$.
+
+		Adding the condition that $\det(A) = 1$, we have $\tr X = 0$. Thus, 
+		\[\gf = \{X \in M_3(\R) \; | \; gX^Tg = -X \text{ and } \tr X = 0\}\]
+
+		These are matrices of the form 
+		\[\begin{pmatrix}
+			0 & -a & b\\
+			a & 0 & c\\
+			b & c & 0
+		\end{pmatrix}\]
+		so we can introduce the basis 
+		\[A = \begin{pmatrix}
+			0 & -1 & 0\\
+			1 & 0 & 0\\
+			0 & 0 & 0
+		\end{pmatrix}, \quad B = \begin{pmatrix}
+			0 & 0 & 1\\
+			0 & 0 & 0\\
+			1 & 0 & 0
+		\end{pmatrix}, \quad C = \begin{pmatrix}
+			0 & 0 & 0\\
+			0 & 0 & 1\\
+			0 & 1 & 0
+		\end{pmatrix}\]
+		and then find that 
+		\begin{align*}
+			[A, B] &= C\\
+			[A, C] &= -B\\
+			[B, C] &= -A
+		\end{align*}
+
+		Then notice that 
+		\begin{align*}
+			\exp(tA) &= I + tA + \frac{1}{2}t^2A^2 - \frac{1}{3!}t^3A - \frac{1}{4!}t^4A^2 + \frac{1}{5!}t^5A + \frac{1}{6!}t^6A^2 + \dots\\ 
+				&= A\sin(t) - A^2\cos(t)\\ 
+				&= \begin{pmatrix}
+					\cos(t) & -\sin(t) & 0\\
+					\sin(t) & \cos(t) & 0\\
+					0 & 0 & 1
+				\end{pmatrix}
+		\end{align*} 
+	\color{black}
+
+\textbf{Bonus: [3 pts]}  In the context of Problem 3, prove that a vector $v \in T_{p}H^{+}$ if and only if $(v,p) = 0$. 
+\pagebreak
+
+4.  Prove that the linear action of $G$ on $\R^{3}$ in Problem 3 preserves the set $S = \{p \in \R^{3} \, | \, (p,p) = -1\}$.  Let $H = \Stab(p)$ where $p = (0,0,1)$.  Calculate a basis for its Lie-algebra $\mathfrak{h}$.\\
+
+	\color{blue}
+		Let $p = (x, y, z) \in \R^3$. Then the set of points $S$ is given by the set of points for whom 
+		\[(p, p) = x^2 + y^2 - z^2 = -1\]
+
+		From calculus, this is a hyperboloid of two sheets. Problem 3 shows that the action of $G$ is rotations in 3-space. Clearly, the linear action of $G$ preserves $S$ since the hyperboloid is symmetric about the $z$-axis. 
+
+		In fact, $H$ is given by precisely the one-parameter family from Problem 3: 
+		\[\begin{pmatrix}
+			\cos(t) & -\sin(t) & 0\\
+			\sin(t) & \cos(t) & 0\\
+			0 & 0 & 1
+		\end{pmatrix} \begin{pmatrix}
+			0\\
+			0\\
+			1
+		\end{pmatrix} = \begin{pmatrix}
+			0\\ 
+			0\\
+			1
+		\end{pmatrix}\]
+		
+		In problem 3, we showed that $\exp(tA) = \begin{pmatrix}
+			\cos(t) & -\sin(t) & 0\\
+			\sin(t) & \cos(t) & 0\\
+			0 & 0 & 1
+		\end{pmatrix}$ for $A = \begin{pmatrix}
+			0 & -1 & 0\\
+			1 & 0 & 0\\
+			0 & 0 & 0
+		\end{pmatrix}$. Since $H$ is a one parameter family, a basis for $\mathfrak{h}$ is given simply by $\{A\}$.
+
+	\color{black}
+
+\pagebreak
+5.  Recall the construction of a semi-direct product.  Let $N$ and $H$ be groups, and let $\phi:  H \lra\Aut(N)$ be a group homomorphism.  Form the semi-direct product $G = N\rtimes_{\phi} H$ to the following.  As a \emph{set}, $G$ is simply $N \times H$.  As a \emph{group}, the group law is
+\[(n,h)(a,b) := (n\phi_{h}(a),hb)\]
+
+Prove that $N$ is a normal subgroup of $G$, and that $G/N \simeq H$.  In fact, show that there exists a \emph{section} $q$ in the short exact sequence
+\[N \xrightarrow{i} G \xrightarrow{q} H\]
+
+That is, show there exists a $\sigma : H \lra G$ such that $q\sigma = 1_{H}$.  \\
+
+	\color{blue}
+		$N$ is normal in $G$ iff for all $n \in N$ and $g \in G$, $gng^{-1} \in N$. Let $n \in N$ and $g = (n', h) \in G$. 
+
+		First, we need to embed $n \mapsto (n, 1) \in G$. Then notice that the inverse of an element $(a, b) \in G$ is given by $(\phi_b^{-1}(a^{-1}), b^{-1})$: 
+		\[(a, b)(\phi_b^{-1}(a^{-1}), b^{-1}) = (a\phi_b(\phi_b^{-1}(a^{-1})), bb^{-1}) = (aa^{-1}, bb^{-1}) = (a, b)\]
+
+		Now taking conjugates, let $n \in N$ and $(a, b) \in G$ so 
+		\begin{align*}
+			(a, b)(n, 1)(a, b)^{-1} &= (a, b)(n, 1)(\phi_b^{-1}(a^{-1}), b^{-1})\\ 
+				&= (a\phi_b(n), b)(a\phi_b^{-1}(a^{-1}), b^{-1})\\
+				&= (a\phi_b(n) \cdot \phi_b(\phi_b^{-1}(a^{-1})), bb^{-1})\\
+				&= (a\phi_b(n)a^{-1}, 1)\\
+		\end{align*}
+		Now we just take the inverse $(n, h) \mapsto n$ of the initial embedding to get $a\phi_b(n)a^{-1}\in N$. 
+			
+		Since $a \in N$, clearly conjugation is in $N$ and thus $N$ is normal in $G$. $\qed$ 
+	\color{black}
+
+\pagebreak
+
+6.  Let $\phi: \R \lra \Aut(\R^{2})$ be a homomorphism, and form $G_{\phi} := \R^{2} \rtimes_{\phi} \R$.  For each $v \in \R^{2}$, and $(n,h) \in G$, define $(n,h)v:= \phi(h)v + n$.  Prove this defines a group action of $G_{\phi}$ on $\R^{2}$.\\
+
+	\color{blue}
+		To be a group action, $(n, h) \cdot v$ must satisfy  
+		\begin{enumerate}
+			\item $(e_{\R^2}, e_\R)\cdot v = v$ 
+			\item $(n, h) \cdot ((m, k) \cdot v) = ((n, h)(m, k)) \cdot v \quad$ for $(m, k) \in G$
+		\end{enumerate}
+
+		For the first condition,
+		\[(e_{\R^2}, e_{\R}) \cdot v = \phi(e)v + e_{\R^2}\]
+		since homomorphisms preserve identity, $\phi_{\R}(e) = e$, so 
+		\[(e_{\R^2}, e_{\R}) \cdot v = v + (0, 0) = v\] 
+
+		For the second condition, 
+		\begin{align*}
+			(n, h) \cdot ((m, k) \cdot v) &= (n, h) \cdot (\phi(k)v + m)\\ 
+				&= \phi(h)(\phi(k)v + m) + n\\ 
+				&= \phi(hk)v + \phi(h)m + n
+		\end{align*}
+		and 
+		\begin{align*}
+			((n, h)(m, k)) \cdot v &= (n + \phi(h)m, h + k) \cdot v\\ 
+				&= \phi(h + k)v + n + \phi(h)m \\ 
+				&= \phi(hk)v + \phi(h)m + n \qed
+		\end{align*}
+
+	\color{black}
+
+
+\pagebreak 
+
+7.  Let $\phi: \R \lra \Aut(\R^{2})$ be defined by 
+\[\phi(h) = \begin{pmatrix}
+  \cos(h) &-\sin(h)\\
+  \sin(h) &\cos(h)
+\end{pmatrix}\]
+Prove the group $G_{\phi}$ is isomorphic to 
+\[
+G=
+\left\{
+\left(\begin{array}{ccc}
+\cos(h) &-\sin(h) & a\\ 
+\sin(h) &\cos(h) & b\\
+0 & 0 & 1
+\end{array}
+\right) \bigg| \, h,a,b \in \R
+\right\} = \text{Isom}^{+}(\R^{2})
+\]
+
+	\color{blue}
+		Elements of $G_{\phi}$ are of the form $(\begin{pmatrix}
+			a\\b
+		\end{pmatrix}, c)$ where $a, b, c \in \R$. A natural choice of homomorphism $\psi: G_{\phi} \to G$ is 
+		\[\psi((\begin{pmatrix}
+			a\\b
+		\end{pmatrix}, c)) = \begin{pmatrix} 
+			\cos(c) & -\sin(c) & a\\
+			\sin(c) & \cos(c) & b\\
+			0 & 0 & 1
+		\end{pmatrix}\]
+
+		We need to show that $\psi$ is a homomorphism and that it is bijective.
+
+		\begin{align*}
+			\psi((\begin{pmatrix}
+				a\\b
+				\end{pmatrix}, c)(\begin{pmatrix}
+				d\\e
+				\end{pmatrix}), f) &= \psi((\begin{pmatrix} 
+					a\\b
+				\end{pmatrix} + \phi_c(\begin{pmatrix} d\\e \end{pmatrix}), c+f))\\ 
+					&= \psi((\begin{pmatrix}
+						a\\b 
+					\end{pmatrix} + \begin{pmatrix}
+						\cos(c)d - \sin(c)e\\
+						\sin(c)d + \cos(c)e
+					\end{pmatrix}, c+f))\\
+					&= \psi((\begin{pmatrix}
+						a + \cos(c)d - \sin(c)e\\
+						b + \sin(c)d + \cos(c)e
+					\end{pmatrix}, c+f))\\
+					&= \begin{pmatrix}
+						\cos(c+f) & -\sin(c+f) & a + \cos(c)d - \sin(c)e\\
+						\sin(c+f) & \cos(c+f) & b + \sin(c)d + \cos(c)e\\
+						0 & 0 & 1
+					\end{pmatrix}\\
+			\psi((\begin{pmatrix}
+				a\\b \end{pmatrix}), c) \psi((\begin{pmatrix}
+				d\\e
+				\end{pmatrix}, f)) &= \begin{pmatrix}
+					\cos(c) & -\sin(c) & a\\
+					\sin(c) & \cos(c) & b\\
+					0 & 0 & 1
+				\end{pmatrix}\begin{pmatrix}
+					\cos(f) & -\sin(f) & d\\
+					\sin(f) & \cos(f) & e\\
+					0 & 0 & 1
+				\end{pmatrix}\\
+				&= \begin{pmatrix}
+					\cos(c)\cos(f) - \sin(c)\sin(f) & -\cos(c)\sin(f) - \sin(c)\cos(f) & a + d\cos(c) - e\sin(c) \\
+					\cos(c)\sin(f) + \cos(f)\sin(c) & -\sin(c)\sin(f) + \cos(c)\cos(f) & b + e\cos(c) + d\sin(c)\\
+					0 & 0 & 1
+				\end{pmatrix}\\
+				&= \begin{pmatrix}
+					\cos(c + f) & -\sin(c + f) & a + d\cos(c) - e\sin(c)\\
+					\sin(c + f) & \cos(c + f) & b + e\cos(c) + d\sin(c)\\
+				\end{pmatrix}
+		\end{align*}
+
+		Thus, $\psi$ is a homomorphism. To see that it is a bijection, consider the mapping $\psi^{-1}: G \to G_{\phi}$ given by
+		\[\begin{pmatrix}
+			\cos(c) & -\sin(c) & a\\
+			\sin(c) & \cos(c) & b\\
+			0 & 0 & 1
+		\end{pmatrix} \mapsto (\begin{pmatrix}
+			a\\b
+		\end{pmatrix}, c)\]
+
+		So 
+		\begin{gather*}
+			\psi^{-1}(\psi((\begin{pmatrix}
+				a\\b \end{pmatrix}, c))) = \psi^{-1}\begin{pmatrix}
+					\cos(c) & -\sin(c) & a\\
+					\sin(c) & \cos(c) & b\\
+					0 & 0 & 1
+				\end{pmatrix} = (\begin{pmatrix}
+					a\\b
+				\end{pmatrix}, c)\\
+			\psi(\psi^{-1}\begin{pmatrix}
+				\cos(c) & -\sin(c) & a\\
+				\sin(c) & \cos(c) & b\\
+				0 & 0 & 1
+			\end{pmatrix}) = \psi((\begin{pmatrix}
+				a\\b
+			\end{pmatrix}, c)) = \begin{pmatrix}
+				\cos(c) & -\sin(c) & a\\
+				\sin(c) & \cos(c) & b\\
+				0 & 0 & 1
+			\end{pmatrix}
+		\end{gather*}
+
+		Thus, $\psi$ is a bijective homomorphism and thus an isomorphism. $\qed$
+
+	\color{black}
+
+\pagebreak
+8.  Calculate the Lie-algebra of the group $G$ as defined in Problem 7.  Show that there is a split-exact sequence of Lie-algebras
+\[
+\R^{2} \lra \mathfrak{g} \lra \R
+\]  
+
+	\color{blue}
+		Let $X \in \gf$. Then $e^{tX}$ is of the form 
+		\[\begin{pmatrix}
+			\cos(t) & -\sin(t) & a\\
+			\sin(t) & \cos(t) & b\\
+			0 & 0 & 1	
+		\end{pmatrix} = \begin{pmatrix}
+			R & \begin{matrix}
+				a\\b
+			\end{matrix}\\ 
+			\begin{matrix}
+				0 & 0
+			\end{matrix} & 1
+		\end{pmatrix}\] 
+		with $R \in \SO(2, \R)$. 
+
+		So $X = \frac{d}{dt} \bigg\vert_{t=0}e^{tX}$ must have the form 
+		\[\begin{pmatrix}
+			Y & \begin{matrix}
+				y_1\\y_2
+			\end{matrix}\\ 
+			\begin{matrix}
+				0 & 0
+			\end{matrix} & 0
+		\end{pmatrix}\] 
+
+		Notice that for $n \geq 1$, 
+		\[\begin{pmatrix}
+			Y & \begin{matrix}
+				y_1\\y_2
+			\end{matrix}\\ 
+			\begin{matrix}
+				0 & 0
+			\end{matrix} & 0
+		\end{pmatrix}^n = \begin{pmatrix}
+			Y^n & \rule{0.6cm}{0.2mm} & Y^{n-1}y \\
+			\vline & & \vline\\
+			0 & 0 & 0
+		\end{pmatrix}\]
+		where $y = (y_1, y_2)^T$
+
+		Thus, $e^{tX}$ is of the form 
+		\[\begin{pmatrix}
+			e^{tY} & \begin{matrix}
+				*\\
+				*
+			\end{matrix}\\
+			\begin{matrix}
+				0 & 0
+			\end{matrix} & 1
+		\end{pmatrix}\]
+
+		Since we need $e^{tY} \in O(2, \R)$, we need $Y^T = -Y$. All together, 
+		\[\gf = \left\{\begin{pmatrix}
+			Y & \begin{matrix}
+				a\\ b
+			\end{matrix}\\ 
+			\begin{matrix}
+				0 & 0
+			\end{matrix} & 0
+		\end{pmatrix} \in M_3(\R) \bigg\vert \; Y^T = -Y,\;  a, b \in \R\right\}\]
+
+		From Problem 5, $\R^2 \trianglelefteq G \simeq \R^2 \rtimes_{\phi} \R$. Therefore, we have a short exact sequence of groups 
+		\[\R^2 \hookrightarrow G \twoheadrightarrow G/\R^2 = \R\]
+		Then on the level of lie-algebras, we have a short exact sequence 
+		\[\R^2 \underset{i}{\hookrightarrow} \gf \underset{p}{\twoheadrightarrow} \R\]
+		(note that this is a slight abuse of notation as the first equation refers to $\R^2, \R$ as groups and the second refers to them as lie-algebras with trivial brackets). 
+
+		To show the sequence is split exact, we must show that it admits a a section $\sigma: \R \to \gf$ such that $p\sigma = 1$.
+
+		Arbitrarily, we can define 
+		\[p\begin{pmatrix}
+			Y & \begin{matrix}
+				a\\ b
+			\end{matrix}\\ 
+			\begin{matrix}
+				0 & 0
+			\end{matrix} & 0
+		\end{pmatrix} = \det Y\]  
+		and 
+		\[\sigma(t) = \begin{pmatrix}
+			\cos(t) & -\sin(t) & 0\\
+			\sin(t) & \cos(t) & 0\\
+			0 & 0 & 0
+		\end{pmatrix}\] 
+
+		Then for $t \in \R$,
+		\[p(\sigma(t)) = p\begin{pmatrix}
+			\cos(t) & -\sin(t) & 0\\
+			\sin(t) & \cos(t) & 0\\
+			0 & 0 & 0
+		\end{pmatrix} = \det \begin{pmatrix}
+			\cos(t) & -\sin(t)\\
+			\sin(t) & \cos(t)
+		\end{pmatrix} = 1 \qed\]
+	\color{black}
+\end{document}

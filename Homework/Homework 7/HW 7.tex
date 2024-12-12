@@ -1,0 +1,475 @@
+\documentclass[12pt]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% PACAKAGES %%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%% GRAPHICS/FONTS
+\usepackage{amsmath,amsfonts,amssymb,graphicx,tikz-cd,pgfplots}
+
+%%%%%%%%%%%%%% FORMATTING
+\usepackage{geometry,titlesec,hyperref,xhfill,setspace,float,fancyhdr}
+
+%%%%%%%%DEFINING COMMANDS
+\usepackage{xifthen}
+
+
+%%%%%%%%%TIKZ STUFF
+\usetikzlibrary{positioning,calc}
+\usetikzlibrary{decorations.markings}
+\usepgfplotslibrary{polar}
+\usepgflibrary{shapes.geometric}
+\usepgfplotslibrary{fillbetween}
+
+%%%%%%FOR THE GRAPHS
+\pgfplotsset{my style/.append style={axis x line=middle, axis y line=
+middle, xlabel={$x$}, ylabel={$y$}, axis equal }}
+
+%%%%%%MARGINS
+\geometry{
+a4paper,
+left=0.25in,
+right=0.25in,
+top=0.25in,
+bottom=0.75in
+}
+
+%%%%%%MAKES THE HEADER AND FOOTER FANCY
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\pagestyle{fancy}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% COMMANDS %%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\underscore}{\underline{\hspace{2mm}}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Aut}{\text{Aut}}
+\newcommand{\GL}{\text{GL}}
+\newcommand{\SL}{\text{SL}}
+\newcommand{\SO}{\text{SO}}
+\newcommand{\PGL}{\text{PGL}}
+\newcommand{\Stab}{\text{Stab}}
+\newcommand{\End}{\text{End}}
+\newcommand{\ad}{\text{ad}}
+\newcommand{\lra}{\longrightarrow}
+
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\sll}{\mathfrak{sl}}
+\newcommand{\pgl}{\mathfrak{pgl}}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\h}{\mathfrak{h}}
+\newcommand{\n}{\mathfrak{n}}
+\newcommand{\la}{\mathfrak{a}}
+\newcommand{\lb}{\mathfrak{b}}
+\newcommand{\q}{\mathfrak{q}}
+
+
+\newcommand{\RP}{\mathbb{R}P}
+\newcommand{\K}{\emph{K}}
+
+\newcommand{\Ha}{\mathbb{H}}
+
+\newcommand{\norm}[1]{\left\vert \left\vert #1 \right\vert \right\vert}
+
+%TEXT COMMAND
+\newcommand{\T}[1][]{\text{#1}}
+\newcommand{\TB}[1][]{\mathbb{#1}}
+
+\newcommand{\xlra}[1][]{%
+  \ifthenelse{\isempty{#1}}%
+    {\xrightarrow{\phantom{,,,,,,}}}% if #1 is empty
+    {\xrightarrow{\phantom{,,}#1\phantom{,,}}}% if #1 is not empty
+}
+
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\brak}[1]{\left\langle #1 \right\rangle}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%BEGINNING OF ACTUAL DOCUMENT %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\parskip=0pt 
+\parindent=0pt 
+
+%%%%TITLE______REMEMBER TO REGULARLY CHANGE THIS!!!!
+\title{Math 1820A Spring 2024 - Homework 7}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-0.5in}
+%%%%%%%%%%%%%%%%
+\begin{spacing}{1.5}
+\noindent \textbf{Instructions:}  This assignment is worth twenty points.  Please complete the following problems assigned below.  Submissions with insufficient explanation may lose points due to a lack of reasoning or clarity.  If you are handwriting your work, please ensure it is readable and well-formatted for the grader.
+
+Be sure when uploading your work to \textbf{assign problems to pages}.  Problems with pages not assigned to them \textbf{may not be graded}.  
+\end{spacing}
+
+%%%%%%%%%%%%%%%%%%
+\vspace{10mm}\noindent
+\textbf{Textbook Problems: }  
+\vspace*{10pt}
+
+\noindent
+\textbf{Additional Problems:}   For these problems let $\Ha$ denote the algebra of Hamiltonians and $\Ha^{\times}$ denote all the non-zero elements as a \emph{group} under multiplication.  For the context of this homework, assume a `rotation' is orientation preserving, and a `reflection' is preserves a codimension 1 subspace. 
+
+\section*{Problem 1} Construct a faithful representation of $\Ha^{\times}$ into $\GL(4,\R)$.  (Hint:  The set $\beta = \{1, i, j, k\} \subset \Ha$ forms a real-basis for $\Ha$ as a vector-space.  Find a matrix representation for $L_{q}$ where $L_{q}$ denotes left-multiplication by the quaternion $q \in \Ha^{\times}$).
+
+    \color{blue}
+        Let $q = a + bi + cj + dk$ and $p = x + yi + zj + wk$ be elements in $\Ha^{\times}$. We want a representation of $q$ as a matrix $L_q$ acting on $p$ such that 
+        \[L_q \begin{pmatrix}
+            x\\ 
+            y\\ 
+            z\\ 
+            w
+        \end{pmatrix} = pq = \begin{pmatrix}
+            ax - by - cz - dw\\ 
+            ay + bx + cw - dz\\ 
+            az - bw + cx + dy\\ 
+            aw + bz - cy + dx
+        \end{pmatrix}\]
+        (note that $pq$ here means the quaternion product of $p$ and $q$ represented as a vector in $\R^4$).
+
+        Clearly, then, 
+        \[L_q = \begin{pmatrix}
+            a & -b & -c & -d\\ 
+            b & a & -d & c\\ 
+            c & d & a & -b\\ 
+            d & -c & b & a
+        \end{pmatrix}\]
+
+        To show that this is, in fact, a faithful representation, it suffices to show that the map 
+        \[\phi:\quad \begin{aligned}
+            \Ha^{\times} &\to \GL(4, \R)\\
+            q &\mapsto L_q
+        \end{aligned}\]
+        is an injective homomorphism. 
+
+        Consider $q = a_1 + b_1i + c_1j + d_1k$ and $p = a_2 + b_2i + c_2j + d_2k$. Then 
+        
+        {\footnotesize
+        \begin{align*}
+            \phi(qp) &= \phi((a_1a_2 - b_1b_2 - c_1c_2 - d_1d_2) + (a_1b_2 + b_1a_2 + c_1d_2 - d_1c_2)i + (a_1c_2 - b_1d_2 + c_1a_2 + d_1b_2)j + (a_1d_2 + b_1c_2 - c_1b_2 + d_1a_2)k)\\
+            &= \begin{pmatrix}
+                a_1a_2 - b_1b_2 - c_1c_2 - d_1d_2 & -a_1b_2 - b_1a_2 - c_1d_2 + d_1c_2 & -a_1c_2 + b_1d_2 - c_1a_2 - d_1b_2 & -a_1d_2 - b_1c_2 + c_1b_2 - d_1a_2\\ 
+                a_1b_2 + b_1a_2 + c_1d_2 - d_1c_2 & a_1a_2 - b_1b_2 - c_1c_2 - d_1d_2 & -a_1d_2 - b_1c_2 + c_1b_2 - d_1a_2 & a_1c_2 - b_1d_2 + c_1a_2 + d_1b_2\\ 
+                a_1c_2 - b_1d_2 + c_1a_2 + d_1b_2 & a_1d_2 + b_1c_2 - c_1b_2 + d_1a_2 & a_1a_2 - b_1b_2 - c_1c_2 - d_1d_2 & -a_1b_2 - b_1a_2 - c_1d_2 + d_1c_2\\
+                a_1d_2 + b_1c_2 - c_1b_2 + d_1a_2 & -a_1c_2 + b_1d_2 - c_1a_2 - d_1b_2 & a_1b_2 + b_1a_2 + c_1d_2 - d_1c_2 & a_1a_2 - b_1b_2 - c_1c_2 - d_1d_2
+            \end{pmatrix}\\
+            \phi(q)\phi(p) &= \begin{pmatrix}
+                a_1 & -b_1 & -c_1 & -d_1\\ 
+                b_1 & a_1 & -d_1 & c_1\\ 
+                c_1 & d_1 & a_1 & -b_1\\ 
+                d_1 & -c_1 & b_1 & a_1
+            \end{pmatrix}\begin{pmatrix}
+                a_2 & -b_2 & -c_2 & -d_2\\ 
+                b_2 & a_2 & -d_2 & c_2\\ 
+                c_2 & d_2 & a_2 & -b_2\\ 
+                d_2 & -c_2 & b_2 & a_2
+            \end{pmatrix}\\ 
+            &= \begin{pmatrix}
+                a_1a_2 - b_1b_2 - c_1c_2 - d_1d_2 & -a_1b_2 - b_1a_2 - c_1d_2 + d_1c_2 & -a_1c_2 + b_1d_2 - c_1a_2 - d_1b_2 & -a_1d_2 - b_1c_2 + c_1b_2 - d_1a_2\\ 
+                a_1b_2 + b_1a_2 + c_1d_2 - d_1c_2 & a_1a_2 - b_1b_2 - c_1c_2 - d_1d_2 & -a_1d_2 - b_1c_2 + c_1b_2 - d_1a_2 & a_1c_2 - b_1d_2 + c_1a_2 + d_1b_2\\ 
+                a_1c_2 - b_1d_2 + c_1a_2 + d_1b_2 & a_1d_2 + b_1c_2 - c_1b_2 + d_1a_2 & a_1a_2 - b_1b_2 - c_1c_2 - d_1d_2 & -a_1b_2 - b_1a_2 - c_1d_2 + d_1c_2\\
+                a_1d_2 + b_1c_2 - c_1b_2 + d_1a_2 & -a_1c_2 + b_1d_2 - c_1a_2 - d_1b_2 & a_1b_2 + b_1a_2 + c_1d_2 - d_1c_2 & a_1a_2 - b_1b_2 - c_1c_2 - d_1d_2
+            \end{pmatrix}
+        \end{align*}
+        }%
+        
+        So the mapping is a genuine representation. To show that it is injective, it suffices to show that the only quaternion which maps to the identity matrix is the identity quaternion. Clearly, 
+        \[\phi(1 + 0i + 0j + 0k) = \begin{pmatrix}
+            1 & 0 & 0 & 0\\ 
+            0 & 1 & 0 & 0\\ 
+            0 & 0 & 1 & 0\\ 
+            0 & 0 & 0 & 1
+        \end{pmatrix}\] 
+        and by definition of $L_q$, $1 \in \Ha^{\times}$ is the only quaternion which maps to the identity matrix. Therefore, the representation is faithful. $\qed$
+    \color{black}
+
+\pagebreak
+
+\section*{Problem 2} Using your result from Problem 1, let $\h$ denote the Lie-algebra of $\Ha^{\times}$ inside $\GL(4,\R)$.  Write out a basis for the Lie-algebra and the corresponding brackets.
+
+    \color{blue}
+        \begin{align*}
+            A &= \begin{pmatrix}
+                1 & 0 & 0 & 0\\
+                0 & 1 & 0 & 0\\
+                0 & 0 & 1 & 0\\
+                0 & 0 & 0 & 1
+            \end{pmatrix}\\ 
+            B &= \begin{pmatrix}
+                0 & -1 & 0 & 0\\
+                1 & 0 & 0 & 0\\
+                0 & 0 & 0 & -1\\
+                0 & 0 & 1 & 0
+            \end{pmatrix}\\
+            C &= \begin{pmatrix}
+                0 & 0 & -1 & 0\\
+                0 & 0 & 0 & 1\\
+                1 & 0 & 0 & 0\\
+                0 & -1 & 0 & 0
+            \end{pmatrix}\\
+            D &= \begin{pmatrix}
+                0 & 0 & 0 & -1\\
+                0 & 0 & -1 & 0\\
+                0 & 1 & 0 & 0\\
+                1 & 0 & 0 & 0
+            \end{pmatrix}
+        \end{align*}
+
+        Provides a natural basis. Using Matlab, we can calculate the bracket $[X, Y] = XY - YX$: 
+        \begin{align*}
+            [A, B] &= 0 \\ 
+            [A, C] &= 0\\ 
+            [A, D] &= 0\\ 
+            [B, C] &= 2D\\ 
+            [B, D] &= -2C\\ 
+            [C, D] &= 2B
+        \end{align*}
+    \color{black}
+
+\pagebreak
+
+\section*{Problem 3} Define $\mathfrak{q} = \h/\mathfrak{z}(\h)$ where $\mathfrak{z}(\h)$ denotes the center of $\h$.  Determine if $\mathfrak{q}$ is solvable.  Is it simple?
+
+    \color{blue}
+        We can create the short exact sequence 
+        \[\mathfrak{z}(\h) \hookrightarrow \h \twoheadrightarrow \mathfrak{q}\]
+
+        $\mathfrak{q}$ is thus solvable iff $\h$ is solvable. 
+
+        From Problem 2, we have 
+        \[\h^1 = [\h, \h] = \brak{2D, -2C, 2B}\]
+        so 
+        \[\h^2 = [\h^1, \h^1] = [\brak{2D, -2C, 2B}, \brak{2D, -2C, 2B}] = 4\brak{B, C, D}\]
+
+        Since this is just a scalar multiple of $\h^1$, the derived series will not terminate. Therefore, $\h$ is not solvable so $\mathfrak{q}$ is not solvable.
+
+        Further, $\q$ is not simple since $\brak{B, C, D} \subseteq \q$ and 
+        \begin{align*}
+            [\brak{B, C, D}, \brak{B, C, D}] &= \brak{B, C, D}\\
+            [\brak{B, C, D}, A] &= 0 \subseteq \brak{B, C, D}
+        \end{align*} 
+        so $\q$ has a non-trivial ideal. $\qed$ 
+
+    \color{black}
+\pagebreak
+
+\section*{Problem 4} Consider the natural group action of $\SO(3,\R)$ on $\R^{3}$, namely you pair a matrix $A \in \SO(3,\R)$ with a vector $v \in \R^{3}$ and get $Av \in \R^{3}$.  Prove that for any $A \in \SO(3,\R)$, there exists a line $L_{A} \subset \R^{3}$ through the origin, such that $A$ fixes all points along $L_{A}$.  Is the same result true for $\SO(4,\R)$?
+
+    \color{blue}
+        It suffices to show that for all $A \in \SO(3, \R)$, there exists a vector $\begin{pmatrix}
+            x\\
+            y\\
+            z
+        \end{pmatrix}$ such that 
+        \[A\begin{pmatrix}
+            x\\
+            y\\
+            z
+        \end{pmatrix} = \begin{pmatrix}
+            x\\
+            y\\
+            z
+        \end{pmatrix}\]
+        i.e. there exists an eigenvector with eigenvalue $1$ for all $A \in \SO(3, \R)$. 
+
+        Since the characteristic polynomial of $A$ will be cubic, it will have at least one real root so there exists at least one real eigenvalue $\lambda$ of $A$.
+
+        Therefore, $Av = \lambda v$ for some vector $v$. Without loss of generality, we can assume that $v$ is a unit vector, i.e. $\norm v = v^Tv = 1$. Further, since $A \in \SO(3, \R)$, we have that $A^T A = I$. Thus 
+        \[1 = v^Tv = v^T(A^TA)v = (Av)^T(Av) = (\lambda v)^T(\lambda v) = \lambda^2 v^Tv = \lambda^2 \implies \lambda = \pm 1\]
+
+        Because $A \in \SO(3, \R)$, $\det A = \lambda_1 \lambda_2 \lambda_3 = 1$. If all the eigenvalues are real, there must be 0 negative eigenvalues or two eigenvalues -- therefore one eigenvalue must be $1$. Similarly, if the eigenvalues are complex, then they must be conjugate pairs with positive product, so the final eigenvalue must be $1$.
+
+        Therefore, $\exists v\in \R^3$ which is an eigenvector with eigenvalue $1$ for any $A \in \SO(3, \R)$. Take $L_A = \text{Span}_{\R}\{v\}$ and we have a line through the origin which is invariant under $A$. $\qed$
+
+        \vspace*{10pt}
+        \hrule 
+        \vspace*{10pt}
+
+        Elements of $\SO(4, \R)$ may not have a real eigenvalue so the result does not hold. 
+    \color{black}
+
+\pagebreak
+
+\section*{Problem 5} Prove that every rotation in $\R^{2}$ can be expressed as the composition of two reflections in $\R^{2}$.  Prove that every rotation in $\R^{3}$ can be expressed as the composition of two reflections in $\R^{3}$.
+
+    \color{blue}
+        In $\R^2$, rotations can be represented by matrices in $\SO(2, \R)$ of the form 
+        \[R_{\theta} = \begin{pmatrix}
+            \cos \theta & -\sin \theta\\ 
+            \sin \theta & \cos \theta
+        \end{pmatrix}\] 
+
+        Similarly, reflections can be written 
+        \[F_{\theta} = \begin{pmatrix}
+            \cos 2\theta & \sin 2\theta\\ 
+            \sin 2\theta & -\cos 2\theta 
+        \end{pmatrix}\]
+
+        Consider the composition of two reflections $F_{\phi}, F_{\psi}$: 
+        \begin{align*}
+            F_{\phi}F_{\psi} &= \begin{pmatrix}
+                \cos 2\phi & \sin 2\phi\\ 
+                \sin 2\phi & -\cos 2\phi 
+            \end{pmatrix} \begin{pmatrix}
+                \cos 2\psi & \sin 2\psi\\ 
+                \sin 2\psi & -\cos 2\psi
+            \end{pmatrix}\\ 
+            &= \begin{pmatrix}
+                \cos 2\phi \cos 2\psi + \sin 2\phi \sin 2\psi & \cos 2\phi \sin 2\psi - \sin 2\phi \cos 2\psi\\ 
+                \sin 2\phi \cos 2\psi - \cos 2\phi \sin 2\psi & \sin 2\phi \sin 2\psi + \cos 2\phi \cos 2\psi
+            \end{pmatrix}\\ 
+            &= \begin{pmatrix}
+                \cos(2(\phi - \psi)) & -\sin(2(\phi - \psi))\\
+                \sin(2(\phi - \psi)) & \cos(2(\phi - \psi))
+            \end{pmatrix}\\ 
+            &= R_{2(\phi - \psi)}
+        \end{align*}
+
+        Therefore, for any rotation $R_{\theta}$, we can write it as the composition of two reflections $F_{\frac{\theta}{4}}, F_{-\frac{\theta}{4}}$.
+
+        \vspace*{10pt}
+        \hrule
+        \vspace*{10pt}
+
+        Let $A$ and be $B$ be lines in $\R^3$ with $L_A$ and $L_B$ their respective line symmetries. 
+
+        In the trivial case $A = B$, we have $L_B \circ L_A = L_A^2 = 1$. 
+
+        Now suppose $A \neq B$. Clearly, there is a non-zero angle between the two. 
+
+        We can consider a rotated reference frame such that $L_A$ and $L_B$ both lie within the $xz$-plane. Since these are elements in $\SO(3, \R)$, we claim that a vector parallel to $A \times B$ is fixed by $L_B \circ L_A$: 
+        \[(L_B \circ L_A)(A \times B) = L_B(L_A(A \times B)) = L_B(-A \times B) = A \times B\]
+        (since $A\times B$ is perpendicular to both $A$ and $B$)
+
+        Therefore, it suffices to analyze the action of $L_B \circ L_A$ on the orthogonal complement of $A \times B$. From the 2-d case, we know that two reflection in this plane will generate a rotation -- and indeed, we know that this relation is precisely twice the angle from $A$ to $B$. Therefore, given any rotation in $\SO(3, \R)$ (say specified by its fixed axis and its angle of rotation $\theta$), we may represent it as the composition of two line symmetries $\theta/2$ degrees apart which are orthogonal to the fixed axis. $\qed$ 
+        
+    \color{black}
+
+\pagebreak
+
+\section*{Problem 6} Prove that $\exp: \textbf{so}(3,\R) \lra SO(3,\R)$ is surjective.  (Hint: You can do a tedious calculation, but there's a slicker way using Problem 4)
+
+    \color{blue}
+        Since every rotation in $\SO(3, \R)$ fixes one axis, we may represent any element of $\SO(3, \R)$ by 
+        \[R = \begin{pmatrix}
+            \cos \theta & -\sin \theta & 0\\ 
+            \sin \theta & \cos \theta & 0\\ 
+            0 & 0 & 1
+        \end{pmatrix}\]
+        relative to some basis. 
+
+        Since 
+        \[\exp\begin{pmatrix}
+            0 & -\theta & 0\\ 
+            \theta & 0 & 0\\ 
+            0 & 0 & 0
+        \end{pmatrix} = \begin{pmatrix}
+            \cos \theta & -\sin \theta & 0\\ 
+            \sin \theta & \cos \theta & 0\\ 
+            0 & 0 & 1
+        \end{pmatrix}\]
+        and 
+        \[\begin{pmatrix}
+            0 & -\theta & 0\\ 
+            \theta & 0 & 0\\ 
+            0 & 0 & 0
+        \end{pmatrix} \in \textbf{so}(3, \R)\]
+        every element of $\SO(3, \R)$ is in the image of $\exp$. Therefore, $\exp$ is surjective. $\qed$
+    \color{black}
+
+
+\pagebreak
+\section*{Problem 7} Let $X \in \textbf{so}(3,\R)$ such that $||X|| = \sqrt{2}$ where $||\cdot ||$ denotes the sum of squares norm. Let $t \in \R$ and prove that 
+\[\exp(tX) = I_{3} + \sin(t)X + \left(1-\cos(t)\right)X^{2}\]
+
+    \color{blue}
+        Since $X \in \textbf{so}(3, \R)$, we can write 
+        \[X = \begin{pmatrix}
+            0 & -c & b\\ 
+            c & 0 & -a\\
+            -b & a & 0
+        \end{pmatrix}\]
+
+        Notice that for all $X \in \textbf{so}(3, \R)$ we have 
+        \[\left(\frac{X}{\sqrt{a^2 + b^2 + c^2}}\right)^3 = -\frac{X}{\norm{X}}, \quad \left(\frac{X}{\norm{X}}\right)^4 = -\left(\frac{X}{\norm{X}}\right)^2, \quad \left(\frac{X}{\norm{X}}\right)^5 = \frac{X}{\norm{X}}, \quad \dots\]
+        
+        Define 
+        \begin{align*}
+            \norm{X} &= \sqrt{a^{2} + b^{2} + c^{2} + (-a)^2 + (-b)^2 + (-c)^2}\\ 
+            & = \sqrt{2a^2 + 2b^2 + 2c^2} = \sqrt{2}\\ 
+            &\implies 2a^2 + 2b^2 + 2c^2 = 2\\ 
+            &\implies a^2 + b^2 + c^2 = 1\\ 
+            &\implies \sqrt{a^2 + b^2 + c^2} = 1
+        \end{align*}
+        so we can say 
+        \begin{align*}
+            \exp(tX) &= \exp(t\frac{X}{\sqrt{a^2 + b^2 + c^2}})\\ 
+                &= I_3 + t \frac{X}{\sqrt{a^2 + b^2 + c^2}} + \frac{t^2}{2} \left(\frac{X}{\sqrt{a^2 + b^2 + c^2}}\right)^2 + \frac{t^3}{3!} \left(\frac{X}{\sqrt{a^2 + b^2 + c^2}}\right)^3 + \dots\\ 
+                &= I_3 + t \frac{X}{\sqrt{a^2 + b^2 + c^2}} + \frac{t^2}{2} \left(\frac{X}{\sqrt{a^2 + b^2 + c^2}}\right)^2 -\frac{t^3}{3!} \left(\frac{X}{\sqrt{a^2 + b^2 + c^2}}\right) - \frac{t^4}{4!} \left(\frac{X}{\sqrt{a^2 + b^2 + c^2}}\right)^2 + \dots\\ 
+                &= I_3 + \left(t - \frac{t^3}{3!} + \frac{t^5}{5!} + \dots\right) \frac{X}{\sqrt{a^2 + b^2 + c^2}} + \left(\frac{t^2}{2} - \frac{t^4}{4!} + \frac{t^6}{6!} + \dots\right) \frac{X^2}{(\sqrt{a^2 + b^2 + c^2})^2}\\ 
+                &= I_3 + \sin(t) \frac{X}{\sqrt{a^2 + b^2 + c^2}} + \left(1 - \cos(t)\right) \frac{X^2}{a^2 + b^2 + c^2}\\ 
+                &= I_3 + \sin(t) X + (1 - \cos(t))X^2 \qed
+        \end{align*}
+    \color{black}
+
+
+\pagebreak
+\section*{Problem 8} Let $R_{A}$ denote the rotation about the line generated by the vector $(1,1,1) \in \R^{3}$ by an angle of $\pi/2$ according to the right-hand rule.  Let $R_{B}$ denote the rotation about the line generated by $(1,0,-1) \in \R^{3}$ by an angle of $\pi/3$. Determine the rotation axis and angle of $R_{A}\circ R_{B}$.
+
+    \color{blue}
+        In general, we may represent a rotation about a line $v$ by an angle $\theta$ as a quaternion of the form 
+        \[q = \cos \frac{\theta}{2} + \sin \frac{\theta}{2} \frac{v}{\norm v}\]
+
+        In our case, 
+        \[R_A \sim q_A = \cos \frac{\pi}{4} + \sin \frac{\pi}{4} (\frac{1}{\sqrt{3}}i + \frac{1}{\sqrt{3}}j + \frac{1}{\sqrt{3}}k) = \frac{\sqrt 2}{2} + \frac{\sqrt 6}{6}i + \frac{\sqrt 6}{6}j + \frac{\sqrt 6}{6}k\]
+        and 
+        \[R_B \sim q_B = \cos \frac{\pi}{6} + \sin \frac{\pi}{6} (\frac{1}{\sqrt 2}i - \frac{1}{\sqrt 2}k) = \frac{\sqrt 3}{2} + \frac{\sqrt{2}}{4}i - \frac{\sqrt{2}}{4}k\]
+
+        Thus the rotation $R_A \circ R_B$ corresponds to quaternion rotation $q_A q_B$ which can be computed: 
+        \begin{align*}
+            q_A q_B &= \left(\frac{\sqrt 2}{2} + \frac{\sqrt 6}{6}i + \frac{\sqrt 6}{6}j + \frac{\sqrt 6}{6}k\right)\left(\frac{\sqrt 3}{2} + \frac{\sqrt{2}}{4}i - \frac{\sqrt{2}}{4}k\right)\\ 
+            &= \frac{\sqrt 6}{4} + \frac{2}{8}i - \frac{2}{8}k\\ 
+                &\qquad + \frac{\sqrt{18}}{12}i + \frac{\sqrt{12}}{24}i^2 - \frac{\sqrt{12}}{24}ik\\ 
+                &\qquad + \frac{\sqrt{18}}{12}j + \frac{\sqrt{12}}{24}ji - \frac{\sqrt{12}}{24} jk\\ 
+                &\qquad + \frac{\sqrt{18}}{12}k + \frac{\sqrt{12}}{24}ki - \frac{\sqrt{12}}{24}k^2\\ 
+            &= \frac{\sqrt 6}{4} + \frac{1}{4}i - \frac{1}{4}k + \frac{\sqrt 2}{4}i - \frac{\sqrt 3}{12} + \frac{\sqrt 3}{12}j + \frac{\sqrt 2}{4}j - \frac{\sqrt 3}{12}k - \frac{\sqrt 3}{12}i + \frac{\sqrt 2}{4}k + \frac{\sqrt 3}{12}j + \frac{\sqrt 3}{12}\\ 
+            &= \left(\frac{\sqrt 6}{4} - \frac{\sqrt 3}{12} + \frac{\sqrt 3}{12}\right) + \left(\frac{1}{4} + \frac{\sqrt 2}{4} - \frac{\sqrt 3}{12}\right)i + \left(\frac{\sqrt 3}{12} + \frac{\sqrt 2}{4}+ \frac{\sqrt 3}{12}\right)j + \left(-\frac{1}{4} - \frac{\sqrt 3}{12} + \frac{\sqrt 2}{4}\right)k\\ 
+            &= \frac{\sqrt 6}{4} + \frac{3 + 3\sqrt 2 - \sqrt 3}{12}i + \frac{3\sqrt 2 + 2\sqrt 3}{12}j + \frac{-3 + 3\sqrt 2 - \sqrt 3}{12}k 
+        \end{align*}
+
+        Notice that 
+        \[\norm{q_A  q_B} = \sqrt{\frac{6}{16} + \frac{30 + 18\sqrt 2 - 6\sqrt 3 - 6\sqrt 6}{144} + \frac{30 + 12\sqrt 6}{144} + \frac{30 - 18\sqrt 2 + 6\sqrt 3 - 6\sqrt 6}{144}} = \sqrt{\frac{6}{16} + \frac{90}{144}} = 1\]
+        so 
+        \[q = \cos \frac{\theta}{2} + \sin \frac{\theta}{2}u\]
+        with $u$ pure and unit. If we normalize  
+        \[\frac{3 + 3\sqrt 2 - \sqrt 3}{12}i + \frac{3\sqrt 2 + 2\sqrt 3}{12}j + \frac{-3 + 3\sqrt 2 - \sqrt 3}{12}k\]
+        we have 
+        \begin{align*}
+            u &= \frac{144}{90}\left(\frac{3 + 3\sqrt 2 - \sqrt 3}{12}i + \frac{3\sqrt 2 + 2\sqrt 3}{12}j + \frac{-3 + 3\sqrt 2 - \sqrt 3}{12}k\right)\\ 
+            &= \frac{6 + 6\sqrt 2 - 2\sqrt 3}{15}i + \frac{6\sqrt 2 + 4\sqrt 3}{15}j + \frac{-6 + 6\sqrt 2 - 2\sqrt 3}{15}k
+        \end{align*}
+        and $\theta = 2\cos^{-1}\left(\frac{\sqrt 6}{4}\right)$ so the composite rotation axis is 
+        \[u = \begin{pmatrix}
+            \frac{6 + 6\sqrt 2 - 2\sqrt 3}{15}\\ 
+            \frac{6\sqrt 2 + 4\sqrt 3}{15}\\ 
+            \frac{-6 + 6\sqrt 2 - 2\sqrt 3}{15}
+        \end{pmatrix} \approx \begin{pmatrix}
+            0.735\\ 
+            1.028\\
+            -0.065
+        \end{pmatrix}\]
+        through an angle of $\theta = 2\cos^{-1}\left(\frac{\sqrt 6}{4}\right) \approx 104.45^{\circ}$
+    \color{black}
+
+
+\pagebreak
+\textbf{Bonus: [3 pts]}  Prove that every element of $\SO(n,\R)$ is the product of at most $(n+2)/2$ reflections.  
+\end{document}

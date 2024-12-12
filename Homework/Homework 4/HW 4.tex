@@ -1,0 +1,718 @@
+\documentclass[12pt]{article} 
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage{graphicx} 
+\usepackage{parskip}
+\usepackage{booktabs}
+\usepackage{array} 
+\usepackage{paralist} 
+\usepackage{verbatim}
+\usepackage{subfig}
+\usepackage{fancyhdr}
+\usepackage{sectsty}
+\usepackage[shortlabels]{enumitem}
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt} 
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+\geometry{letterpaper,
+    left=0.5in,
+    right=0.5in,
+    top=0.75in,
+    bottom=0.75in
+}
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} 
+\usepackage[titles,subfigure]{tocloft}
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} %
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{empheq}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{tikz-cd}
+\pgfplotsset{compat=1.18}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins}
+\tcbset{enhanced}
+\newenvironment*{tbox}[2][gray]{
+    \begin{tcolorbox}[
+        parbox=false,
+        colback=#1!5!white,
+        colframe=#1!75!black,
+        breakable,
+        title={#2}
+    ]}
+    {\end{tcolorbox}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% COMMANDS %%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\underscore}{\underline{\hspace{2mm}}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Aut}{\text{Aut}}
+\newcommand{\GL}{\text{GL}}
+\newcommand{\SL}{\text{SL}}
+\newcommand{\SO}{\text{SO}}
+\newcommand{\PGL}{\text{PGL}}
+\newcommand{\Stab}{\text{Stab}}
+\newcommand{\End}{\text{End}}
+\newcommand{\lra}{\longrightarrow}
+
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\sll}{\mathfrak{sl}}
+\newcommand{\pgl}{\mathfrak{pgl}}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\h}{\mathfrak{h}}
+
+\newcommand{\RP}{\mathbb{R}P}
+\newcommand{\K}{\emph{K}}
+
+\newcommand{\ihat}{\hat{\textbf{i}}}
+\newcommand{\jhat}{\hat{\textbf{j}}}
+\newcommand{\khat}{\hat{\textbf{k}}}
+
+\newcommand{\qed}{\quad \blacksquare}
+%TEXT COMMAND
+\newcommand{\T}[1][]{\text{#1}}
+\newcommand{\TB}[1][]{\mathbb{#1}}
+
+\newcommand{\tr}{\text{tr}\,}
+
+\newcommand{\xlra}[1][]{%
+  \ifthenelse{\isempty{#1}}%
+    {\xrightarrow{\phantom{,,,,,,}}}% if #1 is empty
+    {\xrightarrow{\phantom{,,}#1\phantom{,,}}}% if #1 is not empty
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%BEGINNING OF ACTUAL DOCUMENT %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%TITLE______REMEMBER TO REGULARLY CHANGE THIS!!!!
+\title{Math 1820A Spring 2024 - Homework 4}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-0.5in}
+%%%%%%%%%%%%%%%%
+
+\noindent \textbf{Instructions:}  This assignment is worth twenty points.  Please complete the following problems assigned below.  Submissions with insufficient explanation may lose points due to a lack of reasoning or clarity.  If you are handwriting your work, please ensure it is readable and well-formatted for the grader.
+
+Be sure when uploading your work to \textbf{assign problems to pages}.  Problems with pages not assigned to them \textbf{may not be graded}.  
+
+
+\textbf{Additional Problems:}   For these problems if you see an $S$ in front of a group, you can assume it means determinant 1, e.g. all elements of $SO(3,\R)$ and $SO(2,1)$ have determinant 1.
+
+
+1.  Prove that $\GL(2,\R)$ and $\SL(2,\R)\times \R^{\times}$ are not isomorphic groups.  Show however that $\GL(3,\R)$ and $\SL(3,\R)\times \R^{\times}$ are isomorphic.  
+
+    \color{blue}
+        Notice that the center of $\GL(2,\R)$ is 
+        \[Z(\GL(2, \R)) = \{tI_2 \; | \; t \in \R^{\times}\} \simeq \R^{\times}\] 
+        and the center of $\SL(2, \R) \times \R^{\times}$ is 
+        \[Z(\SL(2, \R) \times \R^{\times}) = Z(\SL(2, \R)) \times Z(\R^{\times}) = \{(\pm I_2, t) \; | \; t \in \R^{\times}\} \simeq \Z_2 \times \R^{\times}\]
+
+        Clearly, these centers are not isomorphic because any map $\phi: Z(\SL(2, \R) \times \R^{\times}) \to Z(\GL(2, \R))$ will be two-to-one. Therefore, the groups are not isomorphic. $\qed$
+
+        \vspace*{10pt}
+        \hrule 
+        \vspace*{10pt}
+
+        We introduce the homomorphism $\phi: \GL(3, \R) \to \SL(3, \R) \times \R^{\times}$ given by $\phi(A) = (A/\sqrt[n]{\det A}, \sqrt[n]{\det A})$.
+
+        We can check that $\phi$ is a homomorphism:
+
+        \begin{align*}
+            \phi(A)\phi(B) &= (\frac{A}{\sqrt[n]{\det A}}, \sqrt[n]{\det A})(\frac{B}{\sqrt[n]{\det B}}, \sqrt[n]{\det B})\\
+                &= (\frac{AB}{\sqrt[n]{\det A \det B}}, \sqrt[n]{\det A \det B})\\ 
+                &= (\frac{AB}{\sqrt[n]{\det AB}}, \sqrt[n]{\det AB})\\
+                &= \phi(AB)
+        \end{align*}
+
+        and introduce the map $\psi: \SL(3, \R) \times \R^{\times} \to \GL(3, \R)$ given by $\psi(A, t)= tA$ which is also a homomorphism:
+        \[\psi(A, t)\psi(B, s) = (tA)(sB) = tsAB= \psi(AB, ts)\]
+        
+        Then, clearly, 
+        \[\psi(\phi(A)) = \psi(\frac{A}{\sqrt[n]{\det A}}, \sqrt[n]{\det A}) = \sqrt[n]{\det A} \cdot \frac{A}{\sqrt[n]{\det A}} = A\]
+        \[\phi(\psi(A, t)) = \phi(tA) = (\frac{tA}{\sqrt[n]{\det tA}}, \sqrt[n]{\det tA}) = (\frac{tA}{\sqrt[n]{t^n \det A}}, \sqrt[n]{t^n \det A}) = (\frac{A}{\det A}, t \det A) = (A, t)\]
+        so $\phi$ is an isomorphism. 
+
+        Therefore, $\GL(3, \R) \simeq \SL(3, \R) \times \R^{\times}$. $\qed$
+    \color{black}
+
+\pagebreak
+
+2.  Show that $\GL^{+}(n,\R) = \{A \in \GL(n,\R) \, | \, \det(A) > 0\}$, is isomorphic to $\SL(n,\R)\times \R^{+}$ where $\R^{+}$ is the group of \emph{positive} real numbers under multiplication.  Show that $\gl(n,\R)$ is isomorphic to $\sll(n,\R)\oplus \R$ as Lie-algebras. 
+
+    \color{blue}
+
+        As above, we introduce the map $\phi: \GL^+(n, \R) \to \SL(n, \R) \times \R^+ $ by 
+        \[\phi(A) = (\frac{A}{\sqrt[n]{\det A}}, \sqrt[n]{\det A})\] 
+        which we showed to be a homomorphism in Problem 1. 
+
+        Since $\det A > 0$ for $A \in \GL^+(n, \R)$, and 
+        \[\det(\frac{A}{\sqrt[n]{\det A}}) = \det\left(\frac{1}{\sqrt[n]{\det A}} \cdot A\right) = \left(\frac{1}{\sqrt[n]{\det A}}\right)^n \det A = \frac{\det A}{\det A} = 1\]
+        $\phi$ is surjective. 
+
+        To see that it is injective, let $\phi(A) = \phi(B)$ and suppose $A \neq B$. Then 
+        \[\begin{cases}
+            \frac{A}{\sqrt[n]{\det A}} = \frac{B}{\sqrt[n]{\det B}}\\
+            d := \sqrt[n]{\det A} = \sqrt[n]{\det B} > 0
+        \end{cases} \implies \frac{A}{d} = \frac{B}{d} \implies A = B\]
+        but this is a contradiction. Therefore, $\phi$ is an isomorphism.
+        
+        \vspace*{10pt}
+        \hrule 
+        \vspace*{10pt}
+
+        We know that $\gl(n, \R) = M_n(\R)$, $\sll(n, \R) = \{A \in M_n(\R) \; | \; \tr(A) = 0\}$, and $\R$ as a Lie algebra is just $\R$.
+
+        Therefore, it suffices to show that 
+        \[M_n(\R) \simeq \{A \in M_n(\R) \; | \; \tr(A) = 0\} \oplus \R\]
+
+        First, embed $i: \sll(n, \R) \to \gl(n, \R)$ by simple inclusion so $\text{im}\, i = \sll(n, \R)$. 
+        Then, define the projection $p: \gl(n, \R) \to \R$ by $p(A) = \tr(A)$. 
+        \[\ker p = \{A \in \gl(n, \R) \; | \; \tr(A) = 0\} = \sll(n, \R)\]
+        
+        Therefore, we have the short exact sequence 
+        \[\sll(n, \R) \overset{i}{\hookrightarrow} \gl(2, \R) \overset{\tr}{\twoheadrightarrow} \R\]
+        
+        We also notice that $p$ admits a section $\sigma: \R \to \gl(n, \R)$ given by $\sigma(t) = \frac{t}{n}I_n$ such that 
+        \[p(\sigma(t)) = p(\frac{t}{n}I_n) = \tr(\frac{t}{n}I_n) = t \]
+        therefore, the extension is split. Then by definition of a split exact sequence, we have the commuting diagram 
+        \[\begin{tikzcd}
+            0 \arrow[r] & \sll(n, \R) \arrow[r, "i"] \arrow[d, "id"] & \gl(n, \R) \arrow[r, "p"] \arrow[d, "\phi"] & \R \arrow[r] \arrow[d, "id"] & 0\\
+            0 \arrow[r] & \sll(n, \R) \arrow[r, "i"] & \sll(n, \R) \oplus \R \arrow[r, "p"] & \R \arrow[r] & 0
+        \end{tikzcd}\]
+        where $\phi$ is an isomorphism. 
+
+        Therefore, $\gl(n,\R) \simeq \sll(n,\R)\oplus \R$ $\qed$
+    
+    \color{black}
+
+\pagebreak
+3.  For $n > 1$ prove that $\SL(n,\C) \times \C^{\times}$ is not isomorphic to $\GL(n,\C)$.  Prove that $\gl(n,\C)$ is isomorphic to $\sll(n,\C)\oplus \C$ as Lie-algebras. 
+
+    \color{blue}
+        As above, consider the centers of the groups:
+        \begin{align*}
+            Z(\SL(n, \C) \times \C^{\times}) &= Z(\SL(n, \C)) \times Z(\C^{\times}) = \{tI_n \; | \; t^n = 1\} \times \C^{\times}\\ 
+            Z(\GL(n, \C)) &= \{tI_n \; | \; t \in \C^{\times}\} \simeq \C^{\times}
+        \end{align*}
+
+        Clearly these groups are not isomorphic as any map $\phi: Z(\SL(n, \C) \times \C^{\times}) \to Z(\GL(n, \C))$ will be $n$-to-one. 
+
+        \vspace*{10pt}
+        \hrule 
+        \vspace*{10pt}
+
+        We know that $\gl(n, \C) = M_n(\C)$, $\sll(n, \C) = \{A \in M_n(\C) \; | \; \tr(A) = 0\}$, and $\C$ as a Lie algebra is just $\C$.
+
+        Therefore, it suffices to show that 
+        \[M_n(\C) \simeq \{A \in M_n(\C) \; | \; \tr(A) = 0\} \oplus \C\]
+
+        Consider the map $\phi: \gl(n, \C) \to \sll(n, \C) \oplus \C$ given by $\phi(A) = (A - \frac{\tr A}{n} I_n, \tr(A))$ so 
+        \[\phi(A + B) = (A + B - \frac{\tr(A + B)}{n}I_n, \tr(A + B)) = (A - \frac{\tr A}{n}, \tr A) + (B - \frac{\tr B}{n}, \tr B) = \phi(A) + \phi(B)\] 
+        meaning $\phi$ is a homomorphism of vector spaces. Clearly it is surjective. 
+
+        To see that it is injective, let $\phi(A) = \phi(B)$ and suppose $A \neq B$. Then
+        \[\begin{cases}
+            A - \frac{\tr A}{n}I_n = B - \frac{\tr B}{n}I_n\\
+            \tr A = \tr B
+        \end{cases} \implies A = B\]
+        This is a contradiction, so $\phi$ is an isomorphism of vector spaces. 
+
+        Then we just need to show that $\phi([A, B]) = [\phi(A), \phi(B)]$. 
+        \begin{align*}
+            [\phi(A), \phi(B)] &=  \phi(A)\phi(B) - \phi(B)\phi(A)\\
+                &= \left(A - \frac{\tr A}{n}I_n, \tr A\right)\left(B - \frac{\tr B}{n}I_n, \tr B\right) - \left(B - \frac{\tr B}{n}I_n, \tr B\right)\left(A - \frac{\tr A}{n}I_n, \tr A\right)\\
+                &= \left(AB - \frac{\tr A}{n}B - \frac{\tr B}{n}A + \frac{\tr A\; \tr B}{n}I_n, \tr A\; \tr B\right) - \left(BA - \frac{\tr B}{n}A - \frac{\tr A}{n}B + \frac{\tr B\; \tr A}{n}I_n, \tr B \; \tr A\right)\\
+                &= \left(AB - BA, 0\right)\\ 
+                &= \left(AB - BA - \frac{\tr(AB - BA)}{n} I_n, 0\right)
+                &= \phi([A, B])
+        \end{align*}
+        So $\phi$ is an isomorphism of Lie algebras. 
+
+        Therefore, $\gl(n,\C) \simeq \sll(n,\C)\oplus \C$ $\qed$
+
+    \color{black}
+        
+
+\pagebreak
+
+4.  Embed $i: \R^{\times} \lra \GL(3,\R)$ via $i(t) = tI_{3}$.  Consider the quotient group $\PGL(3,\R) := \GL(3,\R)/\R^{\times}$.  Prove that $\pgl(3,\R)$ is isomorphic to $\sll(3,\R)$.  
+
+    \color{blue}
+        From Problem 1, $\GL(3,\R) \simeq \SL(3,\R) \times \R^{\times}$. 
+        
+        Consider the map $\phi: \SL(3,\R) \times \R^{\times} \to \R^{\times}$ given by $\phi(A, t) = t$. Clearly, $\ker \phi = \SL(3, \R) \times e_{\R^{\times}}$. Thus, by the first isomorphism theorem, $\GL(3, \R)/\SL(3, \R) \simeq \R^{\times}$. 
+        
+        Thus, 
+        \[\text{PGL}(3, \R) \simeq \SL(3, \R) \implies \mathfrak{pgl}(3, \R) \simeq \sll(3, \R) \qed\] 
+                
+    \color{black}
+
+\pagebreak
+
+5.  Define the \emph{center} of a Lie algebra to be $\mathfrak{z}(\g) = \left\{ X \in \mathfrak{g} \, | \, [X,\g] = 0 \right\}$.  Let \[
+G = \left\{\left(\begin{array}{cccc}
+1 & w & w+w^{2} & x\\
+0 & 1 & 2w  & y\\
+0 & 0 & 1  & z \\
+0 & 0 & 0 & 1
+\end{array}\right) \, \bigg| \, x,y,z,w \in \R\right\}
+\] 
+Calculate the center of $\g$. 
+
+    \color{blue}
+        \[\g = \R \begin{pmatrix}
+            0 & 1 & 1 & 0\\ 
+            0 & 0 & 2 & 0\\
+            0 & 0 & 0 & 0\\
+            0 & 0 & 0 & 0
+        \end{pmatrix} \oplus \R \begin{pmatrix}
+            0 & 0 & 0 & 1\\ 
+            0 & 0 & 0 & 0\\
+            0 & 0 & 0 & 0\\
+            0 & 0 & 0 & 0
+        \end{pmatrix} \oplus \R \begin{pmatrix}
+            0 & 0 & 0 & 0\\ 
+            0 & 0 & 0 & 1\\
+            0 & 0 & 0 & 0\\
+            0 & 0 & 0 & 0
+        \end{pmatrix} \oplus \R \begin{pmatrix}
+            0 & 0 & 0 & 0\\ 
+            0 & 0 & 0 & 0\\
+            0 & 0 & 0 & 1\\
+            0 & 0 & 0 & 0
+        \end{pmatrix} = \R W \oplus \R X \oplus \R Y \oplus \R Z\]
+
+        We can explicitly calculate brackets using Matlab
+        \begin{align*}
+            [W, X] &= 0\\
+            [W, Y] &= X\\ 
+            [W, Z] &= X + 2Y\\
+            [X, Y] &= 0\\
+            [X, Z] &= 0\\ 
+            [Y, Z] &= 0
+        \end{align*}
+
+        Therefore, 
+        \[\boxed{Z(\g) = \left\{\begin{pmatrix}
+            0 & 0 & 0 & x\\ 
+            0 & 0 & 0 & 0\\
+            0 & 0 & 0 & 0\\
+            0 & 0 & 0 & 0
+        \end{pmatrix} \bigg\vert x \in \R \right\}}\]
+    \color{black}
+     
+\pagebreak
+
+6.  Inductively define $\g_{0} = \g$ and $\g_{n+1} = [\g,\g_{n}]$.  This is called the \emph{lower central series}.  Call a Lie-algebra \emph{nilpotent} if and only if the lower central series stabilizes at the zero subspace.  Prove the Lie-algebra in Problem 5 is nilpotent.
+
+    \color{blue}
+        From Problem 5, 
+        \[\g_0 = \g = \begin{pmatrix}
+            0 & w & w & x\\ 
+            0 & 0 & 2w & y\\
+            0 & 0 & 0 & z\\
+            0 & 0 & 0 & 0
+        \end{pmatrix}\]
+
+        Then we can start explicitly calculating elements of the lower central series: 
+        \begin{align*}
+            \g_1 = [\g, \g] &= \begin{pmatrix}
+                0 & w & w & x\\ 
+                0 & 0 & 2w & y\\
+                0 & 0 & 0 & z\\
+                0 & 0 & 0 & 0
+            \end{pmatrix}\begin{pmatrix}
+                0 & a & a & b\\
+                0 & 0 & 2a & c\\
+                0 & 0 & 0 & d\\
+                0 & 0 & 0 & 0
+            \end{pmatrix} - \begin{pmatrix}
+                0 & a & a & b\\
+                0 & 0 & 2a & c\\
+                0 & 0 & 0 & d\\
+                0 & 0 & 0 & 0
+            \end{pmatrix}\begin{pmatrix}
+                0 & w & w & x\\ 
+                0 & 0 & 2w & y\\
+                0 & 0 & 0 & z\\
+                0 & 0 & 0 & 0
+            \end{pmatrix}\\ 
+            &= \begin{pmatrix}
+                0 & 0 & 0 & cw-ay-az+dw\\ 
+                0 & 0 & 0 & 2dw-2az\\
+                0 & 0 & 0 & 0\\
+                0 & 0 & 0 & 0
+            \end{pmatrix} = \begin{pmatrix}
+                0 & 0 & 0 & r\\ 
+                0 & 0 & 0 & s\\
+                0 & 0 & 0 & 0\\
+                0 & 0 & 0 & 0
+            \end{pmatrix}\\ 
+            \g_2 = [\g, \g_1] &= \begin{pmatrix}
+                0 & w & w & x\\ 
+                0 & 0 & 2w & y\\
+                0 & 0 & 0 & z\\
+                0 & 0 & 0 & 0
+            \end{pmatrix}\begin{pmatrix}
+                0 & 0 & 0 & r\\ 
+                0 & 0 & 0 & s\\
+                0 & 0 & 0 & 0\\
+                0 & 0 & 0 & 0
+            \end{pmatrix} - \begin{pmatrix}
+                0 & 0 & 0 & r\\ 
+                0 & 0 & 0 & s\\
+                0 & 0 & 0 & 0\\
+                0 & 0 & 0 & 0
+            \end{pmatrix}\begin{pmatrix}
+                0 & w & w & x\\ 
+                0 & 0 & 2w & y\\
+                0 & 0 & 0 & z\\
+                0 & 0 & 0 & 0
+            \end{pmatrix} = \begin{pmatrix}
+                0 & 0 & 0 & sw\\ 
+                0 & 0 & 0 & 0\\
+                0 & 0 & 0 & 0\\
+                0 & 0 & 0 & 0
+            \end{pmatrix}\\ 
+            \g_3 = [\g, \g_2] &= \begin{pmatrix}
+                0 & w & w & x\\ 
+                0 & 0 & 2w & y\\
+                0 & 0 & 0 & z\\
+                0 & 0 & 0 & 0
+            \end{pmatrix}\begin{pmatrix}
+                0 & 0 & 0 & sw\\ 
+                0 & 0 & 0 & 0\\
+                0 & 0 & 0 & 0\\
+                0 & 0 & 0 & 0
+            \end{pmatrix} - \begin{pmatrix}
+                0 & 0 & 0 & sw\\ 
+                0 & 0 & 0 & 0\\
+                0 & 0 & 0 & 0\\
+                0 & 0 & 0 & 0
+            \end{pmatrix}\begin{pmatrix}
+                0 & w & w & x\\ 
+                0 & 0 & 2w & y\\
+                0 & 0 & 0 & z\\
+                0 & 0 & 0 & 0
+            \end{pmatrix} = \begin{pmatrix}
+                0 & 0 & 0 & 0\\ 
+                0 & 0 & 0 & 0\\
+                0 & 0 & 0 & 0\\
+                0 & 0 & 0 & 0
+            \end{pmatrix}
+        \end{align*}
+
+        Therefore, $\g$ is nilpotent. $\qed$
+    \color{black}
+
+
+\pagebreak
+
+7.  Prove the Lie algebra of 
+\[
+G = \left\{\left(\begin{array}{cccc}
+e^{z} & 0 & x\\
+0 & e^{-z}   & y\\
+0 & 0 & 1
+\end{array}\right) \, \bigg| \, x,y,z,w \in \R\right\}
+\] 
+is \emph{not} nilpotent.  \\
+
+    \color{blue}
+       Let 
+       \[\g = \left\{\begin{pmatrix}
+            -z & 0 & x\\
+            0 & z & y\\
+            0 & 0 & 0
+         \end{pmatrix} \bigg\vert x, y, z \in \R\right\}\]
+
+        Then let $X = \begin{pmatrix}
+            -z & 0 & x\\
+            0 & z & y\\
+            0 & 0 & 0
+        \end{pmatrix}$ and $Y = \begin{pmatrix}
+            -c & 0 & a\\
+            0 & c & b\\
+            0 & 0 & 0
+        \end{pmatrix}$. Then,
+        \[\g_1 = [\g, \g] = [X,Y] = \begin{pmatrix}
+            0 & 0 & cx - az\\
+            0 & 0 & bz - cy\\
+            0 & 0 & 0
+        \end{pmatrix} = \begin{pmatrix}
+            0 & 0 & r\\
+            0 & 0 & s\\
+            0 & 0 & 0
+        \end{pmatrix}\]
+        
+        Now we can take 
+        \[\g_2 = [\g, \g_1] = \begin{pmatrix}
+            -z & 0 & x\\
+            0 & z & y\\
+            0 & 0 & 0
+        \end{pmatrix}\begin{pmatrix}
+            0 & 0 & r\\
+            0 & 0 & s\\
+            0 & 0 & 0
+        \end{pmatrix} - \begin{pmatrix}
+            0 & 0 & r\\
+            0 & 0 & s\\
+            0 & 0 & 0
+        \end{pmatrix} \begin{pmatrix}
+            -z & 0 & x\\
+            0 & z & y\\
+            0 & 0 & 0
+        \end{pmatrix} = \begin{pmatrix}
+            0 & 0 & -rz\\
+            0 & 0 & sz\\
+            0 & 0 & 0
+        \end{pmatrix}\] 
+
+        This is precisely the same form as $\g_1$ so $\g_{n\geq 1}$ is of the form $\begin{pmatrix}
+            0 & 0 & x\\
+            0 & 0 & y\\
+            0 & 0 & 0
+        \end{pmatrix}$ with $x, y \in \R^{\times}$. Therefore, $\g$ is not nilpotent. $\qed$
+    \color{black}
+
+
+\pagebreak
+
+8.  Consider the Lie-group
+\[
+G = \left\{\left(\begin{array}{cccc}
+e^{s} & te^{s} & x\\
+0 & e^{s}   & y\\
+0 & 0 & 1
+\end{array}\right) \, \bigg| \, s,t,x,y \in \R\right\}
+\]
+Prove that $G$ possesses a normal two-dimensional abelian subgroup $H$, whose quotient, $G/H$, is isomorphic to $\R^{2}$.  On the level of Lie-algebras, show that there exists short-exact sequence of Lie-algebras
+\[
+\R^{2} \lra \mathfrak{g} \lra \R^{2}
+\]
+Inductively define $\g^{(0)} = \g$ and $\g^{(n+1)} = [\g^{(n)},\g^{(n)}]$.  This is called the \emph{derived series}. Call a Lie-algebra \emph{solvable} if and only if its derives series stabilizes at the zero subspace.  Is $\mathfrak{g}$ solvable?  
+
+    \color{blue}
+        Let $H = \left\{\begin{pmatrix}
+            1 & 0 & x\\
+            0 & 1 & y\\
+            0 & 0 & 1
+        \end{pmatrix} \bigg\vert x, y \in \R\right\}$. Clearly $H \subseteq G$. Further, it is closed under multiplication because 
+        \[\begin{pmatrix}
+            1 & 0 & a\\
+            0 & 1 & b\\
+            0 & 0 & 1
+        \end{pmatrix}\begin{pmatrix}
+            1 & 0 & c\\
+            0 & 1 & d\\
+            0 & 0 & 1
+        \end{pmatrix} = \begin{pmatrix}
+            1 & 0 & a + c\\
+            0 & 1 & b + d\\
+            0 & 0 & 1
+        \end{pmatrix}\]
+        and abelian because 
+        \[\begin{pmatrix}
+            1 & 0 & c\\
+            0 & 1 & d\\
+            0 & 0 & 1
+        \end{pmatrix} \begin{pmatrix}
+            1 & 0 & a\\
+            0 & 1 & b\\
+            0 & 0 & 1
+        \end{pmatrix} = \begin{pmatrix}
+            1 & 0 & c + a\\
+            0 & 1 & d + b\\
+            0 & 0 & 1
+        \end{pmatrix}\]
+    
+        Finally, to see that it is normal in $G$, we note that 
+        \begin{align*}
+            \begin{pmatrix}
+                e^{s} & te^{s} & x\\
+                0 & e^{s} & y\\
+                0 & 0 & 1
+            \end{pmatrix} \begin{pmatrix}
+                1 & 0 & a\\
+                0 & 1 & b\\
+                0 & 0 & 1
+            \end{pmatrix}\begin{pmatrix}
+                e^{s} & te^{s} & x\\
+                0 & e^{s} & y\\
+                0 & 0 & 1
+            \end{pmatrix}^{-1} &= \begin{pmatrix}
+                e^s te^s & x + ae^s + bte^s\\
+                0 & e^s & y + be^s\\
+                0 & 0 & 1
+            \end{pmatrix} \begin{pmatrix}
+                e^{-s} & -te^{-s} & -xe^{-s} + yte^{-s}\\
+                0 & e^{-s} & -ye^{-s}\\
+                0 & 0 & 1
+            \end{pmatrix}\\ 
+            &= \begin{pmatrix}
+                1 & 0 & ae^s + bte^s\\
+                0 & 1 & be^s\\
+                0 & 0 & 1
+            \end{pmatrix} \in H
+        \end{align*}
+        
+        By the first isomorphism theorem, it suffices to find a surjective homomorphism $\phi$ for which $\ker \phi = H$.  
+        
+        A natural choice is 
+        \[\phi: G \to \R^2 \quad \begin{pmatrix}
+            e^s & te^s & x\\
+            0 & e^s & y\\
+            0 & 0 & 1
+        \end{pmatrix} \mapsto (s,t)\] 
+
+        We can calculate 
+        \begin{align*}
+            \phi\left(\begin{pmatrix}
+                e^a & be^a & x\\
+                0 & e^a & y\\
+                0 & 0 & 0
+            \end{pmatrix}\begin{pmatrix}
+                e^c & de^c & w\\
+                0 & e^c & z\\
+                0 & 0 & 0
+            \end{pmatrix}\right) &= \phi\left(\begin{pmatrix}
+                e^{a+c} & (b + d)e^{a+c} & (w + bx)e^a\\
+                0 & e^{a+c} & ze^a\\
+                0 & 0 & 0
+            \end{pmatrix}\right) = (a+c, b+d)\\ 
+            \phi\begin{pmatrix}
+                e^a & be^a & 0\\
+                0 & e^a & 0\\
+                0 & 0 & 0
+            \end{pmatrix}\phi\begin{pmatrix}
+                e^c & de^c & 0\\
+                0 & e^c & 0\\
+                0 & 0 & 0
+            \end{pmatrix} &= (a,b)(c,d) = (a+c, b+d)
+        \end{align*}
+        Therefore, $\phi$ is a homomorphism and clearly it is surjective. 
+
+        Further, 
+        \[\phi \begin{pmatrix}
+            1 & 0 & x\\
+            0 & 1 & y\\
+            0 & 0 & 1
+        \end{pmatrix} = (0, 0) \implies \ker \phi = \begin{pmatrix}
+            1 & 0 & x\\
+            0 & 1 & y\\
+            0 & 0 & 1
+        \end{pmatrix} = H\]
+
+        Therefore, $G/H \simeq \R^2$.
+
+        Further, since $H \trianglelefteq G$, we have the commutative diagram
+        \[\begin{tikzcd}
+            H \arrow[hook]{r} & G \arrow[two heads]{r} & G/H\\
+            \mathfrak{h} \arrow[hook]{r} & \mathfrak{g} \arrow[two heads]{r} \arrow[leftrightarrow]{u} & \mathfrak{g}/\mathfrak{h}   
+        \end{tikzcd}\]
+
+        Since $G/H \simeq \R^2$, we have $\mathfrak{g}/\mathfrak{h} \simeq \R^2$ as well. 
+        
+        Similarly, $H \simeq \R^2$ because $\mathfrak{h} = \R \begin{pmatrix}
+            0 & 0 & 1\\ 
+            0 & 0 & 0\\
+            0 & 0 & 0
+        \end{pmatrix} \oplus \R \begin{pmatrix}
+            0 & 0 & 0\\ 
+            0 & 0 & 1\\
+            0 & 0 & 0
+        \end{pmatrix}$ and 
+        \[\left[\begin{pmatrix}
+            0 & 0 & 1\\ 
+            0 & 0 & 0\\
+            0 & 0 & 0
+        \end{pmatrix}, \begin{pmatrix}
+            0 & 0 & 0\\ 
+            0 & 0 & 1\\
+            0 & 0 & 0
+        \end{pmatrix}\right] = 0\]
+        so all the brackets are trivial. 
+
+        Together, these give us the short exact sequence of Lie algebras
+        \[\R^2 \hookrightarrow \mathfrak{g} \twoheadrightarrow \R^2\]
+
+        Finally, we can calculate the derived series of $\mathfrak{g}$. 
+
+        \[\g = \left\{\begin{pmatrix}
+            s & t & x\\ 
+            0 & s & y\\
+            0 & 0 & 0
+        \end{pmatrix} \bigg\vert s, t, x, y \in \R\right\}\]
+
+        Now let $X = \begin{pmatrix}
+            a & b & c\\ 
+            0 & a & d\\
+            0 & 0 & 0
+        \end{pmatrix}$ and $Y = \begin{pmatrix}
+            e & f & g\\ 
+            0 & e & h\\
+            0 & 0 & 0
+        \end{pmatrix}$. Then,
+        \[\g^{(1)} = [\g, \g] = [X,Y] = \begin{pmatrix}
+            0 & 0 & ag - ce + bh - df\\ 
+            0 & 0 & ah - de\\
+            0 & 0 & 0
+        \end{pmatrix} = \begin{pmatrix}
+            0 & 0 & x\\ 
+            0 & 0 & y\\
+            0 & 0 & 0
+        \end{pmatrix}\]
+
+        Iterating again, 
+        \[\g^{(2)} = [\g^{(1)}, \g^{(1)}] = \begin{pmatrix}
+            0 & 0 & a\\ 
+            0 & 0 & b\\
+            0 & 0 & 0
+        \end{pmatrix}\begin{pmatrix}
+            0 & 0 & c\\ 
+            0 & 0 & d\\
+            0 & 0 & 0
+        \end{pmatrix} - \begin{pmatrix}
+            0 & 0 & c\\ 
+            0 & 0 & d\\
+            0 & 0 & 0
+        \end{pmatrix}\begin{pmatrix}
+            0 & 0 & a\\ 
+            0 & 0 & b\\
+            0 & 0 & 0
+        \end{pmatrix} = \begin{pmatrix}
+            0 & 0 & 0\\ 
+            0 & 0 & 0\\
+            0 & 0 & 0
+        \end{pmatrix}\]
+
+        Therefore, $\g$ is solvable. $\qed$
+ 
+    \color{black}
+
+\end{document}
